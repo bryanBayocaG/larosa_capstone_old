@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSetController;
 use App\Http\Controllers\RentorController;
@@ -74,3 +75,7 @@ Route::get('/rentor', [RentorController::class, 'index'])->name('rentor.page');
 
 Route::get('/rentor/rentorDetails/{id}', [RentorController::class, 'detailP']);
 Route::post('/addPayment', [RentorController::class, 'pay']);
+
+
+Route::get('/print_pdf/{id}', [PrintController::class, 'singleItemPrint']);
+Route::get('/download_pdf/{id}', [PrintController::class, 'singleItemDL']);

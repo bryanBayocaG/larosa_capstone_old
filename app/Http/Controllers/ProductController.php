@@ -71,7 +71,8 @@ class ProductController extends Controller
             DB::table('item_details')
                 ->where('item_id', $item->id)
                 ->where('status', 'in-possesion')
-                ->limit(1)
+                ->where('set_id2', 0)
+                ->limit(intval($quan))
                 ->update([
                     'set_id2' => $itemId,
                     'updated_at' => now(),

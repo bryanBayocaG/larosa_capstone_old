@@ -69,6 +69,29 @@
                                 </div>
 
                             </div>
+                            <div class="col-sm-2">
+                                <div style="margin-top: 1rem">
+                                    {!! QrCode::size(160)->generate($item->item_code) !!}
+                                </div>
+                            </div>
+                            <div class="col-sm-12 d-flex justify-content-end" style="margin-top: 10px">
+                                <div class="wordset">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ url('download_pdf', $item->id) }}" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Download PDF"><img
+                                                    src="{{ asset('assets/img/icons/pdf.svg') }}" alt="img" /></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('print_pdf', $item->id) }}" target="_blank"
+                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="Print QR code"><img
+                                                    src="{{ asset('assets/img/icons/printer.svg') }}"
+                                                    alt="img" /></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -82,14 +105,20 @@
                         <div class="col-lg-3 col-sm-6 d-flex">
                             <div class="productset flex-fill">
                                 <div class="productsetimg">
-                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}" alt="img">
+                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                        alt="img">
                                     <h6>{{ $items->item_code }}</h6>
                                 </div>
                                 <div class="productsetcontent">
                                     <h5>{{ $item->name }}</h5>
                                     {{-- <p>Status: {{ $items->status }}</p> --}}
                                     <p>Status:
-                                        @if ($items->status === 'in-possesion')
+                                        @if ($items->set_id2 !== 0)
+                                            @php
+                                                $productSet = \App\Models\product_set::find($items->set_id2);
+                                            @endphp
+                                            <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
+                                        @elseif ($items->status === 'in-possesion')
                                             <span class="badges bg-lightgreen">In-Possesion</span>
                                         @else
                                             <span class="badges bg-lightyellow">Renting</span>
@@ -122,6 +151,7 @@
     </div>
 </div>
 </div>
+
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
