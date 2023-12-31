@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Item_details;
 use App\Models\product_set;
 use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -64,6 +65,15 @@ class ProductController extends Controller
                 ->where('item_id', $item->id)
                 ->update([
                     'remaining' => DB::raw('remaining - ' . $quan),
+                    'updated_at' => now(),
+                ]);
+
+            DB::table('item_details')
+                ->where('item_id', $item->id)
+                ->where('status', 'in-possesion')
+                ->limit(1)
+                ->update([
+                    'set_id2' => $itemId,
                     'updated_at' => now(),
                 ]);
         };
