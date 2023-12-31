@@ -43,7 +43,7 @@ class ProductController extends Controller
             'set_code' => $randomCode,
             'name' => $name,
             'quantity' => $quantity,
-            // 'remaining' => $quantity,
+            'remaining' => $quantity,
             'category_id' => $category_id,
             'size_id' => $size_id,
             'color_id' => $color_id,

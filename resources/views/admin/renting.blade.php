@@ -158,14 +158,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <div class="productsetimg">
                                                     <img src="{{ asset('storage/product_images/' . $set->productImage) }}"
                                                         alt="img">
-                                                    <h6>{{ $set->set_code }}</h6>
+                                                    <h6>In-stock: {{ $set->remaining }}</h6>
                                                 </div>
                                                 <div class="productsetcontent">
                                                     <h5>{{ $set->name }}</h5>
 
                                                     @if ($cart->where('id', $set->id)->first())
                                                         <h6>In-Cart</h6>
-                                                    @elseif ($set->quantity === '0')
+                                                    @elseif ($set->remaining === '0')
                                                         <h6>Out of Stock</h6>
                                                     @else
                                                         <a href="javascript:void(0);" class="btn btn-adds"
@@ -291,7 +291,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <div class="productsetimg">
                                                     <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
                                                         alt="img">
-                                                    <h6>{{ $item->item_code }}</h6>
+                                                    <h6>In-stock: {{ $item->quantity->remaining }}</h6>
                                                 </div>
                                                 <div class="productsetcontent">
                                                     <h5>{{ $item->name }}</h5>

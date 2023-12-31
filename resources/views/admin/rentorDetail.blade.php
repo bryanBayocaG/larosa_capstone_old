@@ -242,9 +242,9 @@
                                                     <label class="col-form-label">Enter Amount:</label>
                                                     <input name="payment" type="number" id="priceInput"
                                                         class="form-control" autocomplete="off" required />
-                                                    <input name="currentBal" type="text"
+                                                    <input name="currentBal" type="hidden"
                                                         value="{{ $rentor->balance }}">
-                                                    <input name="target" type="text"
+                                                    <input name="target" type="hidden"
                                                         value="{{ $rentor->id }}">
                                                 </div>
                                                 <div class="mb-3">

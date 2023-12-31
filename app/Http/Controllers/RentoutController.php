@@ -84,7 +84,7 @@ class RentoutController extends Controller
             $product = product_set::find($item->id);
             $Sitem = item::find($item->id);
             if ($product) {
-                $product->quantity = $product->quantity - $item->qty;
+                $product->remaining = $product->remaining - $item->qty;
                 $product->save();
                 for ($i = 0; $i < intval($item->qty); $i++) {
                     $includedItems = included_item::where('product_set_id', $product->id)->get();
