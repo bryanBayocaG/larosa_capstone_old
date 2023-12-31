@@ -92,13 +92,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <h6>Includes: </h1>
-                                        @livewire('included-display')
-                                </div>
                                 @livewire('register-button')
                             </div>
                         </form>
+                        <div class="col-sm-12">
+                            <h6>Includes: </h1>
+                                @livewire('included-display')
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,12 +4,18 @@
             <li>
                 <div class="productimg">
                     <div class="productimgs">
-                        <img src="{{ asset('storage/product_images/' . $CartItem->options->image) }}" alt="img">
+                        @if (file_exists(public_path('storage/product_images/' . $CartItem->options->image)))
+                            <img src="{{ asset('storage/product_images/' . $CartItem->options->image) }}" alt="img">
+                        @else
+                            <img src="{{ asset('storage/item_images/' . $CartItem->options->image) }}" alt="img">
+                        @endif
+
                     </div>
                     <div class="productcontet">
                         <h4>{{ $CartItem->name }}
-                            <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal" data-bs-target="#edit"><img
-                                    src="{{ asset('assets/img/icons/edit-5.svg') }}" alt="img"></a>
+                            <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal"
+                                data-bs-target="#edit"><img src="{{ asset('assets/img/icons/edit-5.svg') }}"
+                                    alt="img"></a>
                         </h4>
                         <div class="productlinkset">
                             <h5>{{ $CartItem->options->code }}</h5>

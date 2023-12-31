@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class RegisterButton extends Component
 {
-    protected $listeners = ['includesupdated' => 'render'];
+    protected $listeners = ['includesupdated' => 'render', 'itemDeleted' => 'render'];
     public function render()
     {
         $includedItems = Cart::instance('itemselected')->content();

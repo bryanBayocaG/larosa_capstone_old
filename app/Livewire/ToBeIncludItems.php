@@ -26,12 +26,13 @@ class ToBeIncludItems extends Component
     {
         $this->sizes = Size::all();
     }
-
+    protected $listeners = ['includesupdated' => 'render', 'itemDeleted' => 'render'];
     public function render()
     {
-        // $sizes = Size::all();
         $colors = Color::orderBy('name', 'asc')->get();
-        $categories = ItemCategory::orderBy('name', 'asc')->get();
+        $categories = ItemCategory::whereRaw('LOWER(name) NOT LIKE ?', ['%gown%'])
+            ->orderBy('name', 'asc')
+            ->get();
         $cart = Cart::instance('itemselected')->content();
 
         $items = Item::where(function ($query) {
@@ -42,13 +43,15 @@ class ToBeIncludItems extends Component
                     $query->where('item_category_id', $this->category);
                 });
         })
+            ->whereDoesntHave('itemCategory', function ($query) {
+                // Exclude items with item_category_id = 4
+                $query->where('name', 'LIKE', ['%gown%']);
+            })
             ->whereHas('quantity', function ($query) {
                 $query->where('remaining', '>', 0);
             })
             ->where('name', 'like', '%' . $this->search . '%')
             ->get();
-        // $this->productId = Route::current()->parameter('id');
-        // $prodVar = ProductVar::where('product_id', $id)->get();
         return view('livewire.to-be-includ-items', compact('items', 'colors', 'categories', 'cart'));
     }
 

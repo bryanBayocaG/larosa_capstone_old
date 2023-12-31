@@ -10,9 +10,12 @@
                     <h6>{{ $item->name }}</h6>
                     <p>Quantity: {{ $item->options->remain }}/{{ $item->options->total }}
                     </p>
-                    <a class="btn btn-danger" href="{{ url('inludeItemRemove', $item->rowId) }}">
+                    {{-- <a class="btn btn-danger" href="{{ url('inludeItemRemove', $item->rowId) }}">
                         REMOVE
-                    </a>
+                    </a> --}}
+                    <button class="btn btn-danger" wire:click="deleteItem('{{ $item->rowId }}')">
+                        REMOVE
+                    </button>
                 </div>
             </div>
         </div>

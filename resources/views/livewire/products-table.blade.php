@@ -3,7 +3,7 @@
     <input wire:model.live="search" placeholder="Search Item..." class="form-control"
         style="margin-bottom: 5px; width: 50%; display: flex; justify-content: flex-end;">
 
-    <div class="row ">
+    <div class="row">
         @forelse ($items as $item)
             <div class="col-lg-3 col-sm-6 d-flex">
                 <div class="productset flex-fill">
@@ -20,6 +20,19 @@
                                 data-bs-toggle="modal" data-bs-target="#addToCart{{ $item->id }}">
                                 Add to Cart
                             </a>
+                            {{-- <a href="javascript:void(0);" class="btn btn-adds" data-product-id="{{ $item->id }}"
+                                data-bs-toggle="modal" data-bs-target="#addTocart"
+                                data-variant-details='{
+                            "id":"{{ $item->id }}",
+                            "code": "{{ $item->item_code }}",
+                            "quantity": "{{ $item->quantity->remaining }}",
+                            "color": {"name": "{{ $item->color->name }}"},
+                            
+                            "product": {"name": "{{ $item->name }}"},
+                            "imagename": "{{ $item->productImage }}",
+                            "image": "{{ asset('storage/item_images/' . $item->productImage) }}" }'>
+                                Add to Cart
+                            </a> --}}
                         @endif
 
                     </div>
@@ -71,7 +84,8 @@
                                             </div>
                                             <div class="mb-2">
                                                 <label for="pricing" class="form-label">Price</label>
-                                                <input type="text" class="form-control" id="priceng" name="price"
+                                                <input type="text" class="form-control"
+                                                    pattern="[0-9]+(\.[0-9]{1,2})?" id="priceng" name="price"
                                                     required>
                                             </div>
                                             <input type="hidden" class="form-control" id="idInput" name="var_id">
@@ -87,6 +101,7 @@
 
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

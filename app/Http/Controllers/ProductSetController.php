@@ -20,9 +20,10 @@ class ProductSetController extends Controller
         $colorses = Color::all();
         $size = Size::all();
         $items = item::all();
-        $includedItems = Cart::instance('itemselected')->content();
+
+        // $includedItems = Cart::instance('itemselected')->content();
         // $Product = product_set::find($id);
         // $combi =  Category::with('products')->get();
-        return view('admin.addSet', compact('categ', 'colorses', 'size', 'items', 'icateg', 'includedItems'));
+        return view('admin.addSet', compact('categ', 'colorses', 'size', 'items', 'icateg'));
     }
 }

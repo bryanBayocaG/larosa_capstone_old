@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class IncludedDisplay extends Component
 {
-    protected $listeners = ['includesupdated' => 'render'];
+    protected $listeners = ['includesupdated' => 'render', 'itemDeleted' => 'render'];
     public function render()
     {
         $includedItem = Cart::instance('itemselected')->content();
@@ -17,5 +17,6 @@ class IncludedDisplay extends Component
     public function deleteItem($itemRowID)
     {
         Cart::instance('itemselected')->remove($itemRowID);
+        $this->dispatch(event: 'itemDeleted');
     }
 }

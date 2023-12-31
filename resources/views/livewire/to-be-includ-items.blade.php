@@ -27,7 +27,8 @@
                     <div class="productsetcontent">
                         <h6>{{ $item->name }}</h6>
                         <p>Color: {{ $item->color->name }} <br>
-                            Quantity: {{ $item->quantity->remaining }}/{{ $item->quantity->total }}
+                            Quantity: {{ $item->quantity->remaining }}/{{ $item->quantity->total }}<br>
+                            Category: {{ $item->itemCategory->name }}
                         </p>
                         @if ($cart->where('id', $item->id)->count())
                             <a href="javascript:void(0);" class="btn btn-remove">

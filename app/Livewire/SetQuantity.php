@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class SetQuantity extends Component
 {
-    protected $listeners = ['includesupdated' => 'render'];
+    protected $listeners = ['includesupdated' => 'render', 'itemDeleted' => 'render'];
     public function render()
     {
         $cartContent = Cart::instance('itemselected')->content();

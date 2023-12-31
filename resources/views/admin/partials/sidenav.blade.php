@@ -19,11 +19,11 @@
                         </li>
                         <li>
                             <a class="{{ request()->segment(2) == 'items' ? 'active' : '' }}"
-                                href="{{ route('items.page') }}">Manage Items</a>
+                                href="{{ route('items.page') }}">Manage Single Product</a>
                         </li>
                         <li>
                             <a class="{{ request()->segment(2) == 'productset' ? 'active' : '' }}"
-                                href="{{ route('productset.page') }}">Manage Product Set</a>
+                                href="{{ route('productset.page') }}">Manage Set Product</a>
                         </li>
                     </ul>
                 </li>

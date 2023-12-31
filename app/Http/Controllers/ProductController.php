@@ -26,27 +26,14 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+
         $quan = $request->input('quantity');
         $cartContent = Cart::instance('itemselected')->content();
-        // $minQuantity = PHP_INT_MAX;
-
-
-        // foreach ($cartContent as $item) {
-        //     // Get the quantity for the current item
-        //     $quantity = $item->qty;
-        //     // Check if the current quantity is less than the current minimum
-        //     if ($quantity < $minQuantity) {
-        //         // Update the minimum quantity and store the item quantity in the variable
-        //         $minQuantity = $quantity;
-        //     }
-        // }
-
         $name = $request->input('name');
         $category_id = $request->input('category');
         $size_id = $request->input('size');
         $color_id = $request->input('color');
         $quantity = $quan;
-        // $description = $request->input('description');
         $image = $request->file('image');
 
         $randomCode = Str::random(10);
