@@ -40,19 +40,19 @@
                     <div class="row">
                         @forelse ($items as $item)
                             <div class="col-lg-2 col-sm-4 d-flex ">
-                                {{-- <a href="{{ url('inventory/products/varietyfor/' . $product->id) }}"> --}}
-                                <div class="productset flex-fill">
-                                    <div class="productsetimg" style="">
-                                        <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
-                                            alt="img">
+                                <a href="{{ url('inventory/items/detail/' . $item->id) }}">
+                                    <div class="productset flex-fill">
+                                        <div class="productsetimg" style="">
+                                            <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                                alt="img">
+                                        </div>
+                                        <div class="productsetcontent">
+                                            <h6>{{ $item->name }}</h6>
+                                            <p>Category: {{ $item->itemCategory->name }} <br>Quantity:
+                                                {{ $item->quantity->remaining }}/{{ $item->quantity->total }}</p>
+                                        </div>
                                     </div>
-                                    <div class="productsetcontent">
-                                        <h6>{{ $item->name }}</h6>
-                                        <p>Category: {{ $item->itemCategory->name }} <br>Quantity:
-                                            {{ $item->quantity->remaining }}/{{ $item->quantity->total }}</p>
-                                    </div>
-                                </div>
-                                {{-- </a> --}}
+                                </a>
                             </div>
                         @empty
                             <center>

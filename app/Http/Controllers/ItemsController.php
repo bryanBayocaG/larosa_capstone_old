@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\item;
+use App\Models\Item_details;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
 
@@ -65,5 +66,12 @@ class ItemsController extends Controller
             ]);
         }
         return redirect()->back()->with('message', 'Item added successfully.');
+    }
+    public function detailP($id)
+    {
+        $item = item::find($id);
+        $thoseItems = Item_details::where('item_id', $id)->get();
+
+        return view('admin.prodDetailSingle', compact('item', 'thoseItems'));
     }
 }

@@ -51,6 +51,8 @@ Route::post('/addProduct', [ProductController::class, 'store'])->name('addProduc
 Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.page');
 Route::post('/addItem', [ItemsController::class, 'store'])->name('addItem');
 
+Route::get('/inventory/items/detail/{id}', [ItemsController::class, 'detailP']);
+
 Route::get('inventory/productset/addProductSet', [ProductSetController::class, 'index']);
 Route::post('/updateProductSet/{id}', [ProductController::class, 'update']);
 
