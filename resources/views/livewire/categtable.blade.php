@@ -41,7 +41,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Edit Category</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Edit Set Category</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal"
                                         aria-label="Close"><span aria-hidden="true">×</span></button>
                                 </div>

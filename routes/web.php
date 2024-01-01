@@ -3,9 +3,12 @@
 use App\Http\Controllers\AddSelectController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemCategController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ProductController;
@@ -13,6 +16,7 @@ use App\Http\Controllers\ProductSetController;
 use App\Http\Controllers\RentorController;
 use App\Http\Controllers\RentoutController;
 use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\SizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +49,16 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/inventory/attributes', [AttributeController::class, 'index'])->name('attributes.page');
+Route::get('/delete_category/{id}', [AttributeController::class, 'delete_category']);
+Route::get('/delete_Icategory2/{id}', [AttributeController::class, 'delete_category2']);
+Route::get('/delete_color/{id}', [AttributeController::class, 'delete_color']);
+Route::get('/delete_size/{id}', [AttributeController::class, 'delete_size']);
+
+Route::resource('/category', CategoryController::class)->only(['update']);
+Route::resource('/category2', ItemCategController::class)->only(['update']);
+Route::resource('/size', SizeController::class)->only(['update']);
+Route::resource('/color', ColorController::class)->only(['update']);
+
 
 Route::get('/inventory/productset', [ProductController::class, 'index'])->name('productset.page');
 Route::post('/addProduct', [ProductController::class, 'store'])->name('addProduct');

@@ -53,11 +53,12 @@
                                         </div>
                                     </td>
                                     <td>
-                            
+
                                         <a href="#editModal{{ $icateg->id }}" data-bs-toggle="modal">
                                             <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img" />
                                         </a>
-                                        <a href="{{ url('delete_Icategory', $icateg->id) }}" onclick="confirmation(event)">
+                                        <a href="{{ url('delete_Icategory2', $icateg->id) }}"
+                                            onclick="confirmation(event)">
                                             <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img" />
                                         </a>
                                     </td>
@@ -68,20 +69,23 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Color Details</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Item Category
+                                                    Details</h5>
                                                 <button type="button" class="close" data-bs-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ url('category/' . $icateg->id) }}" method="POST">
+                                                <form action="{{ url('category2/' . $icateg->id) }}" method="POST">
                                                     @method('PUT')
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
                                                             <label class="col-form-label">New Name:</label>
-                                                            <input type="hidden" name="id" value="{{ $icateg->id }}">
-                                                            <input name="NewCategName" type="text" class="form-control"
-                                                                value="{{ $icateg->name }}" required>
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $icateg->id }}">
+                                                            <input name="NewCategName" type="text"
+                                                                class="form-control" value="{{ $icateg->name }}"
+                                                                required>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="col-form-label">New Description:</label>
@@ -93,7 +97,8 @@
                                                             style="color:white;">
                                                             Update
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
                                                             Cancel
                                                         </button>
                                                     </div>
@@ -148,4 +153,3 @@
         </div>
     </div>
 </div>
-
