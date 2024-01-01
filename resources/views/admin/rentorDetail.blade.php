@@ -72,17 +72,32 @@
                                         <div class="col-sm-12" style="margin-top: -10px">
                                             <div class="row">
                                                 <hr>
-                                                {{-- @foreach ($rentedItems as $rentedItem)
-                                                        <div class="col-sm-6" style="">
-                                                            <p>{{ $rentedItem->productVar->product->name }}({{ $rentedItem->productVar->color->name }})
+                                                @foreach ($rentedItems as $rentedItem)
+                                                    <div class="col-sm-6" style="">
+                                                        @if ($rentedItem->single_item_id === null)
+                                                            @php
+                                                                $productSet = \App\Models\product_set::find($rentedItem->product_set_id);
+                                                            @endphp
+                                                            <p>{{ $productSet->name }}({{ $productSet->color->name }})(SET
+                                                                ITEM)
                                                             </p>
-                                                        </div>
-                                                        <div class="col-sm-6"
-                                                            style="display: flex; justify-content: flex-end;">
-                                                            <p>&#8369;{{ $rentedItem->pricing }}</p>
-                                                        </div>
-                                                        <hr>
-                                                    @endforeach --}}
+                                                        @else
+                                                            @php
+                                                                $productItem = \App\Models\item::find($rentedItem->single_item_id);
+                                                            @endphp
+                                                            <p>{{ $productItem->name }}({{ $productItem->color->name }})(SINGLE
+                                                                ITEM)
+                                                            </p>
+                                                        @endif
+
+                                                    </div>
+                                                    <div class="col-sm-6"
+                                                        style="display: flex; justify-content: flex-end;">
+                                                        <p>&#8369;{{ number_format($rentedItem->pricing, 2, '.', ',') }}
+                                                        </p>
+                                                    </div>
+                                                    <hr>
+                                                @endforeach
                                                 <div class="col-sm-12"
                                                     style="background-color: #bd9a62; color: white; font-size: 170%;">
                                                     <div class="row">
@@ -92,7 +107,8 @@
                                                         </div>
                                                         <div class="col-sm-6"
                                                             style="display: flex; justify-content: flex-end;">
-                                                            <p>&#8369;{{ $rentor->totalPrice }}</p>
+                                                            <p>&#8369;{{ number_format($rentor->totalPrice, 2, '.', ',') }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,7 +126,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-sm-6" style="display: flex; justify-content: flex-end;">
-                                                <p>&#8369; {{ $rentor->balance }}</p>
+                                                <p>&#8369; {{ number_format($rentor->balance, 2, '.', ',') }}</p>
                                             </div>
                                         </div>
                                         </p>
@@ -213,7 +229,7 @@
                                                     <tr>
                                                         <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('M j, Y h:i:s A') }}
                                                         </td>
-                                                        <td>{{ $payment->payments }}</td>
+                                                        <td>{{ number_format($payment->payments, 2, '.', ',') }}</td>
                                                         <td>{{ $payment->remarks }}</td>
                                                     </tr>
                                                 @endforeach
@@ -222,8 +238,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true" wire:ignore.self>
+                            <div class="modal fade" id="addCategory" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">

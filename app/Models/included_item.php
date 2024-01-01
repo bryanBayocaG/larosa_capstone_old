@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class included_item extends Model
 {
     use HasFactory;
+
+    public function item()
+    {
+        return $this->belongsTo(item::class, 'item_id');
+    }
 }

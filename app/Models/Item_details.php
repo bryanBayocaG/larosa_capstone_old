@@ -12,4 +12,8 @@ class Item_details extends Model
     {
         return $this->belongsTo(item::class);
     }
+    public function item_detail()
+    {
+        return $this->belongsTo(item::class, 'item_id');
+    }
 }

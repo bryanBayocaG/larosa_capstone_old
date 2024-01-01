@@ -249,7 +249,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                                         <div class="mb-2">
                                                                             <label for="pricing"
                                                                                 class="form-label">Pricing Set</label>
-                                                                            <input class="form-control" id="priceSet"
+                                                                            <input class="form-control" type="number"
+                                                                                min="1" id="priceSet"
                                                                                 name="price" required>
                                                                         </div>
                                                                         <input type="hidden" class="form-control"
@@ -394,8 +395,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                                         <div class="mb-2">
                                                                             <label for="pricing"
                                                                                 class="form-label">Pricing Item</label>
-                                                                            <input class="form-control"
-                                                                                type="number"id="priceItem"
+                                                                            <input class="form-control" type="number"
+                                                                                min="1" id="priceItem"
                                                                                 name="price" required>
                                                                         </div>
                                                                         <input type="hidden" class="form-control"
@@ -779,7 +780,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
 
-    {{-- <script>
+    <script>
         function validateQuantityInput(event) {
             const inputElement = event.target;
             let inputValue = inputElement.value;
@@ -794,62 +795,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
         }
         document.getElementById('price').addEventListener('input', validateQuantityInput);
         document.getElementById('priceSet').addEventListener('input', validateQuantityInput);
-    </script> --}}
-    <script>
-        function validateQuantityInput(event) {
-            const inputElement = event.target;
-            let inputValue = inputElement.value;
-
-            inputValue = inputValue.replace(/[^0-9]/g, '');
-            inputValue = Number(inputValue).toLocaleString('en-US');
-
-            inputElement.value = inputValue;
-        }
-
-        document.getElementById('priceItem').addEventListener('input', validateQuantityInput);
-        document.getElementById('priceSet').addEventListener('input', validateQuantityInput);
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('.btn-adds').on('click', function() {
-                const variantDetails = $(this).data('variant-details');
-                $('#imgInput').val(variantDetails.imagename);
-                $('#idInput').val(variantDetails.id);
-                $('#codeInput').val(variantDetails.code);
-                $('#topcode').text(variantDetails.code);
-                $('#topquantity').text(variantDetails.code);
-                $('#colorInput').val(variantDetails.color.name);
-                $('#color').text(variantDetails.color.name);
-                // $('#sizeInput').val(variantDetails.size.name);
-                $('#size').text(variantDetails.size.name);
-                $('#productInput').val(variantDetails.product.name);
-                $('#productName').text(variantDetails.product.name);
-                $('#variantImage').attr('src', variantDetails.image);
-
-                $('#addTocart').modal('show');
-            });
-        });
-    </script>
-
-    <script>
-        function validateQuantityInput(event) {
-            const inputElement = event.target;
-            let inputValue = inputElement.value;
-
-            // Remove any non-numeric characters and leading minus sign
-            inputValue = inputValue.replace(/[^0-9]/g, '');
-
-            // Format the value with thousand separators
-            inputValue = Number(inputValue).toLocaleString('en-US');
-
-            // Update the input value with the sanitized and formatted value
-            inputElement.value = inputValue;
-        }
-
-        // Attach the validation function to the input's "input" event
-        document.getElementById('priceng').addEventListener('input', validateQuantityInput);
-    </script>
 
     <script>
         $(document).ready(function() {

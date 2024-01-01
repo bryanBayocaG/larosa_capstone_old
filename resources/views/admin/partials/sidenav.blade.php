@@ -22,7 +22,7 @@
                                 href="{{ route('items.page') }}">Manage Single Product</a>
                         </li>
                         <li>
-                            <a class="{{ request()->segment(2) == 'productset' ? 'active' : '' }}"
+                            <a class="{{ in_array(request()->segment(2), ['set', 'productset']) ? 'active' : '' }}"
                                 href="{{ route('productset.page') }}">Manage Set Product</a>
                         </li>
                     </ul>

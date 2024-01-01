@@ -17,7 +17,7 @@
 
     <center>
         <div style="margin-top: 1rem">
-            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(200)->generate('http://google.com')) !!} ">
+            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(200)->generate($singItem->item_code)) !!} ">
         </div>
     </center>
 </body>

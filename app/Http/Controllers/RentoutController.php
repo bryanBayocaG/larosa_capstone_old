@@ -78,6 +78,7 @@ class RentoutController extends Controller
                 $orderItem->product_set_id = null;
                 $orderItem->single_item_id = $item->id;
             }
+            $orderItem->status = 'Rented';
             $orderItem->pricing = $item->price;
             $orderItem->save();
 

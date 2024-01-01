@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\included_item;
 use App\Models\item;
 use App\Models\Item_details;
 use App\Models\ItemCategory;
+use App\Models\product_set;
 use Illuminate\Http\Request;
 
 
@@ -73,5 +75,12 @@ class ItemsController extends Controller
         $thoseItems = Item_details::where('item_id', $id)->get();
 
         return view('admin.prodDetailSingle', compact('item', 'thoseItems'));
+    }
+    public function detailP2($id)
+    {
+        $item = product_set::find($id);
+        $thoseItems = included_item::where('product_set_id', $id)->get();
+
+        return view('admin.prodDetailSet', compact('item', 'thoseItems', 'id'));
     }
 }

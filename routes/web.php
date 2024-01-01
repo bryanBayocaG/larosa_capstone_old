@@ -53,6 +53,7 @@ Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.p
 Route::post('/addItem', [ItemsController::class, 'store'])->name('addItem');
 
 Route::get('/inventory/items/detail/{id}', [ItemsController::class, 'detailP']);
+Route::get('/inventory/set/detail/{id}', [ItemsController::class, 'detailP2']);
 
 Route::get('inventory/productset/addProductSet', [ProductSetController::class, 'index']);
 Route::post('/updateProductSet/{id}', [ProductController::class, 'update']);
@@ -79,3 +80,6 @@ Route::post('/addPayment', [RentorController::class, 'pay']);
 
 Route::get('/print_pdf/{id}', [PrintController::class, 'singleItemPrint']);
 Route::get('/download_pdf/{id}', [PrintController::class, 'singleItemDL']);
+
+Route::get('/print_pdf2/{id}', [PrintController::class, 'setItemPrint']);
+Route::get('/download_pdf2/{id}', [PrintController::class, 'setItemDL']);

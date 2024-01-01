@@ -32,4 +32,8 @@ class item extends Model
     {
         return $this->belongsTo(Color::class);
     }
+    public function includedItems()
+    {
+        return $this->hasMany(included_item::class, 'item_id');
+    }
 }
