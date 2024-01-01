@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSetController;
 use App\Http\Controllers\RentorController;
 use App\Http\Controllers\RentoutController;
+use App\Http\Controllers\ReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,3 +84,7 @@ Route::get('/download_pdf/{id}', [PrintController::class, 'singleItemDL']);
 
 Route::get('/print_pdf2/{id}', [PrintController::class, 'setItemPrint']);
 Route::get('/download_pdf2/{id}', [PrintController::class, 'setItemDL']);
+
+
+Route::post('/returnSingleRent', [ReturnController::class, 'returnSingle']);
+Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);

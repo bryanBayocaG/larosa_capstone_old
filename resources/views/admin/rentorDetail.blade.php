@@ -39,6 +39,9 @@
                             </p>
                         </div>
                     </div>
+                    @if (session()->has('message'))
+                        <h1>{{ session('message') }}</h1>
+                    @endif
                     <div style="margin-top: 5px" class="card">
                         <div class="card-body">
                             {{-- <div class="page-header "> --}}
@@ -169,21 +172,19 @@
                                                     <h6>{{ $productSet->set_code }}</h6>
                                                 </div>
                                                 <div class="productsetcontent">
-
                                                     <h4>{{ $productSet->name }}|{{ $productSet->color->name }}</h4>
                                                     <h6>Set Item</h6>
-                                                    <a href="javascript:void(0);" class="btn btn-adds"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#staticBackdrop{{ $productSet->id }}">
-                                                        Set as Renturned
-                                                    </a>
-                                                    {{-- <a class="btn btn-scanner-set" type="button"
-                                                        class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#staticBackdrop">
-                                                        <img src="{{ asset('assets/img/icons/qr-code-scan-icon.svg') }}"
-                                                            alt="img" class="me-2" />
-                                                        Scan QR Code
-                                                    </a> --}}
+                                                    @if ($rentedItem->status !== 'Rented')
+                                                        <a href="javascript:void(0);" class="btn btn-remove">
+                                                            Renturned
+                                                        </a>
+                                                    @else
+                                                        <a href="javascript:void(0);" class="btn btn-adds"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#staticBackdrop{{ $productSet->id }}">
+                                                            Set as Renturned
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="modal fade" id="staticBackdrop{{ $productSet->id }}"
@@ -199,15 +200,76 @@
                                                                     aria-hidden="true">×</span></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <center>
-                                                                        <h4 style="color:red">Are you sure to set this
-                                                                            as Returned?</h4>
-                                                                    </center>
-                                                                    hey{{ $productSet->id }}
+                                                            <form action="{{ url('/returnSetRent') }}" method="POST">
+                                                                @csrf
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <center>
+                                                                            <h4 style="color:red">Are you sure to set
+                                                                                this
+                                                                                as Returned?</h4>
+                                                                        </center>
+                                                                        <div class="col-sm-12">
+                                                                            <h5>This item Set consist(s) of
+                                                                                {{ $rentedItem->quantity }} set(s) of
+                                                                                items
+                                                                                including the following:</h5>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                @php
+                                                                                    $setItems = \App\Models\Item_details::where('set_id', $id)
+                                                                                        ->where('set_id2', $rentedItem->product_set_id)
+                                                                                        ->where('status', 'Rented')
+                                                                                        ->get();
+                                                                                @endphp
+                                                                                @foreach ($setItems as $setI)
+                                                                                    <div
+                                                                                        class="col-lg-3 col-sm-6 d-flex">
+                                                                                        <div
+                                                                                            class="productset flex-fill active">
+                                                                                            <div class="productsetimg">
+                                                                                                <img src="{{ asset('storage/item_images/' . $setI->item->productImage) }}"
+                                                                                                    alt="img">
+                                                                                                <h6>{{ $setI->item_code }}
+                                                                                                </h6>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="productsetcontent">
+                                                                                                <h6>{{ $setI->item->name }}|{{ $setI->item->color->name }}
+                                                                                                </h6>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+
+                                                                <input type="hidden" name="rentInfoID"
+                                                                    value="{{ $id }}">
+                                                                <input type="hidden" name="rentQuantity"
+                                                                    value="{{ $rentedItem->quantity }}">
+                                                                <input type="hidden" name="set_id"
+                                                                    value="{{ $rentedItem->product_set_id }}">
+
+                                                                <div class="modal-footer">
+                                                                    <button name="add" type="submit"
+                                                                        class="btn btn-primary"
+                                                                        style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
+                                                                        onmouseout="this.style.opacity='1'">
+                                                                        Continue
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+
+
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,11 +287,17 @@
                                                 <div class="productsetcontent">
                                                     <h4>{{ $productItem->name }}|{{ $productItem->color->name }}</h4>
                                                     <h6>Single Item</h6>
-                                                    <a href="javascript:void(0);" class="btn btn-adds"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#static{{ $productItem->id }}">
-                                                        Set as Renturned
-                                                    </a>
+                                                    @if ($rentedItem->status !== 'Rented')
+                                                        <a href="javascript:void(0);" class="btn btn-remove">
+                                                            Renturned
+                                                        </a>
+                                                    @else
+                                                        <a href="javascript:void(0);" class="btn btn-adds"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#static{{ $productItem->id }}">
+                                                            Set as Renturned
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="modal fade" id="static{{ $productItem->id }}"
@@ -245,7 +313,8 @@
                                                                     aria-hidden="true">×</span></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="POST">
+                                                            <form action="{{ url('/returnSingleRent') }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
@@ -288,6 +357,26 @@
                                                                             @endforeach
                                                                         </div>
                                                                     </div>
+                                                                </div>
+
+                                                                <input type="hidden" name="rentInfoID"
+                                                                    value="{{ $id }}">
+                                                                <input type="hidden" name="rentQuantity"
+                                                                    value="{{ $rentedItem->quantity }}">
+                                                                <input type="hidden" name="item_id"
+                                                                    value="{{ $productItem->id }}">
+
+                                                                <div class="modal-footer">
+                                                                    <button name="add" type="submit"
+                                                                        class="btn btn-primary"
+                                                                        style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
+                                                                        onmouseout="this.style.opacity='1'">
+                                                                        Continue
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                        Cancel
+                                                                    </button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -395,7 +484,8 @@
 
                                             <div class="modal-footer">
                                                 <button name="add" type="submit" class="btn btn-primary"
-                                                    style="color:white;">
+                                                    style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
+                                                    onmouseout="this.style.opacity='1'">
                                                     Continue
                                                 </button>
                                                 <button type="button" class="btn btn-secondary"
