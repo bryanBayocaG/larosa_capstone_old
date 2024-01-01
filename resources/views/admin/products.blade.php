@@ -51,8 +51,11 @@
                                                         alt="img">
                                                 </div>
                                                 <div class="productsetcontent">
+
                                                     <h6>{{ $product->name }}</h6>
-                                                    <p>{{ $product->category->name }}</p>
+                                                    <p>Category: {{ $product->category->name }} <br>
+                                                        Quantity: {{ $product->remaining }}/{{ $product->quantity }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </a>

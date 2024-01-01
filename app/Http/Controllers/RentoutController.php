@@ -80,6 +80,7 @@ class RentoutController extends Controller
             }
             $orderItem->status = 'Rented';
             $orderItem->pricing = $item->price;
+            $orderItem->quantity = intval($item->qty);
             $orderItem->save();
 
             $product = product_set::find($item->id);

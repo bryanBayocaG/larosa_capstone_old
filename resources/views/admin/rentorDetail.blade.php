@@ -79,14 +79,14 @@
                                                                 $productSet = \App\Models\product_set::find($rentedItem->product_set_id);
                                                             @endphp
                                                             <p>{{ $productSet->name }}({{ $productSet->color->name }})(SET
-                                                                ITEM)
+                                                                ITEM) ({{ $rentedItem->quantity }}PC(S))
                                                             </p>
                                                         @else
                                                             @php
                                                                 $productItem = \App\Models\item::find($rentedItem->single_item_id);
                                                             @endphp
                                                             <p>{{ $productItem->name }}({{ $productItem->color->name }})(SINGLE
-                                                                ITEM)
+                                                                ITEM) ({{ $rentedItem->quantity }}PC(S))
                                                             </p>
                                                         @endif
 
@@ -158,21 +158,143 @@
                             <div class="row">
                                 @foreach ($rentedItems as $rentedItem)
                                     <div class="col-lg-3 col-sm-6 d-flex">
-                                        <div class="productset flex-fill active">
-                                            <div class="productsetimg">
-                                                {{-- <img src="{{ asset('storage/product_images/product_var/' . $rentedItem->productVar->var_image) }}"
-                                                        alt="img" />
-                                                    <h6>{{ $rentedItem->productVar->code }}</h6> --}}
-                                                {{-- <div class="check-product">
-                                                        <i class="fa fa-check"></i>
-                                                    </div> --}}
+                                        @if ($rentedItem->single_item_id === null)
+                                            @php
+                                                $productSet = \App\Models\product_set::find($rentedItem->product_set_id);
+                                            @endphp
+                                            <div class="productset flex-fill active">
+                                                <div class="productsetimg">
+                                                    <img src="{{ asset('storage/product_images/' . $productSet->productImage) }}"
+                                                        alt="img">
+                                                    <h6>{{ $productSet->set_code }}</h6>
+                                                </div>
+                                                <div class="productsetcontent">
+
+                                                    <h4>{{ $productSet->name }}|{{ $productSet->color->name }}</h4>
+                                                    <h6>Set Item</h6>
+                                                    <a href="javascript:void(0);" class="btn btn-adds"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop{{ $productSet->id }}">
+                                                        Set as Renturned
+                                                    </a>
+                                                    {{-- <a class="btn btn-scanner-set" type="button"
+                                                        class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop">
+                                                        <img src="{{ asset('assets/img/icons/qr-code-scan-icon.svg') }}"
+                                                            alt="img" class="me-2" />
+                                                        Scan QR Code
+                                                    </a> --}}
+                                                </div>
                                             </div>
-                                            <div class="productsetcontent">
-                                                <h5></h5>
-                                                {{-- <h4>{{ $rentedItem->productVar->color->name }}</h4>
-                                                    <h6>{{ $rentedItem->productVar->product->name }}</h6> --}}
+                                            <div class="modal fade" id="staticBackdrop{{ $productSet->id }}"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Return
+                                                                Set Item</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"><span
+                                                                    aria-hidden="true">×</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <center>
+                                                                        <h4 style="color:red">Are you sure to set this
+                                                                            as Returned?</h4>
+                                                                    </center>
+                                                                    hey{{ $productSet->id }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            @php
+                                                $productItem = \App\Models\item::find($rentedItem->single_item_id);
+                                            @endphp
+                                            <div class="productset flex-fill active">
+                                                <div class="productsetimg">
+                                                    <img src="{{ asset('storage/item_images/' . $productItem->productImage) }}"
+                                                        alt="img">
+                                                    <h6>{{ $productItem->item_code }}</h6>
+                                                </div>
+                                                <div class="productsetcontent">
+                                                    <h4>{{ $productItem->name }}|{{ $productItem->color->name }}</h4>
+                                                    <h6>Single Item</h6>
+                                                    <a href="javascript:void(0);" class="btn btn-adds"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#static{{ $productItem->id }}">
+                                                        Set as Renturned
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="static{{ $productItem->id }}"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Return
+                                                                Single Item</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"><span
+                                                                    aria-hidden="true">×</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST">
+                                                                @csrf
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <center>
+                                                                            <h3 style="color:red">Are you sure to set
+                                                                                this
+                                                                                as Returned?</h3>
+                                                                        </center>
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <h5>This item consist(s) of
+                                                                            {{ $rentedItem->quantity }}pc(s) of item(s)
+                                                                            including the following:</h5>
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div class="row">
+                                                                            @php
+                                                                                $singleItems = \App\Models\Item_details::where('set_id', $id)
+                                                                                    ->where('set_id2', 0)
+                                                                                    ->where('status', 'Rented')
+                                                                                    ->get();
+                                                                            @endphp
+                                                                            @foreach ($singleItems as $singleI)
+                                                                                <div class="col-lg-3 col-sm-6 d-flex">
+                                                                                    <div
+                                                                                        class="productset flex-fill active">
+                                                                                        <div class="productsetimg">
+                                                                                            <img src="{{ asset('storage/item_images/' . $singleI->item->productImage) }}"
+                                                                                                alt="img">
+                                                                                            <h6>{{ $singleI->item_code }}
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div class="productsetcontent">
+                                                                                            <h6>{{ $singleI->item->name }}|{{ $singleI->item->color->name }}
+                                                                                            </h6>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

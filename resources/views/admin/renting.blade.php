@@ -36,9 +36,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
 </head>
 
 <body>
-    <div id="global-loader">
+    {{-- <div id="global-loader">
         <div class="whirly-loader"> </div>
-    </div>
+    </div> --}}
 
     @if (Session::has('message'))
         <script>
