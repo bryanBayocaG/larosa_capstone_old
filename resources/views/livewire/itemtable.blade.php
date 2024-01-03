@@ -2,13 +2,13 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Item Category list</h4>
+                <h4>Single Item Category list</h4>
                 <h6>View/Search Item Categroy</h6>
             </div>
             <div class="page-btn">
                 <a href="addcategory.php" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addItemCateg">
                     <img src="{{ asset('assets/img/icons/plus.svg') }}" class="me-1" alt="img" />
-                    Item Category
+                    Single Item Category
                 </a>
             </div>
         </div>
@@ -31,14 +31,14 @@
                     <table id="datatable" class="table datanew">
                         <thead>
                             <tr>
-                                <th>Item Category Name</th>
+                                <th>Single Item Category Name</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Item Category Name</th>
+                                <th>Single Item Category Name</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
@@ -69,7 +69,8 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Item Category
+                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Single Item
+                                                    Category
                                                     Details</h5>
                                                 <button type="button" class="close" data-bs-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -120,24 +121,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Add Item Category
+                        Add Single Item Category
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         &times;
                     </button>
                 </div>
-                <form wire:submit.prevent="create">
+                <form {{-- wire:submit.prevent="create" --}}action="{{ route('addItemCategory') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="col-form-label">New Item Category:</label>
-                            <input wire:model.defer="name"{{-- name="name" --}} type="text" class="form-control"
-                                required>
+                            <input {{-- wire:model.defer="name" --}}name="name" type="text" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">Description:</label>
 
-                            <textarea wire:model.defer="description"{{-- name="description" --}} class="form-control" cols="30" rows="6"></textarea>
+                            <textarea {{-- wire:model.defer="description" --}}name="description" class="form-control" cols="30" rows="6"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ColorController extends Controller
 {
@@ -15,5 +16,14 @@ class ColorController extends Controller
 
         $data->save();
         return redirect()->back()->with('message', 'Color Updated Succesfully');
+    }
+    public function addColor(Request $request)
+    {
+        DB::table('colors')->insert([
+            'name' => $request->input('name'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return redirect()->back()->with('message', 'Color added successfully.');
     }
 }

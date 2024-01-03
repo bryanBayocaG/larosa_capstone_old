@@ -27,7 +27,7 @@ class AttributeController extends Controller
             return redirect()->back()->with('message', 'Cannot delete because it has child.');
         } else {
             $post = Category::find($id);
-            // $post->delete();
+            $post->delete();
             return redirect()->back()->with('message', 'Set Category Deleted Succesfully');
         }
     }
@@ -50,7 +50,7 @@ class AttributeController extends Controller
             return redirect()->back()->with('message', 'Cannot delete because it has child.');
         } else {
             $post = Color::find($id);
-            // $post->delete();
+            $post->delete();
             return redirect()->back()->with('message', 'Color Deleted Succesfully');
         }
     }

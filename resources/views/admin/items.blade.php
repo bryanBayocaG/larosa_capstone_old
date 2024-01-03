@@ -48,7 +48,8 @@
                                         </div>
                                         <div class="productsetcontent">
                                             <h6>{{ $item->name }}</h6>
-                                            <p>Category: {{ $item->itemCategory->name }} <br>Quantity:
+                                            <p>Category: {{ $item->itemCategory->name }} <br>
+                                                Quantity:
                                                 {{ $item->quantity->remaining }}/{{ $item->quantity->total }}</p>
                                         </div>
                                     </div>

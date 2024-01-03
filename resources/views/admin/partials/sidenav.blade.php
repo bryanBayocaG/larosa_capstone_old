@@ -2,7 +2,8 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="{{ request()->segment(1) == 'home' ? 'active' : '' }}">
+                <li
+                    class="{{ in_array(request()->segment(1), ['home', 'colorPage', 'sizePage', 'itemCategPage', 'setCategPage']) ? 'active' : '' }}">
                     <a href="{{ url('home') }}">
                         <img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img" /><span>Dashboard</span>
                     </a>
@@ -13,10 +14,10 @@
                             Inventory</span>
                         <span class="menu-arrow"></span></a>
                     <ul>
-                        <li>
+                        {{-- <li>
                             <a class="{{ request()->segment(2) == 'attributes' ? 'active' : '' }}"
                                 href="{{ route('attributes.page') }}">Manage Attributes</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a class="{{ request()->segment(2) == 'items' ? 'active' : '' }}"
                                 href="{{ route('items.page') }}">Manage Single Product</a>
@@ -32,11 +33,11 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a class="{{ request()->segment(1) == 'rentor' ? 'active' : '' }}"
                         href="{{ route('rentor.page') }}"><i data-feather="users"></i><span> Rentors</span>
                     </a>
-                </li>
+                </li> --}}
 
 
                 {{-- @if (Auth::user()->usertype == 'Admin')

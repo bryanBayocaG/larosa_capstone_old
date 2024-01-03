@@ -48,11 +48,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                     type: "success",
                     title: "{{ Session::get('message') }}",
                     showConfirmButton: !1,
-                    timer: 1500,
+                    timer: 2000,
                     confirmButtonClass: "btn btn-primary",
                     buttonsStyling: !1,
                 });
-            }, 1000);
+            }, 500);
         </script>
     @endif
     @if (session('error'))
@@ -512,21 +512,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <div class="form-group">
                                                     <label>First Name</label>
                                                     <input name="fname" type="text" class="form-control"
-                                                        autocomplete="off" />
+                                                        autocomplete="off" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label>Last Name</label>
                                                     <input name="lname" type="text" class="form-control"
-                                                        autocomplete="off" />
+                                                        autocomplete="off" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label>Contact Number</label>
                                                     <input id="phone" name="contactnum" type="text"
-                                                        class="form-control" autocomplete="off" />
+                                                        class="form-control" autocomplete="off" required />
 
                                                 </div>
                                             </div>
@@ -534,7 +534,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <div class="form-group">
                                                     <label>Event Date</label>
                                                     <input name="eventdate" type="date" id="dateInput"
-                                                        class="form-control">
+                                                        class="form-control"required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-sm-12 col-12">
@@ -542,7 +542,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                     <label>Address</label>
                                                     <input id="address" class="form-control" name="address"
                                                         type="text" autocomplete="off"
-                                                        placeholder="Barangay, District, City/Municipality" />
+                                                        placeholder="Barangay, District, City/Municipality" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-sm-12 col-12">
@@ -555,7 +555,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                                 <h6><span>&#8369;</span>&nbsp;{{ Gloudemans\Shoppingcart\Facades\Cart::priceTotal() }}
                                                                 </h6>
                                                                 <input name="rent_type" type="hidden"
-                                                                    value="Itemize" />
+                                                                    value="Itemize" required />
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -565,7 +565,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <div class="form-group">
                                                     <label>Payment</label>
                                                     <input name="payment" type="number" id="priceInput"
-                                                        class="form-control" autocomplete="off" />
+                                                        class="form-control" autocomplete="off" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-sm-12 col-12">

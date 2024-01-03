@@ -113,13 +113,12 @@
                         &times;
                     </button>
                 </div>
-                <form wire:submit.prevent="create">
+                <form {{-- wire:submit="create" --}} action="{{ route('addColor') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="col-form-label">New Color:</label>
-                            <input wire:model.defer="name"{{-- name="name" --}} type="text" class="form-control"
-                                required>
+                            <input {{-- wire:model.defer="name" --}}name="name" type="text" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">

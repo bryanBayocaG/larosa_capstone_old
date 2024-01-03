@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SizeController extends Controller
 {
@@ -15,5 +16,15 @@ class SizeController extends Controller
         $data->description = $request->NewDescription;
         $data->save();
         return redirect()->back()->with('message', 'Size Updated Succesfully');
+    }
+    public function addsize(Request $request)
+    {
+        DB::table('sizes')->insert([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return redirect()->back()->with('message', 'Size added successfully.');
     }
 }

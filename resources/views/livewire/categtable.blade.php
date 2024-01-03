@@ -92,19 +92,18 @@
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
                 </div>
-                {{-- <form action="{{ route('addCategory') }}" method="POST"> --}}
-                <form wire:submit.prevent="create">
+                <form action="{{ route('addSetCategory') }}" method="POST">
+                    {{-- <form wire:submit.prevent="create"> --}}
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="col-form-label">New Set Category:</label>
-                            <input wire:model.defer="name"{{-- name="name" --}} type="text" class="form-control"
-                                required>
+                            <input {{-- wire:model.defer="name" --}}name="name" type="text" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">Description:</label>
 
-                            <textarea wire:model.defer="description"{{-- name="description" --}} class="form-control" cols="30" rows="6"></textarea>
+                            <textarea {{-- wire:model.defer="description" --}}name="description" class="form-control" cols="30" rows="6"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

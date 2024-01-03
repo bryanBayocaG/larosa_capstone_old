@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,5 +16,15 @@ class CategoryController extends Controller
         $data->description = $request->NewDescription;
         $data->save();
         return redirect()->back()->with('message', 'Category Updated Succesfully');
+    }
+    public function addSetCategory(Request $request)
+    {
+        DB::table('categories')->insert([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return redirect()->back()->with('message', 'Set Category added successfully.');
     }
 }

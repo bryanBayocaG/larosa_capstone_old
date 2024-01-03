@@ -38,6 +38,15 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/filterDueDate', [HomeController::class, 'filterDueDate'])->name('filterDueDate');
+
+
+Route::get('/setCategPage', [HomeController::class, 'setCategPage'])->name('setCategPage');
+Route::get('/itemCategPage', [HomeController::class, 'itemCategPage'])->name('itemCategPage');
+Route::get('/sizePage', [HomeController::class, 'sizePage'])->name('sizePage');
+Route::get('/colorPage', [HomeController::class, 'colorPage'])->name('colorPage');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,6 +66,11 @@ Route::get('/delete_size/{id}', [AttributeController::class, 'delete_size']);
 Route::resource('/category', CategoryController::class)->only(['update']);
 Route::resource('/category2', ItemCategController::class)->only(['update']);
 Route::resource('/size', SizeController::class)->only(['update']);
+
+Route::post('/addSetCategory', [CategoryController::class, 'addSetCategory'])->name('addSetCategory');
+Route::post('/addItemCategory', [ItemCategController::class, 'addItemCategory'])->name('addItemCategory');
+Route::post('/addsize', [SizeController::class, 'addsize'])->name('addsize');
+Route::post('addColor', [ColorController::class, 'addColor'])->name('addColor');
 Route::resource('/color', ColorController::class)->only(['update']);
 
 
