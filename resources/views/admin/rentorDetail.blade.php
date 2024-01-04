@@ -35,7 +35,8 @@
                             @endif
                         </div>
                         <div class="col-lg-6">
-                            <p id="yen">Transaction Code: <span id="code">{{ $rentor->transac_code }}</span>
+                            <p id="yen"><strong>Transaction Code: </strong><span
+                                    id="code">{{ $rentor->transac_code }}</span>
                             </p>
                         </div>
                     </div>
@@ -51,17 +52,19 @@
                                     <p style="font-weight: bold; text-transform: uppercase; font-size: 170%;">
                                         {{ $rentor->first_name }}
                                         {{ $rentor->last_name }}</p>
-                                    <p>{{ $rentor->address }}</p>
-                                    <p>{{ $rentor->contact_num }}</p>
+                                    <p><strong>Address: </strong>{{ $rentor->address }}</p><strong></strong>
+                                    <p><strong>Contact Number: </strong>{{ $rentor->contact_num }}</p>
+                                    <p><strong>Rent Type: </strong> {{ $rentor->rent_type }}</p>
                                     {{-- </div> --}}
                                 </div>
                                 <div class="col-sm-4" style="line-height: 5px; margin-top: 15px;">
                                     {{-- <div class="page-title"> --}}
-                                    <p>Rental Start Date:
+                                    <p><strong>Transaction Date: </strong>
+                                        {{ \Carbon\Carbon::parse($rentor->created_at)->format('M j, Y h:i:s A') }}</p>
+                                    <p><strong>Event Start Date: </strong>
                                         {{ \Carbon\Carbon::parse($rentor->event_date)->format('M d, Y') }}</p>
-                                    <p>Return Date:
+                                    <p><strong>Due Date: </strong>
                                         {{ \Carbon\Carbon::parse($rentor->return_date)->format('M d, Y') }}</p>
-                                    <p>Rent Type: {{ $rentor->rent_type }}</p>
                                     {{-- </div> --}}
                                 </div>
                             </div>
@@ -88,7 +91,8 @@
                                                             @php
                                                                 $productItem = \App\Models\item::find($rentedItem->single_item_id);
                                                             @endphp
-                                                            <p>{{ $productItem->name }}({{ $productItem->color->name }})(SINGLE
+                                                            <p>{{ $productItem->name }},
+                                                                {{ $productItem->color->name }}(SINGLE
                                                                 ITEM) ({{ $rentedItem->quantity }}PC(S))
                                                             </p>
                                                         @endif
