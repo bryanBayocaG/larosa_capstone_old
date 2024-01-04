@@ -10,7 +10,7 @@
 </div>
 
 {{-- asdfasdf --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     window.addEventListener('closeModal', event => {
         $('#addCategory').modal('hide');
     });
@@ -57,7 +57,7 @@
             buttonsStyling: !1,
         });
     });
-</script>
+</script> --}}
 
 
 <script type="text/javascript">
@@ -114,6 +114,9 @@
 <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script>
 
 <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
 @livewireScripts
 </body>

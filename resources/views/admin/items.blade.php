@@ -1,10 +1,6 @@
 @include('admin.partials.header');
 @include('admin.partials.sidenav');
-<style>
-    .productset .productsetimg {
-        height: 200px;
-    }
-</style>
+
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
@@ -197,6 +193,8 @@
 <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
 
 {{-- <script src="{{asset('assets/plugins/fileupload/fileupload.min.js')}}"></script> --}}
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 @livewireScripts
 </body>
 

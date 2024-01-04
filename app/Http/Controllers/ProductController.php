@@ -79,6 +79,6 @@ class ProductController extends Controller
                 ]);
         };
         Cart::instance('itemselected')->destroy();
-        return redirect()->back()->with('message', 'Product set added successfully.');
+        return redirect()->back()->with('success', 'Product set added successfully.');
     }
 }

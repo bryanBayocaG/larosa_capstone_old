@@ -271,8 +271,6 @@
                                                                         Cancel
                                                                     </button>
                                                                 </div>
-
-
                                                             </form>
                                                         </div>
                                                     </div>
@@ -401,7 +399,7 @@
                                 <div class="page-btn">
                                     @if ($rentor->balance === '0.00')
                                         <button href="" class="btn btn-remove" disabled>
-                                            Add Payment
+                                            Fully Paid
                                         </button>
                                     @else
                                         <a href="addcategory.php" class="btn btn-added" data-bs-toggle="modal"

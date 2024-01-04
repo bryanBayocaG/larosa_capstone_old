@@ -15,7 +15,7 @@ class ColorController extends Controller
         $data->name = $request->NewCategName;
 
         $data->save();
-        return redirect()->back()->with('message', 'Color Updated Succesfully');
+        return redirect()->back()->with('success', 'Color Updated Succesfully');
     }
     public function addColor(Request $request)
     {

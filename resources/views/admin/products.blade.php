@@ -1,10 +1,6 @@
         @include('admin.partials.header');
         @include('admin.partials.sidenav');
-        <style>
-            .productset .productsetimg {
-                height: 200px;
-            }
-        </style>
+
         <div class="page-wrapper">
             <div class="content">
                 <div class="page-header">

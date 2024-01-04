@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toatr.css') }}" />
 
     {{-- <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script> --}}
 
@@ -53,7 +54,7 @@
     {{-- <div id="global-loader">
         <div class="whirly-loader"></div>
     </div> --}}
-    @if (session('message'))
+    {{-- @if (session('message'))
         <script>
             setTimeout(function() {
                 Swal.fire({
@@ -67,9 +68,9 @@
                 });
             }, 1000);
         </script>
-    @endif
+    @endif --}}
 
-    @if (Session::has('message'))
+    {{-- @if (Session::has('message'))
         <script>
             setTimeout(function() {
                 Swal.fire({
@@ -83,9 +84,9 @@
                 });
             }, 1000);
         </script>
-    @endif
+    @endif --}}
+
     <div class="main-wrapper">
-
         <div class="header">
             <div class="header-left active">
                 <a href="{{ url('home') }}" class="logo">
