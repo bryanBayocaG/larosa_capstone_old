@@ -125,29 +125,29 @@ class RentoutController extends Controller
 
 
 
-        // $apiKey = 'da96e8b9124390d6e9a85bfc253e6cea';
-        // $number = $request->input('contactnum');
-        // $cleanedNumber = str_replace('-', '', $number);
-        // $itemNames = '';
-        // foreach (Cart::instance('shopping')->content() as $item) {
-        //     $itemName = $item->name;
-        //     $itemNames .= ($itemNames ? ', ' : '') . $itemName;
-        // }
-        // $customerFName = $request->input('fname');
-        // $customerLName = $request->input('lname');
-        // $message = "Hello " . $customerFName . " " . $customerLName . " as of " . now() . ", you rented the following item(s) [" . $itemNames . "] with a total of " . $tot . ", and paid by the amount of " . $bayad . ", Thank you for renting in Larosa";
+        $apiKey = 'da96e8b9124390d6e9a85bfc253e6cea';
+        $number = $request->input('contactnum');
+        $cleanedNumber = str_replace('-', '', $number);
+        $itemNames = '';
+        foreach (Cart::instance('shopping')->content() as $item) {
+            $itemName = $item->name;
+            $itemNames .= ($itemNames ? ', ' : '') . $itemName;
+        }
+        $customerFName = $request->input('fname');
+        $customerLName = $request->input('lname');
+        $message = "Hello " . $customerFName . " " . $customerLName . " as of " . now() . ", you rented the following item(s) [" . $itemNames . "] with a total of " . $tot . ", and paid by the amount of " . $bayad . ", Thank you for renting in Larosa";
 
 
-        // $client = new Client();
-        // $client->post('https://semaphore.co/api/v4/messages', [
-        //     'form_params' => [
-        //         'apikey' => $apiKey,
-        //         'number' => $cleanedNumber,
-        //         'message' => $message,
-        //         'sendername' => 'LAROSA',
-        //     ],
-        //     'verify' => false,
-        // ]);
+        $client = new Client();
+        $client->post('https://semaphore.co/api/v4/messages', [
+            'form_params' => [
+                'apikey' => $apiKey,
+                'number' => $cleanedNumber,
+                'message' => $message,
+                'sendername' => 'LAROSA',
+            ],
+            'verify' => false,
+        ]);
         Cart::instance('shopping')->destroy();
         return redirect()->back()->with('message', 'Apparel checked out succesfully!');
     }
