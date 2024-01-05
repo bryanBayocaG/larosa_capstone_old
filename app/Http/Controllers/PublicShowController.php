@@ -17,7 +17,7 @@ class PublicShowController extends Controller
     public function setItem($code)
     {
 
-        $singItem = product_set::where('set_code', $code)->get();
-        return view('admin.publicSet', compact('singItem'));
+        $setItem = product_set::where('set_code', $code)->get();
+        return view('admin.publicSet', compact('setItem'));
     }
 }

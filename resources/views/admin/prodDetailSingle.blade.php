@@ -72,6 +72,8 @@
                             <div class="col-sm-2">
                                 <div style="margin-top: 1rem">
                                     {!! QrCode::size(160)->generate($item->link) !!}
+                                    {{-- <img src="data:image/png;base64, {!! base64_encode(QrCode::size(200)->generate($item->link)) !!} "> --}}
+                                    {{-- <img src="{!! QrCode::format('png')->generate($item->link) !!}"> --}}
                                 </div>
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end" style="margin-top: 10px">
@@ -97,10 +99,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-sm-12 tabs_wrapper">
+            {{-- <div class="col-lg-12 col-sm-12 tabs_wrapper">
                 <div class="row">
-                    {{-- <div class="col-lg-3 col-sm-6 d-flex"> --}}
-
                     @foreach ($thoseItems as $items)
                         <div class="col-lg-3 col-sm-6 d-flex">
                             <div class="productset flex-fill">
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="productsetcontent">
                                     <h5>{{ $item->name }}</h5>
-                                    {{-- <p>Status: {{ $items->status }}</p> --}}
+
                                     <p>Status:
                                         @if ($items->set_id2 !== 0)
                                             @php
@@ -124,29 +124,12 @@
                                             <span class="badges bg-lightyellow">Renting</span>
                                         @endif
                                     </p>
-
-                                    {{-- @if ($cart->where('id', $set->id)->first())
-                                            <h6>In-Cart</h6>
-                                        @elseif ($set->remaining === '0')
-                                            <h6>Out of Stock</h6>
-                                        @else
-                                            <a href="javascript:void(0);" class="btn btn-adds"
-                                                data-product-id="{{ $set->id }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#addToCart{{ $set->id }}">
-                                                Add to Cart
-                                            </a>
-                                        @endif --}}
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
-
-                    {{-- </div> --}}
-
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

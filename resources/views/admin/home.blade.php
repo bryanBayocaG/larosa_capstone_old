@@ -69,50 +69,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das3">
-                            <div class="dash-counts">
-                                <h4>{{ $totalApparel }}</h4>
-                                <h5>Total Products</h5>
-                            </div>
-                            <div class="dash-imgs">
-                                <i data-feather="tag"></i>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das5">
-                            <div class="dash-counts">
-                                <h4>{{ $totalRented }}</h4>
-                                <h5>Rented Out Products</h5>
-                            </div>
-                            <div class="dash-imgs">
-                                <i data-feather="minus-circle"></i>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das1" style="background-color: #bd9a62">
-                            <div class="dash-counts">
-                                <h4>0</h4>
-                                <h5>Overdue</h5>
-                            </div>
-                            <div class="dash-imgs">
-                                <i data-feather="alert-circle"></i>
-                            </div>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das2" style="background-color: #bd9a62">
-                            <div class="dash-counts">
-                                <h4>0</h4>
-                                <h5>With</h5>
-                            </div>
-                            <div class="dash-imgs">
-                                <i data-feather="user-check"></i>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="dash-widget dash2">
                             <div class="dash-widgetimg ">
@@ -122,11 +78,59 @@
                                 <h5>
                                     <span class="counters" data-count="{{ $totalItem }}">{{ $totalItem }}</span>
                                 </h5>
-                                <h6>Total Items</h6>
+                                <h6>Single Items <a
+                                        style="color: white; background-color: #bd9a62; padding: 5px; border-radius: 5px"
+                                        href="{{ route('setCategPage') }}">
+                                        Check Details
+                                    </a>
+                                </h6>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget dash">
+                            <div class="dash-widgetimg">
+                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
+                            </div>
+                            <div class="dash-widgetcontent">
+                                <h5>
+                                    <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
+                                </h5>
+                                <h6>Product Set <a
+                                        style="color: white; background-color: #bd9a62; padding: 5px; border-radius: 5px"
+                                        href="{{ route('setCategPage') }}">
+                                        Check Details
+                                    </a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="dash-widget dash1">
+                            <div class="dash-widgetimg">
+                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
+                            </div>
+                            <div class="dash-widgetcontent">
+                                <h5>
+                                    <span class="counters" data-count="{{ $setRemain }}">{{ $setRemain }}</span>
+                                </h5>
+                                <h6>Customer with Balance</h6>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                        <div class="dash-count das1" style="background-color: #ff7857">
+                            <div class="dash-counts">
+                                <h4>0</h4>
+                                <h5>Customer with Balance</h5>
+                            </div>
+                            <div class="dash-imgs">
+                                <i data-feather="minus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-lg-3 col-sm-6 col-12">
                         <div class="dash-widget dash1">
                             <div class="dash-widgetimg">
                                 <span><img src="assets/img/icons/dash3.svg" alt="img" /></span>
@@ -136,33 +140,18 @@
                                     <span class="counters"
                                         data-count="{{ $totalAvailableItem }}">{{ $totalAvailableItem }}</span>
                                 </h5>
-                                <h6>Available Items</h6>
+                                <h6>Overdue Rents</h6>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash2">
-                            <div class="dash-widgetimg">
-                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
+                    </div> --}}
+                    <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                        <div class="dash-count das1" style="background-color: rgb(196, 19, 19)">
+                            <div class="dash-counts">
+                                <h4>0</h4>
+                                <h5>Overdue</h5>
                             </div>
-                            <div class="dash-widgetcontent">
-                                <h5>
-                                    <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
-                                </h5>
-                                <h6>Total Product Set</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash1">
-                            <div class="dash-widgetimg">
-                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>
-                                    <span class="counters" data-count="{{ $setRemain }}">{{ $setRemain }}</span>
-                                </h5>
-                                <h6>Available Product Set</h6>
+                            <div class="dash-imgs">
+                                <i data-feather="alert-circle"></i>
                             </div>
                         </div>
                     </div>
