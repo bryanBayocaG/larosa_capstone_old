@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    @if ($singItem)
-        <p>{{ $singItem[0]->name }}</p>
-    @else
-        <h1>not found</h1>
-    @endif
+
+    <p>{{ $singItem[0]->name }}</p>
+
+    <h1>not found</h1>
+
 
 </body>
 
