@@ -27,6 +27,15 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+        $messages = [
+            'name.required|string|max:20',
+            'image.required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ];
+        $request->validate([
+            'name' => 'required|string|max:20',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ], $messages);
+
 
         $quan = $request->input('quantity');
         $cartContent = Cart::instance('itemselected')->content();

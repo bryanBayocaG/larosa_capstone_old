@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
         $data->description = $request->NewDescription;
         $data->save();
-        return redirect()->back()->with('message', 'Category Updated Succesfully');
+        return redirect()->back()->with('success', 'Set Category Updated Succesfully');
     }
     public function addSetCategory(Request $request)
     {
@@ -25,6 +25,6 @@ class CategoryController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return redirect()->back()->with('message', 'Set Category added successfully.');
+        return redirect()->back()->with('success', 'Set Category added successfully.');
     }
 }

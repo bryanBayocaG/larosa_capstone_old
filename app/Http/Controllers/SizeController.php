@@ -15,7 +15,7 @@ class SizeController extends Controller
         $data->name = $request->NewCategName;
         $data->description = $request->NewDescription;
         $data->save();
-        return redirect()->back()->with('message', 'Size Updated Succesfully');
+        return redirect()->back()->with('success', 'Size Updated Succesfully');
     }
     public function addsize(Request $request)
     {
@@ -25,6 +25,6 @@ class SizeController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return redirect()->back()->with('message', 'Size added successfully.');
+        return redirect()->back()->with('success', 'Size added successfully.');
     }
 }

@@ -30,6 +30,15 @@ class ItemsController extends Controller
     }
     public function store(Request $request)
     {
+        $messages = [
+            'name.required|string|max:20',
+            'image.required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ];
+        $request->validate([
+            'name' => 'required|string|max:20',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ], $messages);
+
         $name = $request->input('name');
         $image = $request->file('image');
         $quantity = $request->input('quantity');
@@ -67,8 +76,9 @@ class ItemsController extends Controller
                 'updated_at' => now(),
             ]);
         }
-        return redirect()->back()->with('message', 'Item added successfully.');
+        return redirect()->back()->with('success', 'Item added successfully.');
     }
+
     public function detailP($id)
     {
         $item = item::find($id);

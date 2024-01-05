@@ -54,37 +54,33 @@
     {{-- <div id="global-loader">
         <div class="whirly-loader"></div>
     </div> --}}
-    {{-- @if (session('message'))
+    @if (session('success'))
         <script>
             setTimeout(function() {
-                Swal.fire({
-                    position: "top-end",
-                    type: "success",
-                    title: "{{ Session::get('message') }}",
-                    showConfirmButton: !1,
-                    timer: 1500,
-                    confirmButtonClass: "btn btn-primary",
-                    buttonsStyling: !1,
-                });
-            }, 1000);
+                toastr.success("{{ Session::get('success') }}", "Action Succesfull!")
+            }, 100);
         </script>
-    @endif --}}
+    @endif
 
-    {{-- @if (Session::has('message'))
+    @if (session('error'))
         <script>
             setTimeout(function() {
-                Swal.fire({
-                    position: "top-end",
-                    type: "success",
-                    title: "{{ Session::get('message') }}",
-                    showConfirmButton: !1,
-                    timer: 1500,
-                    confirmButtonClass: "btn btn-primary",
-                    buttonsStyling: !1,
-                });
-            }, 1000);
+                toastr.error("{{ Session::get('error') }}", "Action Not Permitted!")
+            }, 100);
         </script>
-    @endif --}}
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                setTimeout(function() {
+                    toastr.error("{{ $error }}", "Action Error!")
+
+                }, 100);
+            </script>
+        @endforeach
+    @endif
+
 
     <div class="main-wrapper">
         <div class="header">

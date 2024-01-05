@@ -15,7 +15,7 @@ class ItemCategController extends Controller
 
         $data->description = $request->NewDescription;
         $data->save();
-        return redirect()->back()->with('message', 'Category Updated Succesfully');
+        return redirect()->back()->with('success', 'Category Updated Succesfully');
     }
     public function addItemCategory(Request $request)
     {
@@ -25,6 +25,6 @@ class ItemCategController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return redirect()->back()->with('message', 'Item Category added successfully.');
+        return redirect()->back()->with('success', 'Item Category added successfully.');
     }
 }

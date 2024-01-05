@@ -52,7 +52,7 @@
             </div>
         @empty
             <center>
-                <h2>No product</li>
+                @include('admin.partials.noProduct')
             </center>
         @endforelse
 

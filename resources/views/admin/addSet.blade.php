@@ -33,7 +33,7 @@
                                         <label> Product Set Image</label>
                                         <div style="" class="container" class="image-upload">
                                             <input name="image" type="file" class="form-control"
-                                                onchange="loadFile(event)">
+                                                onchange="loadFile(event)" required>
                                             <div style="margin-top:5px;padding:5px;" class="image-uploads">
                                                 <center>
                                                     <img style="height:fit-content;border-radius:5px;" id="output"
@@ -51,6 +51,7 @@
                                     <div class="mb-1">
                                         <label class="col-form-label">Product Set Name</label>
                                         <input name="name" type="text" class="form-control" required>
+                                        <p style="color:red;">*Name must be greater than 20 characters</p>
                                     </div>
                                     <div class="mb-2">
                                         <div class="row">
@@ -134,6 +135,7 @@
     </div>
 </div>
 </div>
+
 <script type="text/javascript">
     var loadFile = function(event) {
         var output = document.getElementById('output');
@@ -153,7 +155,12 @@
     };
 </script>
 
+
+
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
 <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
@@ -172,13 +179,14 @@
 <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script>
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
-<script src="{{ asset('asset/js/html5-qrcode.min.js') }}"></script>
+
 
 <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 
-<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
+
+
+
+
 @livewireScripts
 </body>
 

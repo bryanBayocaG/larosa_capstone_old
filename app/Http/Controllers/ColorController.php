@@ -24,6 +24,6 @@ class ColorController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return redirect()->back()->with('message', 'Color added successfully.');
+        return redirect()->back()->with('success', 'Color added successfully.');
     }
 }

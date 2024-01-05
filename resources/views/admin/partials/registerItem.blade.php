@@ -18,8 +18,8 @@
                             <div class="form-group">
                                 <label> Item Image</label>
                                 <div style="" class="container" class="image-upload">
-                                    <input name="image" type="file" class="form-control"
-                                        onchange="loadFile(event)">
+                                    <input name="image" type="file" class="form-control" onchange="loadFile(event)"
+                                        required>
                                     <div style="margin-top:5px;padding:5px;" class="image-uploads">
                                         <center>
                                             <img style="height:fit-content;border-radius:5px;" id="output"
@@ -28,13 +28,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <p style="color:red;margin-top:-20px;">Upload only jpeg,png,jpg,gif files with Maximum
+                            <p style="color:red;margin-top:-20px;">*Upload only jpeg,png,jpg,gif files with Maximum
                                 of 2(MB)</p>
                         </div>
                         <div class="col-sm-7">
                             <div class="mb-1">
                                 <label class="col-form-label">Item Name</label>
-                                <input name="name" type="text" class="form-control" required>
+                                <input name="name" type="text" placeholder="Item name" class="form-control"
+                                    required>
+                                <p style="color:red;">*Name must be greater than 20 characters</p>
+
                             </div>
                             <div class="mb-2">
                                 <label class="col-form-label">Item Category</label>
