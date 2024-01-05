@@ -9,7 +9,7 @@
         content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects" />
     <meta name="author" content="Dreamguys - Bootstrap Admin Template" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Larosa</title>
+    <title>Larosa Gowns and Rental</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/picture/LarosaSmall.jpg') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" />
