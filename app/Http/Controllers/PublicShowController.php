@@ -12,6 +12,11 @@ class PublicShowController extends Controller
 
         $singItem = item::where('item_code', $code)->get();
 
-        return view('admin.publicSingle', compact('singItem'));
+        if ($singItem) {
+
+            return view('admin.publicSingle', compact('singItem'));
+        } else {
+            return view('admin.notFound');
+        }
     }
 }
