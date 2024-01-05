@@ -29,9 +29,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-    <link href="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
-" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toatr.css') }}" />
     @livewireStyles
 </head>
 
@@ -40,19 +39,26 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
         <div class="whirly-loader"> </div>
     </div> --}}
 
-    @if (Session::has('message'))
+    {{-- @if (session('success'))
         <script>
             setTimeout(function() {
                 Swal.fire({
                     position: "top-end",
                     type: "success",
-                    title: "{{ Session::get('message') }}",
+                    title: "{{ Session::get('success') }}",
                     showConfirmButton: !1,
                     timer: 2000,
                     confirmButtonClass: "btn btn-primary",
                     buttonsStyling: !1,
                 });
             }, 500);
+        </script>
+    @endif --}}
+    @if (session('success'))
+        <script>
+            setTimeout(function() {
+                toastr.success("{{ Session::get('success') }}", "Action Succesfull!")
+            }, 100);
         </script>
     @endif
     @if (session('error'))
@@ -61,7 +67,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                 console.log('Session Error variable: {{ session('error') }}');
                 Swal.fire({
                     icon: "error",
-                    title: "Oops...",
+                    title: "Nothing Match",
                     text: `{{ session('error') }}`
 
                 });
@@ -69,8 +75,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                     @php
                         session()->forget('error');
                     @endphp
-                }, 1000);
-            }, 2000);
+                }, 100);
+            }, 100);
         </script>
     @endif
     @if (session('errors'))
@@ -104,9 +110,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
         </script>
     @endif --}}
 
-    @if (session()->has('matchProVar'))
+    @if (session()->has('matchItem'))
         @php
-            $matchProVar = session('matchProVar');
+            $matchItem = session('matchItem');
         @endphp
 
         <script>
@@ -115,7 +121,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                 $(document).ready(function() {
                     $('#yow').modal('show');
                 });
-            }, 1500);
+            }, 300);
         </script>
     @endif
 
@@ -278,7 +284,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                         </div>
                                     @empty
                                         <center>
-                                            <h2>No product</li>
+                                            @include('admin.partials.noProduct')
                                         </center>
                                     @endforelse
                                 </div>
@@ -425,7 +431,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                         </div>
                                     @empty
                                         <center>
-                                            <h2>No product</li>
+                                            @include('admin.partials.noProduct')
                                         </center>
                                     @endforelse
                                 </div>
@@ -586,7 +592,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                         </div>
                     </div>
 
-                    @if (isset($matchProVar))
+                    @if (isset($matchItem))
                         <div class="modal fade" id="yow" data-bs-backdrop="static" data-bs-keyboard="false"
                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -595,11 +601,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h5 class="modal-title">Add
-                                                    <span>{{ $matchProVar->product->name }}</span>
+                                                    <span>{{ $matchItem->name }}</span>
                                                     to Cart
                                                 </h5>
                                             </div>
-                                            <p>Product Code: <span id="topcode">{{ $matchProVar->code }}</span></p>
+                                            <p>Product Code: <span id="topcode">{{ $matchItem->item_code }}</span>
+                                            </p>
                                         </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"
                                             aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -609,7 +616,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src="{{ asset('storage/product_images/product_var/' . $matchProVar->var_image) }}"
+                                                    <img src="{{ asset('storage/item_images/' . $matchItem->productImage) }}"
                                                         alt="img">
                                                 </div>
                                                 <div class="col-lg-8">
@@ -617,37 +624,37 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                         <div class="mb-2">
                                                             <label for="colorInput" class="form-label">Color</label>
                                                             <input type="text" class="form-control"
-                                                                id="colorInput" value={{ $matchProVar->color->name }}
+                                                                id="colorInput" value={{ $matchItem->color->name }}
                                                                 name="color" readonly>
                                                         </div>
-                                                        <div class="mb-2">
+                                                        {{-- <div class="mb-2">
                                                             <label for="sizeInput" class="form-label">Size</label>
                                                             <input type="text" class="form-control" id="sizeInput"
-                                                                value={{ $matchProVar->size->name }} name="size"
+                                                                value={{ $matchItem->size->name }} name="size"
                                                                 readonly>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="mb-2">
                                                             <label for="pricing" class="form-label">Pricing</label>
                                                             <input type="text" class="form-control" id="pricing"
                                                                 name="price" required>
                                                         </div>
                                                         <input type="hidden" class="form-control" id="idInput"
-                                                            value={{ $matchProVar->id }} name="var_id">
+                                                            value={{ $matchItem->id }} name="var_id">
                                                         <input type="hidden" class="form-control" id="codeInput"
-                                                            value={{ $matchProVar->code }} name="code">
+                                                            value={{ $matchItem->product_code }} name="code">
                                                         <input type="hidden" class="form-control" id="productInput"
-                                                            value="{{ $matchProVar->product->name }}" name="product">
+                                                            value="{{ $matchItem->name }}" name="product">
                                                         <input type="hidden" class="form-control" id="imgInput"
-                                                            value={{ $matchProVar->var_image }} name="imgname">
+                                                            value={{ $matchItem->productImage }} name="imgname">
                                                     </div>
-                                                    @if ($cart->where('id', $matchProVar->id)->count())
+                                                    @if ($cart->where('id', $matchItem->id)->count())
                                                         <a href="javascript:void(0);" class="btn btn-remove">
                                                             In-Cart
                                                         </a>
-                                                    @elseif($matchProVar->status === 'rented')
+                                                        {{-- @elseif($matchItem->status === 'rented')
                                                         <a href="javascript:void(0);" class="btn btn-remove">
                                                             Currently Rented
-                                                        </a>
+                                                        </a> --}}
                                                     @else
                                                         <div class="col-lg-12">
                                                             <button id="addme" class="btn form-control"
@@ -780,6 +787,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
 
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
+
     <script>
         function validateQuantityInput(event) {
             const inputElement = event.target;
@@ -811,7 +821,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
     <script>
         function onScanSuccess(decodedText, decodedResult) {
             try {
-                decodedText = decodedText.replace(/(https?|:|\/|\.)+/g, '');
+                decodedText = decodedText.replace(/(:|\/|\.)+/g, '');
+                // decodedText = decodedText.replace(/(https):\/\//g, '');
                 const url = `/qrCheck/${decodedText}`;
                 window.location.href = url;
             } catch (error) {

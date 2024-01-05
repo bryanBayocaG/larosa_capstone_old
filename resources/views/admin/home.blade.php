@@ -80,7 +80,7 @@
                                 </h5>
                                 <h6>Single Items <a
                                         style="color: white; background-color: #bd9a62; padding: 5px; border-radius: 5px"
-                                        href="{{ route('setCategPage') }}">
+                                        href="{{ route('reportSingleItem') }}">
                                         Check Details
                                     </a>
                                 </h6>
@@ -106,19 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash1">
-                            <div class="dash-widgetimg">
-                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>
-                                    <span class="counters" data-count="{{ $setRemain }}">{{ $setRemain }}</span>
-                                </h5>
-                                <h6>Customer with Balance</h6>
-                            </div>
-                        </div>
-                    </div> --}}
+
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count das1" style="background-color: #ff7857">
                             <div class="dash-counts">
@@ -130,20 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash1">
-                            <div class="dash-widgetimg">
-                                <span><img src="assets/img/icons/dash3.svg" alt="img" /></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>
-                                    <span class="counters"
-                                        data-count="{{ $totalAvailableItem }}">{{ $totalAvailableItem }}</span>
-                                </h5>
-                                <h6>Overdue Rents</h6>
-                            </div>
-                        </div>
-                    </div> --}}
+
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count das1" style="background-color: rgb(196, 19, 19)">
                             <div class="dash-counts">
@@ -161,19 +136,6 @@
                 </div> --}}
                 <div class="card">
                     <div class="card-body">
-
-                        {{-- <div class="table-top">
-                            <div class="search-set">
-                                <div class="search-path">
-                                    <img src="assets/img/icons/filter.svg" alt="img">
-                                    <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                                </div>
-                                <div class="search-input">
-                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
-                                            alt="img"></a>
-                                </div>
-                            </div>
-                        </div> --}}
                         <form method="GET" action="{{ route('filterDueDate') }}">
                             @csrf
                             <div class="row">

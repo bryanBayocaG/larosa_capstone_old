@@ -34,7 +34,7 @@ class CartController extends Controller
         // $seetUpdate->save();
 
 
-        return redirect()->back()->with('message', 'Product Added to Cart');
+        return redirect()->back()->with('success', 'Product Added to Cart');
     }
     public function store2(Request $request)
     {
@@ -61,7 +61,7 @@ class CartController extends Controller
         // $seetUpdate->save();
 
 
-        return redirect()->back()->with('message', 'Product Added to Cart');
+        return redirect()->back()->with('success', 'Product Added to Cart');
     }
     public function destroy($id)
     {
@@ -73,6 +73,6 @@ class CartController extends Controller
         // $seetUpdate->save();
 
         Cart::instance('shopping')->remove($rowId);
-        return redirect()->back()->with('message', 'Product Remove from Cart');
+        return redirect()->back()->with('success', 'Product Remove from Cart');
     }
 }

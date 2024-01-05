@@ -12,6 +12,7 @@ use App\Http\Controllers\ItemCategController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductReportController;
 use App\Http\Controllers\ProductSetController;
 use App\Http\Controllers\PublicShowController;
 use App\Http\Controllers\RentorController;
@@ -95,6 +96,7 @@ Route::post('/addItemInSet', [AddSelectController::class, 'store2'])->name('addI
 
 Route::get('/renting', [RentoutController::class, 'index'])->name('renting.page');
 Route::post('/checkout', [RentoutController::class, 'checkout']);
+Route::get('/qrCheck/{code}',[RentoutController::class,'qrCodeCheck']); 
 
 
 Route::post('/cartstore', [CartController::class, 'store'])->name('cart.store');
@@ -117,6 +119,9 @@ Route::get('/download_pdf2/{id}', [PrintController::class, 'setItemDL']);
 
 Route::post('/returnSingleRent', [ReturnController::class, 'returnSingle']);
 Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);
+
+Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleItem'])->name('reportSingleItem');
+
 
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
 // Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'setItem']);
