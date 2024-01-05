@@ -9,12 +9,11 @@
 </head>
 
 <body>
-
-    <p>{{ $singItem[0]->name }}</p>
-
-    <h1>not found</h1>
-
-
+    @if ($singItem && count($singItem) > 0)
+        <p>{{ $singItem[0]->name }}</p>
+    @else
+        <h1>Not Found</h1>
+    @endif
 </body>
 
 </html>
