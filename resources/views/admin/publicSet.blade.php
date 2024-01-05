@@ -9,7 +9,11 @@
 </head>
 
 <body>
-    <h1>NOt found</h1>
+    @if ($setItem && count($setItem) > 0)
+        <p>{{ $setItem[0]->name }}</p>
+    @else
+        <h1>Not Found</h1>
+    @endif
 </body>
 
 </html>
