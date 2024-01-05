@@ -63,7 +63,7 @@
     <h4>Main Set QR Code</h4>
     <center>
         <div style="margin-top: 1rem">
-            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(140)->generate($setItem->set_code)) !!} ">
+            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(140)->generate($setItem->link)) !!} ">
         </div>
     </center>
     <h4>Included QR Code in the set</h4>
@@ -82,7 +82,7 @@
     @foreach ($includes as $incluItem)
         <div class="btn-group">
             <div class="button" style="margin-top: 1rem">
-                <img src="data:image/png;base64, {!! base64_encode(QrCode::size(130)->generate($incluItem->item->item_code)) !!} ">
+                <img src="data:image/png;base64, {!! base64_encode(QrCode::size(130)->generate($incluItem->item->link)) !!} ">
                 {{-- <p style="background-color: #bd9a62">{{ $incluItem->item->item_code }} </p> --}}
             </div>
             <div class="button" style="margin-top: 1rem">

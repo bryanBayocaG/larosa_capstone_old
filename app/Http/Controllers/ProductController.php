@@ -51,6 +51,8 @@ class ProductController extends Controller
         $image->storeAs('product_images', $imageName, 'public');
         $itemId = DB::table('product_sets')->insertGetId([
             'set_code' => $randomCode,
+            'cleanlink' => 'httpslarosarentalonlinelarosashowSetProd' . $randomCode,
+            'link' => 'https://larosarental.online/larosa/showSetProd/' . $randomCode,
             'name' => $name,
             'quantity' => $quantity,
             'remaining' => $quantity,

@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <div style="margin-top: 1rem">
-                                    {!! QrCode::size(160)->generate($item->item_code) !!}
+                                    {!! QrCode::size(160)->generate($item->link) !!}
                                 </div>
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end" style="margin-top: 10px">
