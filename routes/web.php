@@ -124,4 +124,5 @@ Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleIt
 Route::get('/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
 
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
+Route::get('/larosa/showSetProd/{code}', [PublicShowController::class, 'setItem']);
 // Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'setItem']);

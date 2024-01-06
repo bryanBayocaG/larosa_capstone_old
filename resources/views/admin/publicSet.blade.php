@@ -10,9 +10,10 @@
 
 <body>
     @if ($setItem && count($setItem) > 0)
-        <p>{{ $setItem[0]->name }}</p>
+        {{-- <p>{{ $setItem[0]->name }}</p> --}}
+        <h5>{{ $setItem }}</h5>
     @else
-        <h1>Not Found</h1>
+        <h1>No Match Found</h1>
     @endif
 </body>
 
