@@ -198,9 +198,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <button style="margin-top:2px" class="btn btn-primary"
-                                        type="submit">Filter</button>
+                                <div class="col-sm-12" style="margin-top:5px">
+                                    <button class="btn btn-primary" type="submit">Filter
+                                    </button>
+                                    <a href="{{ url('home') }}" class="btn btn-primary">
+                                        Reset Filter
+                                    </a>
                                 </div>
                             </div>
                         </form>
