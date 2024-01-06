@@ -25,7 +25,7 @@
             <div class="row">
                 <div id ="ney" class="col-lg-12 col-sm-12">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             @if ($rentor->status === 'Renting')
                                 <p id="yen">Status: <span class="badges bg-lightyellow">Renting</span></p>
                             @elseif ($rentor->status === 'Overdue')
@@ -34,7 +34,16 @@
                                 <p id="yen">Status: <span class="badges bg-lightgreen">Returned</span></p>
                             @endif
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            @if ($rentor->balance > 0)
+                                <p id="yen">Payment Status: <span class="badges bg-lightyellow">Partially
+                                        Paid</span></p>
+                            @else
+                                <p id="yen">Payment Status: <span class="badges bg-lightgreen">Fully Paid</span>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="col-lg-4">
                             <p id="yen"><strong>Transaction Code: </strong><span
                                     id="code">{{ $rentor->transac_code }}</span>
                             </p>
@@ -204,7 +213,8 @@
                                                                     aria-hidden="true">×</span></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ url('/returnSetRent') }}" method="POST">
+                                                            <form action="{{ url('/returnSetRent') }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 <div class="row">
                                                                     <div class="col-sm-12">

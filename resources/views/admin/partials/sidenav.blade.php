@@ -3,7 +3,7 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li
-                    class="{{ in_array(request()->segment(1), ['home', 'colorPage', 'sizePage', 'itemCategPage', 'setCategPage']) ? 'active' : '' }}">
+                    class="{{ in_array(request()->segment(1), ['home', 'colorPage', 'sizePage', 'itemCategPage', 'setCategPage', 'rentor']) ? 'active' : '' }}">
                     <a href="{{ url('home') }}">
                         <img src="{{ asset('assets/img/icons/dashboard.svg') }}" alt="img" /><span>Dashboard</span>
                     </a>

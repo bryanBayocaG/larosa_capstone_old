@@ -65,7 +65,9 @@
     @if (session('error'))
         <script>
             setTimeout(function() {
-                toastr.error("{{ Session::get('error') }}", "Action Not Permitted!", { timeOut: 10000 })
+                toastr.error("{{ Session::get('error') }}", "Action Not Permitted!", {
+                    timeOut: 10000
+                })
             }, 100);
         </script>
     @endif
@@ -74,7 +76,9 @@
         @foreach ($errors->all() as $error)
             <script>
                 setTimeout(function() {
-                    toastr.error("{{ $error }}", "Action Error!", { timeOut: 10000 })
+                    toastr.error("{{ $error }}", "Action Not Permitted!", {
+                        timeOut: 10000
+                    })
 
                 }, 100);
             </script>
