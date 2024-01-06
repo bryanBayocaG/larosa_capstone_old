@@ -795,8 +795,7 @@
         });
     </script>
 
-    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
-
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
         function onScanSuccess(decodedText, decodedResult) {
             try {
@@ -812,6 +811,7 @@
             "qr-reader", {
                 fps: 10,
                 qrbox: 250,
+                // supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
             });
         html5QrcodeScanner.render(onScanSuccess);
     </script>
