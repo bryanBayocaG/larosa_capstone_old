@@ -1,40 +1,247 @@
-<!DOCTYPE html>
-<html>
+@include('admin.partials.header');
+@include('admin.partials.sidenav');
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header ">
+            <div class="page-title">
+                <h4>ITEM REPORT</h4>
+                <h6>Customize your Reports using Filters and Export/Print</h6>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" action="{{ route('filterDueDate') }}">
+                    @csrf
+                    <div class="row">
 
-<head>
-    <title>hey</title>
-    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
-</head>
+                        <div class="col-sm-4">
+                            <h6>For Due Date</h6>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="">Start Date:</label>
+                                    <input type="date" name="Duestart_date" class="form-control">
 
-<body>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">End Date:</label>
+                                    <input type="date" name="Dueend_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>For Event Date</h6>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="">Start Date:</label>
+                                    <input type="date" name="Eventstart_date" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">End Date:</label>
+                                    <input type="date" name="Eventend_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <h6>For Transaction Date</h6>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="">Start Date:</label>
+                                    <input type="date" name="Transactionstart_date" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="">End Date:</label>
+                                    <input type="date" name="Transactionend_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" style="margin-top:5px">
+                            <button class="btn btn-primary" type="submit">Filter
+                            </button>
+                            <a href="{{ url('home') }}" class="btn btn-primary">
+                                Reset Filter
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table id="example">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Status</th>
+                                <th>Rentor Name</th>
+                                <th>Rent Due Date</th>
+                                <th>Overdue</th>
+                                <th>Included Set</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item->item->name }} - {{ $item->item_code }}
+                                    </td>
+                                    <td>
+                                        @if ($item->status === 'in-possesion')
+                                            <span class="badges bg-lightgreen">In-Possesion</span>
+                                        @else
+                                            <span class="badges bg-lightyellow">Rented</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->status === 'Rented')
+                                            @php
+                                                $rentIfo = \App\Models\RentInfo::find($item->set_id);
+                                            @endphp
+                                            <p>{{ $rentIfo->last_name }} {{ $rentIfo->first_name }}</p>
+                                        @else
+                                            <p style="color: gray">Not Rented</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->status === 'Rented')
+                                            @php
+                                                $rentIfo = \App\Models\RentInfo::find($item->set_id);
+                                            @endphp
+                                            <p>{{ \Carbon\Carbon::parse($rentIfo->return_date)->format('M d, Y') }}</p>
+                                        @else
+                                            <p style="color: gray">Not Rented</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->status === 'Rented')
+                                            @php
+                                                $rentIfo = \App\Models\RentInfo::find($item->set_id);
+                                            @endphp
+                                            @if ($rentIfo->status !== 'Overdue')
+                                                <span class="badges bg-lightgreen">No</span>
+                                            @else
+                                                <span class="badges bg-lightred">Yes</span>
+                                            @endif
+                                        @else
+                                            <p style="color: gray">Not Rented</p>
+                                        @endif
+                                    </td>
+                                    <td style="color: gray">
+                                        @if ($item->set_id2 !== 0)
+                                            @php
+                                                $productSet = \App\Models\product_set::find($item->set_id2);
+                                            @endphp
+                                            <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
+                                            {{ $productSet->quantity }}x
+                                        @else
+                                            <p style="color: gray">None</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->status === 'in-possesion' && $item->set_id2 === 0)
+                                            <span class="badges bg-lightgreen">Available</span>
+                                        @else
+                                            <span class="badges bg-lightred">Not Available</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Status</th>
+
+                                <th>Rentor Name</th>
+                                <th>Rent Due Date</th>
+                                <th>Overdue</th>
+                                <th>Included Set</th>
+                                <th>Availability</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+                <style>
+                    #see:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    <div id="qr-reader" style="width: 60%"></div>
+</div>
+</div>
+</div>
+
+
+{{-- for crazy --}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var today = new Date();
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copy',
+
+                },
+                {
+                    extend: 'csv',
+                    title: 'Report_' + today.getFullYear() + '-' + (today.getMonth() + 1) +
+                        '-' + today.getDate(),
+
+                },
+                {
+                    extend: 'excel',
+                    title: 'Report_' + today.getFullYear() + '-' + (today.getMonth() + 1) +
+                        '-' + today.getDate(),
+
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Report_' + today.getFullYear() + '-' + (today.getMonth() + 1) +
+                        '-' + today.getDate(),
+
+                },
+                {
+                    extend: 'print',
+
+                },
+            ],
+
+        });
+    });
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+{{-- for crazy --}}
+
+
+{{-- <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
+
+<script src="{{ asset('assets/js/feather.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
 
 
 
-    {{-- <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script> --}}
 
-    
-    {{-- <script src="asset/plugins/00qr/html5-qrcode.min.js" type="text/javascript"></script> --}}
-    <script>
-        function onScanSuccess(decodedText, decodedResult) {
-            try {
-                decodedText = decodedText.replace(/(https?|:|\/|\.)+/g, '');
-                const url = `/qrCheck/${decodedText}`;
-                window.location.href = url;
-            } catch (error) {
-                console.error('An error occurred:', error);
-            }
-        }
-        var html5QrcodeScanner = new Html5QrcodeScanner(
-            "qr-reader", {
-                fps: 10,
-                qrbox: 250
-            });
-        html5QrcodeScanner.render(onScanSuccess);
-    </script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
+<script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
+
+<script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>
