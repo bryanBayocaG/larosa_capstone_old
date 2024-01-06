@@ -24,7 +24,6 @@
                                         <option value="1">In Set</option>
                                         <option value="2">Not in Set</option>
                                     </select>
-
                                 </div>
                                 <div class="col-sm-6">
                                     <select name="state" id="" class="form-control">
@@ -35,7 +34,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div style="margin-top: 5px">
+                            <div style="margin-top: 5px; margin-bottom:5px;text-align: right;">
                                 <button class="btn btn-primary" type="submit">Filter
                                 </button>
                                 <a href="{{ url('reportSingleItem') }}" class="btn btn-primary">
