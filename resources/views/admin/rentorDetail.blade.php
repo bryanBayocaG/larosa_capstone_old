@@ -93,17 +93,19 @@
                                                             @php
                                                                 $productSet = \App\Models\product_set::find($rentedItem->product_set_id);
                                                             @endphp
-                                                            <p>{{ $productSet->name }}({{ $productSet->color->name }})(SET
-                                                                ITEM) ({{ $rentedItem->quantity }}PC(S))
+                                                            <p>{{ $productSet->name }}({{ $productSet->color->name }},
+                                                                {{ $rentedItem->quantity }}x) - <span
+                                                                    style="color:gray">SET ITEM</span>
+
                                                             </p>
                                                         @else
                                                             @php
                                                                 $productItem = \App\Models\item::find($rentedItem->single_item_id);
                                                             @endphp
-                                                            <p>{{ $productItem->name }},
-                                                                {{ $productItem->color->name }}(SINGLE
-                                                                ITEM) ({{ $rentedItem->quantity }}PC(S))
-                                                            </p>
+                                                            <p>{{ $productItem->name }}
+                                                                ({{ $productItem->color->name }},
+                                                                {{ $rentedItem->quantity }}x)
+                                                                - <span style="color:gray">SINGLE ITEM</span></p>
                                                         @endif
 
                                                     </div>
@@ -189,13 +191,13 @@
                                                     <h6>Set Item</h6>
                                                     @if ($rentedItem->status !== 'Rented')
                                                         <a href="javascript:void(0);" class="btn btn-remove">
-                                                            Renturned
+                                                            Returned
                                                         </a>
                                                     @else
                                                         <a href="javascript:void(0);" class="btn btn-adds"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#staticBackdrop{{ $productSet->id }}">
-                                                            Set as Renturned
+                                                            Set as Returned
                                                         </a>
                                                     @endif
                                                 </div>
@@ -301,13 +303,13 @@
                                                     <h6>Single Item</h6>
                                                     @if ($rentedItem->status !== 'Rented')
                                                         <a href="javascript:void(0);" class="btn btn-remove">
-                                                            Renturned
+                                                            Returned
                                                         </a>
                                                     @else
                                                         <a href="javascript:void(0);" class="btn btn-adds"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#static{{ $productItem->id }}">
-                                                            Set as Renturned
+                                                            Set as Returned
                                                         </a>
                                                     @endif
                                                 </div>
