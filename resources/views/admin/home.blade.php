@@ -110,8 +110,17 @@
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count das1" style="background-color: #ff7857">
                             <div class="dash-counts">
-                                <h4>0</h4>
+                                <h4>{{ $withBalance }}</h4>
                                 <h5>Customer with Balance</h5>
+                                @if ($withBalance === 0)
+                                @else
+                                    <form method="GET" action="{{ route('filterDueDate') }}">
+                                        <input type="hidden" name="withBalance" value="{{ $withBalance }}">
+                                        <button class="btn btn-priimary"
+                                            style="background-color:#ef9c87; color: white;">Check
+                                            now</button>
+                                    </form>
+                                @endif
                             </div>
                             <div class="dash-imgs">
                                 <i data-feather="minus-circle"></i>
@@ -122,8 +131,17 @@
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count das1" style="background-color: rgb(196, 19, 19)">
                             <div class="dash-counts">
-                                <h4>0</h4>
-                                <h5>Overdue</h5>
+                                <h4>{{ $overDuerent }}</h4>
+                                <h5>Overdue Rents</h5>
+                                @if ($overDuerent === 0)
+                                @else
+                                    <form method="GET" action="{{ route('filterDueDate') }}">
+                                        <input type="hidden" name="overDue" value="{{ $overDuerent }}">
+                                        <button class="btn btn-priimary"
+                                            style="background-color:rgb(198, 77, 77); color: white;">Check
+                                            now</button>
+                                    </form>
+                                @endif
                             </div>
                             <div class="dash-imgs">
                                 <i data-feather="alert-circle"></i>
@@ -181,7 +199,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
 
@@ -212,7 +229,11 @@
                                                 <p>{{ $rentor->last_name }} {{ $rentor->first_name }}</p>
                                             </td>
                                             <td>
-                                                <p>&#8369; {{ number_format($rentor->balance, 2, '.', ',') }}</p>
+                                                @if ($rentor->balance === '0.00')
+                                                    <span class="badges bg-lightgreen">Fully Paid</span>
+                                                @else
+                                                    <p>&#8369; {{ number_format($rentor->balance, 2, '.', ',') }}</p>
+                                                @endif
                                             </td>
                                             <td>{{ $rentor->rent_type }}</td>
                                             <td>

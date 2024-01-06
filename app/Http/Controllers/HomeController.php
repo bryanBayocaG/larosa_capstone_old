@@ -30,8 +30,10 @@ class HomeController extends Controller
                 $rentors = RentInfo::all();
                 $setNum = product_set::sum('quantity');
                 $setRemain = product_set::sum('remaining');
+                $overDuerent = RentInfo::where('status', 'Overdue')->count();
+                $withBalance = RentInfo::where('balance', '>', 0.00)->count();
 
-                return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors'));
+                return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors', 'overDuerent', 'withBalance'));
             } else {
                 return redirect()->back();
             }
@@ -65,6 +67,8 @@ class HomeController extends Controller
         $Transactionstart_date = $request->Transactionstart_date;
         $Transactionend_date = $request->Transactionend_date;
 
+        $withBalance = $request->withBalance;
+        $withOverdue = $request->overDue;
 
 
         // $rentors = RentInfo::whereDate('return_date', '>=', $start_date)
@@ -92,6 +96,12 @@ class HomeController extends Controller
         if (!empty($Transactionend_date)) {
             $rentorsQuery->whereDate('created_at', '<=', $Transactionend_date);
         }
+        if (!empty($withBalance)) {
+            $rentorsQuery->where('balance', '>', '0.00');
+        }
+        if (!empty($withOverdue)) {
+            $rentorsQuery->where('status', '===', 'Overdue');
+        }
         $rentors = $rentorsQuery->get();
 
         $totalItem = Item_details::count();
@@ -101,7 +111,9 @@ class HomeController extends Controller
         $totalSizes = Size::count();
         $setNum = product_set::sum('quantity');
         $setRemain = product_set::sum('remaining');
+        $overDuerent = RentInfo::where('status', 'Overdue')->count();
+        $withBalance = RentInfo::where('balance', '>', 0.00)->count();
 
-        return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors'));
+        return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors', 'overDuerent', 'withBalance'));
     }
 }

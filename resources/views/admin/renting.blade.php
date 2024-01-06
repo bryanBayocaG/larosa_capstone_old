@@ -246,12 +246,6 @@
                                                                                 class="form-control" id="pricing"
                                                                                 name="quantity" required>
                                                                         </div>
-                                                                        {{-- <div class="mb-2">
-                                                                            <label for="pricing"
-                                                                                class="form-label">Pricing Set</label>
-                                                                            <input class="form-control" id="price"
-                                                                                name="price" required>
-                                                                        </div> --}}
                                                                         <div class="mb-2">
                                                                             <label for="pricing"
                                                                                 class="form-label">Pricing Set</label>
@@ -275,7 +269,6 @@
                                                                             Cart</button>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </form>
                                                     </div>
