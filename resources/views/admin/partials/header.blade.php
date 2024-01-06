@@ -57,7 +57,12 @@
     @if (session('success'))
         <script>
             setTimeout(function() {
-                toastr.success("{{ Session::get('success') }}", "Action Succesfull!")
+                toastr.success("{{ Session::get('success') }}", "Action Succesfull!");
+
+                @php
+                    session()->forget('success');
+                @endphp
+
             }, 100);
         </script>
     @endif

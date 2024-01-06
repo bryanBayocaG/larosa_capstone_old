@@ -96,22 +96,14 @@
 @include('admin.partials.registerItem')
 
 <script>
-    function validateQuantityInput(event) {
+    function ThosoundSeparator(event) {
         const inputElement = event.target;
         let inputValue = inputElement.value;
-
-        // Remove any non-numeric characters and leading minus sign
         inputValue = inputValue.replace(/[^0-9]/g, '');
-
-        // Format the value with thousand separators
         inputValue = Number(inputValue).toLocaleString('en-US');
-
-        // Update the input value with the sanitized and formatted value
         inputElement.value = inputValue;
     }
-
-    // Attach the validation function to the input's "input" event
-    document.getElementById('quantity').addEventListener('input', validateQuantityInput);
+    document.getElementById('quantity').addEventListener('input', ThosoundSeparator);
 </script>
 
 <script type="text/javascript">

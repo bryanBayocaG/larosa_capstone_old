@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-12 col-sm-12 tabs_wrapper">
+            <div class="col-lg-12 col-sm-12 tabs_wrapper">
                 <div class="row">
                     @foreach ($thoseItems as $items)
                         <div class="col-lg-3 col-sm-6 d-flex">
@@ -129,7 +129,7 @@
                         </div>
                     @endforeach
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>

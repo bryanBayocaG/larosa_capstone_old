@@ -154,13 +154,21 @@ class RentoutController extends Controller
     public function qrCodeCheck($code)
     {
         $matchItem = item::where('cleanlink', $code)->first();
+
         if ($matchItem) {
             session()->flash('matchItem', $matchItem);
             // session()->flash('success', 'Product matched with ' . $code);
             return redirect()->back()->with('matchProVar', $matchItem);
         } else {
-            session()->flash('error', $code);
-            return redirect()->back();
+            $mathSet = product_set::where('cleanlink', $code)->first();
+
+            if ($mathSet) {
+                session()->flash('mathSet', $mathSet);
+                return redirect()->back()->with('matchProVar', $mathSet);
+            } else {
+                session()->flash('error', $code);
+                return redirect()->back();
+            }
         }
         // session()->flash('error', $code);
         // return redirect()->back();

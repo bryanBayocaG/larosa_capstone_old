@@ -101,9 +101,24 @@
 
         <script>
             setTimeout(function() {
-                console.log('Session variable hehehehe: {{ session('success') }}');
+                // console.log('Session variable hehehehe: {{ session('success') }}');
                 $(document).ready(function() {
                     $('#yow').modal('show');
+                });
+            }, 300);
+        </script>
+    @endif
+
+    @if (session()->has('mathSet'))
+        @php
+            $mathSet = session('mathSet');
+        @endphp
+
+        <script>
+            setTimeout(function() {
+                // console.log('Session variable hehehehe: {{ session('success') }}');
+                $(document).ready(function() {
+                    $('#yow2').modal('show');
                 });
             }, 300);
         </script>
@@ -290,21 +305,7 @@
                                                             data-bs-target="#addToCart{{ $item->id }}">
                                                             Add to Cart
                                                         </a>
-                                                        {{-- <a href="javascript:void(0);" class="btn btn-adds" data-product-id="{{ $item->id }}"
-                                                            data-bs-toggle="modal" data-bs-target="#addTocart"
-                                                            data-variant-details='{
-                                                        "id":"{{ $item->id }}",
-                                                        "code": "{{ $item->item_code }}",
-                                                        "quantity": "{{ $item->quantity->remaining }}",
-                                                        "color": {"name": "{{ $item->color->name }}"},
-                                                        
-                                                        "product": {"name": "{{ $item->name }}"},
-                                                        "imagename": "{{ $item->productImage }}",
-                                                        "image": "{{ asset('storage/item_images/' . $item->productImage) }}" }'>
-                                                            Add to Cart
-                                                        </a> --}}
                                                     @endif
-
                                                 </div>
                                             </div>
                                         </div>
@@ -372,8 +373,8 @@
                                                                         <div class="mb-2">
                                                                             <label for="pricing"
                                                                                 class="form-label">Pricing Item</label>
-                                                                            <input class="form-control" type="number"
-                                                                                min="1" id="priceItem"
+                                                                            <input class="form-control" min="1"
+                                                                                type="number" id="priceItem"
                                                                                 name="price" required>
                                                                         </div>
                                                                         <input type="hidden" class="form-control"
@@ -662,6 +663,90 @@
                     @else
                         &nbsp;
                     @endif
+                    @if (isset($mathSet))
+                        <div class="modal fade" id="yow2" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 class="modal-title" id="variantDetailsModalLabel">
+                                                    Add <span id="productName">
+                                                    </span> to
+                                                    Cart</h5>
+                                            </div>
+                                            <p>Product Code: <span id="topcode">{{ $set->set_code }}</span></p>
+                                            <p>Available Quantity: <span id="topcode">{{ $set->quantity }}</span>
+                                            </p>
+                                        </div>
+                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                            aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="{{ route('cart.store') }}">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <img src="{{ asset('storage/product_images/' . $set->productImage) }}"
+                                                        alt="Variant Image">
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="mb-3">
+                                                        <div class="mb-2">
+                                                            <input type="hidden" name="setID"
+                                                                value="{{ $set->id }}">
+                                                            <input type="hidden" name="currentQuan"
+                                                                value="{{ $set->quantity }}">
+                                                            <label for="colorInput" class="form-label">Color</label>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $set->color->name }}" name="color"
+                                                                readonly>
+                                                        </div>
+                                                        <div class="mb-2">
+
+                                                            <label for="sizeInput" class="form-label">Category</label>
+                                                            <input type="text" class="form-control" id="sizeInput"
+                                                                value="{{ $set->category->name }}" name="category"
+                                                                readonly>
+                                                        </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="pricing" class="form-label">Quantity</label>
+                                                            <input type="number" min="1"
+                                                                max="{{ $set->quantity }}" class="form-control"
+                                                                id="pricing" name="quantity" required>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label for="pricing" class="form-label">Pricing
+                                                                Set</label>
+                                                            <input class="form-control" type="number" min="1"
+                                                                id="priceSet" name="price" required>
+                                                        </div>
+                                                        <input type="hidden" class="form-control" id="idInput"
+                                                            name="var_id">
+                                                        <input type="hidden" class="form-control" id="codeInput"
+                                                            name="code">
+                                                        <input type="hidden" class="form-control" id="productInput"
+                                                            name="product">
+                                                        <input type="hidden" class="form-control" id="imgInput"
+                                                            name="imgname">
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <button id="addme" class="btn form-control"
+                                                            type="submit">Add to
+                                                            Cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        &nbsp;
+                    @endif
                     {{-- hehehehehe --}}
 
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -681,122 +766,27 @@
                             </div>
                         </div>
                     </div>
-                    {{-- modal for twosasdfasdfasdfasDFASF --}}
-
-
-
-                    {{-- <div class="modal fade" id="addTocart" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h5 class="modal-title" id="variantDetailsModalLabel">Add <span
-                                                    id="productName">
-                                                </span> to
-                                                Cart</h5>
-                                        </div>
-                                        <p>Product Code: <span id="topcode"></span></p>
-                                        <p>Available Quantity: <span id="topquantity"></span></p>
-                                    </div>
-                                    <button type="button" class="close" data-bs-dismiss="modal"
-                                        aria-label="Close"><span aria-hidden="true">×</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST" action="{{ route('cart.store') }}">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <img id="variantImage" src="" alt="Variant Image">
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="mb-3">
-                                                    <div class="mb-2">
-                                                        <label for="colorInput" class="form-label">Color</label>
-                                                        <input type="text" class="form-control" id="colorInput"
-                                                            name="color" readonly>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="sizeInput" class="form-label">Category</label>
-                                                        <input type="text" class="form-control" id="sizeInput"
-                                                            value="{{ $item->itemCategory->name }}" name="category"
-                                                            readonly>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="pricing" class="form-label">Quantity</label>
-                                                        <input type="number" min="1"
-                                                            max="{{ $item->quantity->remaining }}"
-                                                            class="form-control" id="pricing" name="quantity"
-                                                            required>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="pricing" class="form-label">Pricing</label>
-                                                        <input type="text" class="form-control" id="price"
-                                                            name="price" required>
-                                                    </div>
-                                                    <input type="hidden" class="form-control" id="idInput"
-                                                        name="var_id">
-                                                    <input type="hidden" class="form-control" id="codeInput"
-                                                        name="code">
-                                                    <input type="hidden" class="form-control" id="productInput"
-                                                        name="product">
-                                                    <input type="hidden" class="form-control" id="imgInput"
-                                                        name="imgname">
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <button id="addme" class="btn form-control"
-                                                        type="submit">Add to
-                                                        Cart</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
-
-
-
-
-
-                    {{-- modal for twosasdfasdfasdfasDFASF --}}
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    {{-- @livewire('show-variant') --}}
+    {{-- <script>
+        function ThosoundSeparator(event) {
+            const inputElement = event.target;
+            let inputValue = inputElement.value;
+            inputValue = inputValue.replace(/[^0-9]/g, '');
+            inputValue = Number(inputValue).toLocaleString('en-US');
+            inputElement.value = inputValue;
+        }
+        document.getElementById('priceItem').addEventListener('input', ThosoundSeparator);
+    </script> --}}
 
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
-
-    <script>
-        function validateQuantityInput(event) {
-            const inputElement = event.target;
-            let inputValue = inputElement.value;
-
-
-            inputValue = inputValue.replace(/[^0-9]/g, '');
-
-
-            inputValue = Number(inputValue).toLocaleString('en-US');
-
-            inputElement.value = inputValue;
-        }
-        document.getElementById('price').addEventListener('input', validateQuantityInput);
-        document.getElementById('priceSet').addEventListener('input', validateQuantityInput);
-    </script>
-
-
     <script>
         $(document).ready(function() {
             $("#phone").inputmask({
@@ -806,7 +796,6 @@
     </script>
 
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
-    {{-- <script src="{{ asset('asset/js/dist/html5-qrcode.min.js') }}"></script> --}}
     <script>
         function onScanSuccess(decodedText, decodedResult) {
             try {
@@ -821,7 +810,7 @@
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "qr-reader", {
                 fps: 10,
-                qrbox: 250
+                qrbox: 250,
             });
         html5QrcodeScanner.render(onScanSuccess);
     </script>
