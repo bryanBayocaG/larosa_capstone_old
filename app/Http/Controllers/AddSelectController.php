@@ -43,6 +43,8 @@ class AddSelectController extends Controller
         $image->storeAs('item_images', $imageName, 'public');
         $itemId = DB::table('items')->insertGetId([
             'item_code' => $randomCode,
+            'cleanlink' => 'httpslarosarentalonlinelarosashowSingleProd' . $randomCode,
+            'link' => 'https://larosarental.online/larosa/showSingleProd/' . $randomCode,
             'item_category_id' => $Itemcateg,
             'color_id' => $Itemcolor,
             'name' => $name,
