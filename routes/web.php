@@ -96,7 +96,7 @@ Route::post('/addItemInSet', [AddSelectController::class, 'store2'])->name('addI
 
 Route::get('/renting', [RentoutController::class, 'index'])->name('renting.page');
 Route::post('/checkout', [RentoutController::class, 'checkout']);
-Route::get('/qrCheck/{code}',[RentoutController::class,'qrCodeCheck']); 
+Route::get('/qrCheck/{code}', [RentoutController::class, 'qrCodeCheck']);
 
 
 Route::post('/cartstore', [CartController::class, 'store'])->name('cart.store');
@@ -121,7 +121,7 @@ Route::post('/returnSingleRent', [ReturnController::class, 'returnSingle']);
 Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);
 
 Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleItem'])->name('reportSingleItem');
-
+Route::get('/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
 
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
 // Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'setItem']);

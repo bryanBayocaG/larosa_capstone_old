@@ -10,57 +10,42 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form method="GET" action="{{ route('filterDueDate') }}">
+                <form method="GET" action="{{ route('filterSingleItem') }}">
                     @csrf
                     <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <h6>Filter by: </h6>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <select name="setVal" id="" class="form-control">
+                                        <option value="0" hidden>Choose Set Status</option>
+                                        <option value="1">In Set</option>
+                                        <option value="2">Not in Set</option>
+                                    </select>
 
-                        <div class="col-sm-4">
-                            <h6>For Due Date</h6>
-                            <div class="row">
+                                </div>
                                 <div class="col-sm-6">
-                                    <label for="">Start Date:</label>
-                                    <input type="date" name="Duestart_date" class="form-control">
+                                    <select name="state" id="" class="form-control">
+                                        <option value="none" hidden>Choose Item State</option>
+                                        <option value="Rented">Rented</option>
+                                        <option value="Available">Available</option>
+                                        <option value="Overdue">Overdue</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="margin-top: 5px">
+                                <button class="btn btn-primary" type="submit">Filter
+                                </button>
+                                <a href="{{ url('reportSingleItem') }}" class="btn btn-primary">
+                                    Reset Filter
+                                </a>
+                            </div>
+                        </div>
 
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">End Date:</label>
-                                    <input type="date" name="Dueend_date" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <h6>For Event Date</h6>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="">Start Date:</label>
-                                    <input type="date" name="Eventstart_date" class="form-control">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">End Date:</label>
-                                    <input type="date" name="Eventend_date" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <h6>For Transaction Date</h6>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="">Start Date:</label>
-                                    <input type="date" name="Transactionstart_date" class="form-control">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="">End Date:</label>
-                                    <input type="date" name="Transactionend_date" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12" style="margin-top:5px">
-                            <button class="btn btn-primary" type="submit">Filter
-                            </button>
-                            <a href="{{ url('home') }}" class="btn btn-primary">
-                                Reset Filter
-                            </a>
-                        </div>
+
+
                     </div>
                 </form>
 
@@ -96,7 +81,7 @@
                                             @endphp
                                             <p>{{ $rentIfo->last_name }} {{ $rentIfo->first_name }}</p>
                                         @else
-                                            <p style="color: gray">Not Rented</p>
+                                            <p style="color: gray">NONE</p>
                                         @endif
                                     </td>
                                     <td>
@@ -106,7 +91,7 @@
                                             @endphp
                                             <p>{{ \Carbon\Carbon::parse($rentIfo->return_date)->format('M d, Y') }}</p>
                                         @else
-                                            <p style="color: gray">Not Rented</p>
+                                            <p style="color: gray">NONE</p>
                                         @endif
                                     </td>
                                     <td>
@@ -120,7 +105,7 @@
                                                 <span class="badges bg-lightred">Yes</span>
                                             @endif
                                         @else
-                                            <p style="color: gray">Not Rented</p>
+                                            <p style="color: gray">NONE</p>
                                         @endif
                                     </td>
                                     <td style="color: gray">
@@ -131,7 +116,7 @@
                                             <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
                                             {{ $productSet->quantity }}x
                                         @else
-                                            <p style="color: gray">None</p>
+                                            <p style="color: gray">NONE</p>
                                         @endif
                                     </td>
                                     <td>
