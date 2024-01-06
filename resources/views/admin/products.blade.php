@@ -5,7 +5,7 @@
             <div class="content">
                 <div class="page-header">
                     <div class="page-title">
-                        <h4>Product List</h4>
+                        <h4>Set Product List</h4>
                         <h6>Manage your Inventory</h6>
                     </div>
                     <div class="page-btn">
@@ -15,7 +15,7 @@
                         </a> --}}
                         <a href="{{ url('inventory/productset/addProductSet') }}" class="btn btn-added">
                             <img src="{{ asset('assets/img/icons/product.svg') }}" class="me-1" alt="img" />
-                            Create a product set
+                            Create a Product Set
                         </a>
                     </div>
                 </div>

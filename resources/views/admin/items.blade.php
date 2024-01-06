@@ -5,13 +5,13 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Items List</h4>
+                <h4>Single Product List</h4>
                 <h6>Manage your Inventory</h6>
             </div>
             <div class="page-btn">
                 <a href="" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#registerProd">
                     <img src="{{ asset('assets/img/icons/product.svg') }}" class="me-1" alt="img" />
-                    Register an Item
+                    Add single Product
                 </a>
             </div>
         </div>
