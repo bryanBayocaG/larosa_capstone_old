@@ -57,7 +57,7 @@
                                                     <p>Category: <span
                                                             id="code">{{ $item->itemCategory->name }}</span></p>
                                                     </p>
-                                                    <p>Remaining Pieces: <span
+                                                    <p>Available Pieces: <span
                                                             id="code">{{ $item->quantity->remaining }} pc(s)</span>
                                                     </p>
                                                     </p>
@@ -99,37 +99,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-12 col-sm-12 tabs_wrapper">
-                <div class="row">
-                    @foreach ($thoseItems as $items)
-                        <div class="col-lg-3 col-sm-6 d-flex">
-                            <div class="productset flex-fill">
-                                <div class="productsetimg">
-                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
-                                        alt="img">
-                                    <h6>{{ $items->item_code }}</h6>
-                                </div>
-                                <div class="productsetcontent">
-                                    <h5>{{ $item->name }}</h5>
 
-                                    <p>Status:
-                                        @if ($items->set_id2 !== 0)
-                                            @php
-                                                $productSet = \App\Models\product_set::find($items->set_id2);
-                                            @endphp
-                                            <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
-                                        @elseif ($items->status === 'in-possesion')
-                                            <span class="badges bg-lightgreen">In-Possesion</span>
-                                        @else
-                                            <span class="badges bg-lightyellow">Renting</span>
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div> --}}
             <div class="card">
                 <div class="card-body">
                     <div class="table-top">
@@ -172,7 +142,8 @@
                                                 @php
                                                     $productSet = \App\Models\product_set::find($items->set_id2);
                                                 @endphp
-                                                <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
+                                                <a href="{{ url('inventory/set/detail/' . $productSet->id) }}"><span
+                                                        class="badges bg-lightyellow">{{ $productSet->name }}</span></a>
                                             @else
                                                 <p>None</p>
                                             @endif

@@ -57,7 +57,7 @@
                                                     <p>Category: <span id="code">{{ $item->category->name }}</span>
                                                     </p>
                                                     </p>
-                                                    <p>Remaining Pieces: <span id="code">{{ $item->remaining }}
+                                                    <p>Available Pieces: <span id="code">{{ $item->remaining }}
                                                             pc(s)</span>
                                                     </p>
                                                     </p>
@@ -127,7 +127,7 @@
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Variant</h5>
+                                        <h5 class="modal-title" id="staticBackdropLabel">Variant List</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"><span aria-hidden="true">×</span></button>
                                     </div>
@@ -137,7 +137,7 @@
                                                 ->where('item_id', $includedItem->item_id)
                                                 ->get();
                                         @endphp
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             @foreach ($includedPerItems as $theItem)
                                                 <div class="col-lg-2 col-sm-3 d-flex">
                                                     <div class="productset flex-fill">
@@ -156,6 +156,55 @@
                                                 </div>
                                             @endforeach
 
+                                        </div> --}}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-top">
+                                                    <div class="search-set">
+                                                        <div class="search-path">
+                                                        </div>
+                                                        <div class="search-input">
+                                                            <a class="btn btn-searchset"><img
+                                                                    src="{{ asset('assets/img/icons/search-white.svg') }}"
+                                                                    alt="img" /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card" id="filter_inputs">
+                                                    <div class="card-body pb-0"></div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table id="datatable" class="table datanew">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                <th>See More</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                <th>See More</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                            @foreach ($includedPerItems as $theItem)
+                                                                <tr>
+                                                                    <td>{{ $theItem->item_detail->name }} -
+                                                                        {{ $theItem->item_code }}</td>
+
+                                                                    <td>
+                                                                        <a
+                                                                            href="{{ url('inventory/items/detail/' . $theItem->item_detail->id) }}">See
+                                                                            more</a>
+                                                                    </td>
+
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
