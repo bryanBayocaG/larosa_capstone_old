@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-sm-12 tabs_wrapper">
+            {{-- <div class="col-lg-12 col-sm-12 tabs_wrapper">
                 <div class="row">
                     @foreach ($thoseItems as $items)
                         <div class="col-lg-3 col-sm-6 d-flex">
@@ -128,6 +128,74 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </div> --}}
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-top">
+                        <div class="search-set">
+                            <div class="search-path">
+                            </div>
+                            <div class="search-input">
+                                <a class="btn btn-searchset"><img
+                                        src="{{ asset('assets/img/icons/search-white.svg') }}" alt="img" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="filter_inputs">
+                        <div class="card-body pb-0"></div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table datanew">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Included Set</th>
+                                    <th>Status</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Included Set</th>
+                                    <th>Status</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach ($thoseItems as $items)
+                                    <tr>
+                                        <td>{{ $item->name }} - {{ $items->item_code }}</td>
+                                        <td>
+                                            @if ($items->set_id2 !== 0)
+                                                @php
+                                                    $productSet = \App\Models\product_set::find($items->set_id2);
+                                                @endphp
+                                                <span class="badges bg-lightyellow">{{ $productSet->name }}</span>
+                                            @else
+                                                <p>None</p>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($items->status === 'in-possesion')
+                                                <span class="badges bg-lightgreen">In-Possesion</span>
+                                            @else
+                                                <span class="badges bg-lightyellow">Rented</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($items->status === 'in-possesion' && $items->set_id2 === 0)
+                                                <span class="badges bg-lightgreen">Available</span>
+                                            @else
+                                                <span class="badges bg-lightred">Not Available</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

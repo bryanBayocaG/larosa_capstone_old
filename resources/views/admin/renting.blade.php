@@ -796,6 +796,7 @@
     </script>
 
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+
     <script>
         function onScanSuccess(decodedText, decodedResult) {
             try {
