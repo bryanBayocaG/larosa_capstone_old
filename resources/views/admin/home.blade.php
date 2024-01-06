@@ -164,8 +164,7 @@
                                         <div class="col-sm-6">
                                             <label for="">Start Date:</label>
                                             <input type="date" name="Duestart_date" class="form-control">
-                                            <button style="margin-top:2px" class="btn btn-primary"
-                                                type="submit">Filter</button>
+
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="">End Date:</label>
@@ -198,6 +197,10 @@
                                             <input type="date" name="Transactionend_date" class="form-control">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button style="margin-top:2px" class="btn btn-primary"
+                                        type="submit">Filter</button>
                                 </div>
                             </div>
                         </form>

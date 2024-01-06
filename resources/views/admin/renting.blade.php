@@ -38,22 +38,6 @@
     {{-- <div id="global-loader">
         <div class="whirly-loader"> </div>
     </div> --}}
-
-    {{-- @if (session('success'))
-        <script>
-            setTimeout(function() {
-                Swal.fire({
-                    position: "top-end",
-                    type: "success",
-                    title: "{{ Session::get('success') }}",
-                    showConfirmButton: !1,
-                    timer: 2000,
-                    confirmButtonClass: "btn btn-primary",
-                    buttonsStyling: !1,
-                });
-            }, 500);
-        </script>
-    @endif --}}
     @if (session('success'))
         <script>
             setTimeout(function() {
@@ -385,12 +369,6 @@
                                                                                 class="form-control" id="pricing"
                                                                                 name="quantity" required>
                                                                         </div>
-                                                                        {{-- <div class="mb-2">
-                                                                            <label for="pricing"
-                                                                                class="form-label">Pricing Item</label>
-                                                                            <input class="form-control" id="priceSet"
-                                                                                name="price" required>
-                                                                        </div> --}}
                                                                         <div class="mb-2">
                                                                             <label for="pricing"
                                                                                 class="form-label">Pricing Item</label>
@@ -593,61 +571,77 @@
                                     <div class="modal-header">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <h5 class="modal-title">Add
-                                                    <span>{{ $matchItem->name }}</span>
-                                                    to Cart
-                                                </h5>
+                                                <h5 class="modal-title" id="variantDetailsModalLabel">
+                                                    Add <span id="productName">
+                                                    </span> to
+                                                    Cart</h5>
                                             </div>
-                                            <p>Product Code: <span id="topcode">{{ $matchItem->item_code }}</span>
+                                            <p>Product Code: <span id="topcode">{{ $item->item_code }}</span></p>
+                                            <p>Available Quantity: <span
+                                                    id="topcode">{{ $item->quantity->remaining }}</span>
                                             </p>
                                         </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"
                                             aria-label="Close"><span aria-hidden="true">×</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('cart.store') }}">
+                                        <form method="POST" action="{{ route('cart.storeI') }}">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src="{{ asset('storage/item_images/' . $matchItem->productImage) }}"
-                                                        alt="img">
+                                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                                        alt="Variant Image">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="mb-3">
                                                         <div class="mb-2">
+                                                            <input type="hidden" name="setID"
+                                                                value="{{ $item->id }}">
+                                                            <input type="hidden" name="currentQuan"
+                                                                value="{{ $item->quantity->remaining }}">
                                                             <label for="colorInput" class="form-label">Color</label>
                                                             <input type="text" class="form-control"
-                                                                id="colorInput" value={{ $matchItem->color->name }}
-                                                                name="color" readonly>
-                                                        </div>
-                                                        {{-- <div class="mb-2">
-                                                            <label for="sizeInput" class="form-label">Size</label>
-                                                            <input type="text" class="form-control" id="sizeInput"
-                                                                value={{ $matchItem->size->name }} name="size"
+                                                                value="{{ $item->color->name }}" name="color"
                                                                 readonly>
-                                                        </div> --}}
+                                                        </div>
                                                         <div class="mb-2">
-                                                            <label for="pricing" class="form-label">Pricing</label>
-                                                            <input type="text" class="form-control" id="pricing"
-                                                                name="price" required>
+                                                            <label for="sizeInput" class="form-label">Category</label>
+                                                            <input type="text" class="form-control" id="sizeInput"
+                                                                value="{{ $item->itemCategory->name }}"
+                                                                name="category" readonly>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label for="pricing" class="form-label">Quantity</label>
+                                                            <input type="number" min="1"
+                                                                max="{{ $item->quantity->remaining }}"
+                                                                class="form-control" id="pricing" name="quantity"
+                                                                required>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label for="pricing" class="form-label">Pricing
+                                                                Item</label>
+                                                            <input class="form-control" type="number" min="1"
+                                                                id="priceItem" name="price" required>
                                                         </div>
                                                         <input type="hidden" class="form-control" id="idInput"
-                                                            value={{ $matchItem->id }} name="var_id">
+                                                            name="var_id">
                                                         <input type="hidden" class="form-control" id="codeInput"
-                                                            value={{ $matchItem->product_code }} name="code">
+                                                            name="code">
                                                         <input type="hidden" class="form-control" id="productInput"
-                                                            value="{{ $matchItem->name }}" name="product">
+                                                            name="product">
                                                         <input type="hidden" class="form-control" id="imgInput"
-                                                            value={{ $matchItem->productImage }} name="imgname">
+                                                            name="imgname">
                                                     </div>
-                                                    @if ($cart->where('id', $matchItem->id)->count())
+                                                    @if ($cart->where('id', $item->id)->first())
+                                                        <div class="col-lg-12">
+                                                            <a href="javascript:void(0);" class="btn btn-remove">
+                                                                In-cart
+                                                            </a>
+                                                        </div>
+                                                    @elseif ($item->quantity->remaining === 0)
                                                         <a href="javascript:void(0);" class="btn btn-remove">
-                                                            In-Cart
+                                                            Out of Stock
                                                         </a>
-                                                        {{-- @elseif($matchItem->status === 'rented')
-                                                        <a href="javascript:void(0);" class="btn btn-remove">
-                                                            Currently Rented
-                                                        </a> --}}
                                                     @else
                                                         <div class="col-lg-12">
                                                             <button id="addme" class="btn form-control"
@@ -655,10 +649,12 @@
                                                                 Cart</button>
                                                         </div>
                                                     @endif
+
                                                 </div>
 
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
