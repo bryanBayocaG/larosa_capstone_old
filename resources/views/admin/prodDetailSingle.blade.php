@@ -71,9 +71,12 @@
                             </div>
                             <div class="col-sm-2">
                                 <div style="margin-top: 1rem">
-                                    {!! QrCode::size(160)->generate($item->link) !!}
-                                    {{-- <img src="data:image/png;base64, {!! base64_encode(QrCode::size(200)->generate($item->link)) !!} "> --}}
-                                    {{-- <img src="{!! QrCode::format('png')->generate($item->link) !!}"> --}}
+
+                                    <a href="#" id="downloadLink" type="image/png">
+                                        <img src="data:image/png;base64, {!! base64_encode(
+                                            QrCode::size(160)->format('png')->generate($item->link),
+                                        ) !!}" alt="QR Code">
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end" style="margin-top: 10px">
@@ -173,6 +176,47 @@
     </div>
 </div>
 </div>
+<script>
+    document.getElementById('downloadLink').addEventListener('click', function() {
+        // Get the base64-encoded image data
+        var imageData = "{!! base64_encode(
+            QrCode::size(300)->format('png')->generate($item->link),
+        ) !!}";
+
+        // Convert base64 to binary
+        var binaryData = atob(imageData);
+
+        // Create a Uint8Array from binary data
+        var arrayBuffer = new ArrayBuffer(binaryData.length);
+        var uint8Array = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < binaryData.length; i++) {
+            uint8Array[i] = binaryData.charCodeAt(i);
+        }
+
+        // Create a Blob from the Uint8Array
+        var blob = new Blob([uint8Array], {
+            type: 'image/png'
+        });
+
+        // Create a link element
+        var downloadLink = document.createElement('a');
+
+        // Set the href with the Blob URL
+        downloadLink.href = URL.createObjectURL(blob);
+
+        // Set the filename (optional)
+        downloadLink.download = "qrcode.png";
+
+        // Append the link to the document
+        document.body.appendChild(downloadLink);
+
+        // Trigger a click on the link
+        downloadLink.click();
+
+        // Remove the link from the document
+        document.body.removeChild(downloadLink);
+    });
+</script>
 
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
