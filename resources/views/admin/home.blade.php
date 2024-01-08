@@ -5,13 +5,12 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
 
-                        <div class="dash-count das2" style="background-color: #bd9a62">
+                        <div class="dash-count das2" style="background-color: #977640">
                             <div class="dash-counts">
                                 <h4>{{ $totalCategory }}</h4>
                                 <h5>Set Categories</h5>
-                                <a style="color: white; background-color: #ddc39b; padding: 5px; border-radius: 5px"
-                                    href="{{ route('setCategPage') }}">
-                                    Go to Set Categories
+                                <a class="btn btn-primary" href="{{ route('setCategPage') }}">
+                                    View Info
                                 </a>
                             </div>
                             <div class="dash-imgs">
@@ -23,13 +22,12 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das2" style="background-color: #bd9a62">
+                        <div class="dash-count das2" style="background-color: #977640">
                             <div class="dash-counts">
                                 <h4>{{ $totalCategory }}</h4>
                                 <h5>Single Item Categories</h5>
-                                <a style="color: white; background-color: #ddc39b; padding: 5px; border-radius: 5px"
-                                    href="{{ route('itemCategPage') }}">
-                                    Go to Single Item Categories
+                                <a class="btn btn-primary" href="{{ route('itemCategPage') }}">
+                                    View Info
                                 </a>
                             </div>
                             <div class="dash-imgs">
@@ -39,13 +37,12 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das2" style="background-color: #bd9a62">
+                        <div class="dash-count das2" style="background-color: #977640">
                             <div class="dash-counts">
                                 <h4>{{ $totalSizes }}</h4>
                                 <h5>Sizes</h5>
-                                <a style="color: white; background-color: #ddc39b; padding: 5px; border-radius: 5px"
-                                    href="{{ route('sizePage') }}">
-                                    Go to Sizes
+                                <a class="btn btn-primary" href="{{ route('sizePage') }}">
+                                    View Info
                                 </a>
                             </div>
                             <div class="dash-imgs">
@@ -55,13 +52,12 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                        <div class="dash-count das2" style="background-color: #bd9a62">
+                        <div class="dash-count das2" style="background-color: #977640">
                             <div class="dash-counts">
                                 <h4>{{ $totalColors }}</h4>
                                 <h5>Colors</h5>
-                                <a style="color: white; background-color: #ddc39b; padding: 5px; border-radius: 5px"
-                                    href="{{ route('colorPage') }}">
-                                    Go to Colors
+                                <a class="btn btn-primary" href="{{ route('colorPage') }}">
+                                    View Info
                                 </a>
                             </div>
                             <div class="dash-imgs">
@@ -78,9 +74,7 @@
                                 <h5>
                                     <span class="counters" data-count="{{ $totalItem }}">{{ $totalItem }}</span>
                                 </h5>
-                                <h6>Single Items <a
-                                        style="color: white; background-color: #bd9a62; padding: 5px; border-radius: 5px"
-                                        href="{{ route('reportSingleItem') }}">
+                                <h6>Single Items <a class="btn btn-primary" href="{{ route('reportSingleItem') }}">
                                         Check Details
                                     </a>
                                 </h6>
@@ -97,9 +91,7 @@
                                 <h5>
                                     <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
                                 </h5>
-                                <h6>Product Set <a
-                                        style="color: white; background-color: #bd9a62; padding: 5px; border-radius: 5px"
-                                        href="{{ route('setCategPage') }}">
+                                <h6>Product Set <a class="btn btn-primary" href="{{ route('setCategPage') }}">
                                         Check Details
                                     </a>
                                 </h6>
