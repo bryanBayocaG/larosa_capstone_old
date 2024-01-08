@@ -68,14 +68,14 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="dash-widget dash2">
                             <div class="dash-widgetimg ">
-                                <span><img src="assets/img/icons/dash3.svg" alt="img" /></span>
+                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img" /></span>
                             </div>
                             <div class="dash-widgetcontent">
                                 <h5>
                                     <span class="counters" data-count="{{ $totalItem }}">{{ $totalItem }}</span>
                                 </h5>
                                 <h6>Single Items <a class="btn btn-primary" href="{{ route('reportSingleItem') }}">
-                                        Check Details
+                                        Create Report
                                     </a>
                                 </h6>
 
@@ -85,14 +85,14 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="dash-widget dash">
                             <div class="dash-widgetimg">
-                                <span><img src="assets/img/icons/dash1.svg" alt="img" /></span>
+                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img" /></span>
                             </div>
                             <div class="dash-widgetcontent">
                                 <h5>
                                     <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
                                 </h5>
                                 <h6>Product Set <a class="btn btn-primary" href="{{ route('setCategPage') }}">
-                                        Check Details
+                                        Create Report
                                     </a>
                                 </h6>
                             </div>
@@ -191,9 +191,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12" style="margin-top:5px">
-                                    <button class="btn btn-primary" type="submit">Filter
+                                    <button class="btn btn-primary btn-sm" type="submit">Filter
                                     </button>
-                                    <a href="{{ url('home') }}" class="btn btn-primary">
+                                    <a href="{{ url('home') }}" class="btn btn-primary btn-sm">
                                         Reset Filter
                                     </a>
                                 </div>
@@ -247,7 +247,8 @@
                                                 <center>
                                                     <a class="me-3"
                                                         href="{{ url('/rentor/rentorDetails/' . $rentor->id) }}">
-                                                        <img id="see" src="assets/img/icons/eye.svg"
+                                                        <img id="see"
+                                                            src="{{ asset('assets/img/icons/eye.svg') }}"
                                                             alt="img">
                                                     </a>
                                                 </center>

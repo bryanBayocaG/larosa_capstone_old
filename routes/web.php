@@ -40,7 +40,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/filterDueDate', [HomeController::class, 'filterDueDate'])->name('filterDueDate');
+Route::get('/home/filterDueDate', [HomeController::class, 'filterDueDate'])->name('filterDueDate');
 
 
 Route::get('/setCategPage', [HomeController::class, 'setCategPage'])->name('setCategPage');
@@ -84,7 +84,11 @@ Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.p
 Route::post('/addItem', [ItemsController::class, 'store'])->name('addItem');
 
 Route::get('/inventory/items/detail/{id}', [ItemsController::class, 'detailP']);
+Route::get('/editItem/{id}', [ItemsController::class, 'editItem']);
+
+
 Route::get('/inventory/set/detail/{id}', [ItemsController::class, 'detailP2']);
+Route::get('/editSet/{id}', [ItemsController::class, 'editSet']);
 
 Route::get('inventory/productset/addProductSet', [ProductSetController::class, 'index']);
 Route::post('/updateProductSet/{id}', [ProductController::class, 'update']);
@@ -121,7 +125,7 @@ Route::post('/returnSingleRent', [ReturnController::class, 'returnSingle']);
 Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);
 
 Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleItem'])->name('reportSingleItem');
-Route::get('/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
+Route::get('/reportSingleItem/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
 
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
 Route::get('/larosa/showSetProd/{code}', [PublicShowController::class, 'setItem']);

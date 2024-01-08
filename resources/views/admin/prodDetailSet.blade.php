@@ -137,26 +137,6 @@
                                                 ->where('item_id', $includedItem->item_id)
                                                 ->get();
                                         @endphp
-                                        {{-- <div class="row">
-                                            @foreach ($includedPerItems as $theItem)
-                                                <div class="col-lg-2 col-sm-3 d-flex">
-                                                    <div class="productset flex-fill">
-                                                        <div class="productsetimg">
-                                                            <img src="{{ asset('storage/item_images/' . $theItem->item_detail->productImage) }}"
-                                                                alt="img">
-                                                            <h6>{{ $theItem->item_code }}</h6>
-                                                        </div>
-                                                        <div class="productsetcontent">
-                                                            <h5>{{ $theItem->item_detail->name }}</h5>
-
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            @endforeach
-
-                                        </div> --}}
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="table-top">

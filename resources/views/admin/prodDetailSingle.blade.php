@@ -65,9 +65,7 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                             <div class="col-sm-2">
                                 <div style="margin-top: 1rem">
@@ -79,22 +77,35 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-sm-12 d-flex justify-content-end" style="margin-top: 10px">
-                                <div class="wordset">
-                                    <ul>
-                                        <li>
-                                            <a href="{{ url('download_pdf', $item->id) }}" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Download PDF"><img
-                                                    src="{{ asset('assets/img/icons/pdf.svg') }}" alt="img" /></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('print_pdf', $item->id) }}" target="_blank"
-                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="Print QR code"><img
-                                                    src="{{ asset('assets/img/icons/printer.svg') }}"
-                                                    alt="img" /></a>
-                                        </li>
-                                    </ul>
+                            <div class="col-sm-12" style="margin-top: 10px">
+                                <div class="row">
+                                    <div class="col-sm-10" style="margin-top: 5px">
+                                        <a href="#editModal" data-bs-toggle="modal">
+                                            <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img" />
+
+                                        </a>
+
+                                    </div>
+                                    <div class="col-sm-2" style="margin-top: 5px">
+                                        <div class="wordset">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ url('download_pdf', $item->id) }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Download PDF"><img
+                                                            src="{{ asset('assets/img/icons/pdf.svg') }}"
+                                                            alt="img" /></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('print_pdf', $item->id) }}" target="_blank"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Print QR code"><img
+                                                            src="{{ asset('assets/img/icons/printer.svg') }}"
+                                                            alt="img" /></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,6 +180,75 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Edit Item Details</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url('editItem/' . $item->id) }}" method="POST">
+
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">yow</div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-2">
+                                                        <label class="col-form-label">New Name:</label>
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $item->id }}">
+                                                        <input name="newName" type="text" class="form-control"
+                                                            value="{{ $item->name }}" required>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label class="col-form-label">New Color:</label>
+                                                        <select name="newColor" class="form-control">
+                                                            <option value="{{ $item->color }}" hidden>
+                                                                {{ $item->color->name }}
+                                                            </option>
+                                                            @foreach ($colors as $color)
+                                                                <option value="{{ $color->id }}">
+                                                                    {{ $color->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label class="col-form-label">New Category:</label>
+                                                        <input name="newCateg" type="text" class="form-control"
+                                                            value="{{ $item->itemCategory->name }}" required>
+                                                    </div>
+
+                                                    <center>or</center>
+
+                                                    <div class="mb-2">
+                                                        <label class="col-form-label">Change Quantity:</label>
+                                                        <input name="newQuan" type="text" class="form-control"
+                                                            value="{{ $item->quantity->total }}" required>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button name="add" type="submit" class="btn btn-submit"
+                                                style="color:white;">
+                                                Update
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -35,9 +35,9 @@
                                 </div>
                             </div>
                             <div style="margin-top: 5px; margin-bottom:5px;text-align: right;">
-                                <button class="btn btn-primary" type="submit">Filter
+                                <button class="btn btn-primary btn-sm" type="submit">Filter
                                 </button>
-                                <a href="{{ url('reportSingleItem') }}" class="btn btn-primary">
+                                <a href="{{ url('reportSingleItem') }}" class="btn btn-primary btn-sm">
                                     Reset Filter
                                 </a>
                             </div>

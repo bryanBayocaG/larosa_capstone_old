@@ -85,8 +85,16 @@ class ItemsController extends Controller
     {
         $item = item::find($id);
         $thoseItems = Item_details::where('item_id', $id)->get();
+        $colors = Color::all();
 
-        return view('admin.prodDetailSingle', compact('item', 'thoseItems'));
+        return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors'));
+    }
+    public function editItem(Request $request, $id)
+    {
+        $item = item::find($id);
+
+        $item->name = $request->input('newName');
+        $item->save();
     }
     public function detailP2($id)
     {
