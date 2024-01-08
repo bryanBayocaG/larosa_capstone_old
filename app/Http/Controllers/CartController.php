@@ -26,7 +26,7 @@ class CartController extends Controller
             $quan,
             $price,
             0,
-            ['size' => $size, 'category' => '', 'image' => $image, 'code' => $code, 'color' => $color]
+            ['size' => $size, 'category' => '', 'image' => $image, 'code' => $code, 'color' => $color, 'setba' => 'yes']
         );
 
         // $seetUpdate = product_set::find($request->input('setID'));
@@ -53,7 +53,7 @@ class CartController extends Controller
             $quan,
             $price,
             0,
-            ['size' => '', 'category' => $category, 'image' => $image, 'code' => $code, 'color' => $color]
+            ['size' => '', 'category' => $category, 'image' => $image, 'code' => $code, 'color' => $color, 'setba' => 'no']
         );
 
         // $seetUpdate = product_set::find($request->input('setID'));

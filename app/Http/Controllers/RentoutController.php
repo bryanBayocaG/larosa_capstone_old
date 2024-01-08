@@ -24,7 +24,6 @@ class RentoutController extends Controller
     public function index()
     {
         $categ = Category::all();
-        // $combi =  Category::with('products')->get();
         $cart = Cart::instance('shopping')->content();
         $sets = product_set::all();
         $items = item::all();
@@ -69,6 +68,7 @@ class RentoutController extends Controller
         ]);
 
         foreach (Cart::instance('shopping')->content() as $item) {
+            $numberToDeduct = intval($item->qty);
             $orderItem = new rentedItem();
             $orderItem->rent_info_id = $RentinfoId;
             if ($item->options->category === '') {
@@ -84,36 +84,41 @@ class RentoutController extends Controller
             $orderItem->save();
 
             $product = product_set::find($item->id);
-            $Sitem = item::find($item->id);
-            if ($product) {
-                $product->remaining = $product->remaining - $item->qty;
-                $product->save();
-                for ($i = 0; $i < intval($item->qty); $i++) {
-                    $includedItems = included_item::where('product_set_id', $product->id)->get();
-                    foreach ($includedItems as $includedItem) {
-                        $itemDetail = item_details::where('item_id', $includedItem->item_id)->where('status', 'in-possesion')->first();
-                        if ($itemDetail) {
-                            $itemDetail->set_id = $RentinfoId;
-                            $itemDetail->status = 'Rented';
-                            $itemDetail->save();
+            if ($item->options->setba === 'yes') {
+                if ($product) {
+                    $product->remaining = intval($product->remaining) - $numberToDeduct;
+                    $product->save();
+                    for ($i = 0; $i < intval($item->qty); $i++) {
+                        $includedItems = included_item::where('product_set_id', $product->id)->get();
+                        foreach ($includedItems as $includedItem) {
+                            $itemDetail = item_details::where('item_id', $includedItem->item_id)->where('status', 'in-possesion')->first();
+                            if ($itemDetail) {
+                                $itemDetail->set_id = $RentinfoId;
+                                $itemDetail->status = 'Rented';
+                                $itemDetail->save();
+                            }
                         }
                     }
-                }
-            }
-            if ($Sitem) {
-                $itemQuan = Item_quantity::where('item_id', $Sitem->id)->first();
-                if ($itemQuan) {
-                    $itemQuan->remaining = $itemQuan->remaining - $item->qty;
-                    $itemQuan->save();
-                }
-                for ($i = 0; $i < intval($item->qty); $i++) {
-                    $itemBelongs = Item_details::where('item_id', $Sitem->id)->where('status', 'in-possesion')->first();
-                    if ($itemBelongs) {
-                        $itemBelongs->set_id = $RentinfoId;
-                        $itemBelongs->status = 'Rented';
-                        $itemBelongs->save();
+                };
+            };
+
+            if ($item->options->setba === 'no') {
+                $Sitem = item::find($item->id);
+                if ($Sitem) {
+                    $itemQuan = Item_quantity::where('item_id', $Sitem->id)->first();
+                    if ($itemQuan) {
+                        $itemQuan->remaining = intval($itemQuan->remaining) - $numberToDeduct;
+                        $itemQuan->save();
                     }
-                }
+                    for ($i = 0; $i < intval($item->qty); $i++) {
+                        $itemBelongs = Item_details::where('item_id', $Sitem->id)->where('status', 'in-possesion')->first();
+                        if ($itemBelongs) {
+                            $itemBelongs->set_id = $RentinfoId;
+                            $itemBelongs->status = 'Rented';
+                            $itemBelongs->save();
+                        }
+                    }
+                };
             }
         };
 
