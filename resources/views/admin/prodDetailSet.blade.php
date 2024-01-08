@@ -192,13 +192,11 @@
                                                                 <tr>
                                                                     <td>{{ $theItem->item_detail->name }} -
                                                                         {{ $theItem->item_code }}</td>
-
                                                                     <td>
                                                                         <a
                                                                             href="{{ url('inventory/items/detail/' . $theItem->item_detail->id) }}">See
                                                                             more</a>
                                                                     </td>
-
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -211,10 +209,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
-                    {{-- </div> --}}
-
                 </div>
             </div>
         </div>

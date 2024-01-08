@@ -186,7 +186,5 @@ class RentoutController extends Controller
                 return redirect()->back();
             }
         }
-        // session()->flash('error', $code);
-        // return redirect()->back();
     }
 }
