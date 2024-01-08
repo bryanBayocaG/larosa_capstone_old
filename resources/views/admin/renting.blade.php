@@ -800,7 +800,6 @@
         function onScanSuccess(decodedText, decodedResult) {
             try {
                 decodedText = decodedText.replace(/(:|\/|\.)+/g, '');
-                // decodedText = decodedText.replace(/(https):\/\//g, '');
                 const url = `/qrCheck/${decodedText}`;
                 window.location.href = url;
             } catch (error) {
