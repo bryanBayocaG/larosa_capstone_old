@@ -101,7 +101,7 @@
 
         <script>
             setTimeout(function() {
-                // console.log('Session variable hehehehe: {{ session('success') }}');
+                console.log('Session variable hehehehe: {{ session('matchItem') }}');
                 $(document).ready(function() {
                     $('#yow').modal('show');
                 });
@@ -116,7 +116,7 @@
 
         <script>
             setTimeout(function() {
-                // console.log('Session variable hehehehe: {{ session('success') }}');
+                console.log('Session variable hehehehe: {{ session('mathSet') }}');
                 $(document).ready(function() {
                     $('#yow2').modal('show');
                 });
@@ -577,9 +577,10 @@
                                                     </span> to
                                                     Cart</h5>
                                             </div>
-                                            <p>Product Code: <span id="topcode">{{ $item->item_code }}</span></p>
+                                            <p>Product Code: <span id="topcode">{{ $matchItem->item_code }}</span>
+                                            </p>
                                             <p>Available Quantity: <span
-                                                    id="topcode">{{ $item->quantity->remaining }}</span>
+                                                    id="topcode">{{ $matchItem->quantity->remaining }}</span>
                                             </p>
                                         </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"
@@ -590,31 +591,31 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                                    <img src="{{ asset('storage/item_images/' . $matchItem->productImage) }}"
                                                         alt="Variant Image">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="mb-3">
                                                         <div class="mb-2">
                                                             <input type="hidden" name="setID"
-                                                                value="{{ $item->id }}">
+                                                                value="{{ $matchItem->id }}">
                                                             <input type="hidden" name="currentQuan"
-                                                                value="{{ $item->quantity->remaining }}">
+                                                                value="{{ $matchItem->quantity->remaining }}">
                                                             <label for="colorInput" class="form-label">Color</label>
                                                             <input type="text" class="form-control"
-                                                                value="{{ $item->color->name }}" name="color"
+                                                                value="{{ $matchItem->color->name }}" name="color"
                                                                 readonly>
                                                         </div>
                                                         <div class="mb-2">
                                                             <label for="sizeInput" class="form-label">Category</label>
                                                             <input type="text" class="form-control" id="sizeInput"
-                                                                value="{{ $item->itemCategory->name }}"
+                                                                value="{{ $matchItem->itemCategory->name }}"
                                                                 name="category" readonly>
                                                         </div>
                                                         <div class="mb-2">
                                                             <label for="pricing" class="form-label">Quantity</label>
                                                             <input type="number" min="1"
-                                                                max="{{ $item->quantity->remaining }}"
+                                                                max="{{ $matchItem->quantity->remaining }}"
                                                                 class="form-control" id="pricing" name="quantity"
                                                                 required>
                                                         </div>
@@ -633,13 +634,13 @@
                                                         <input type="hidden" class="form-control" id="imgInput"
                                                             name="imgname">
                                                     </div>
-                                                    @if ($cart->where('id', $item->id)->first())
+                                                    @if ($cart->where('id', $matchItem->id)->first())
                                                         <div class="col-lg-12">
                                                             <a href="javascript:void(0);" class="btn btn-remove">
                                                                 In-cart
                                                             </a>
                                                         </div>
-                                                    @elseif ($item->quantity->remaining === 0)
+                                                    @elseif ($matchItem->quantity->remaining === 0)
                                                         <a href="javascript:void(0);" class="btn btn-remove">
                                                             Out of Stock
                                                         </a>
@@ -676,8 +677,9 @@
                                                     </span> to
                                                     Cart</h5>
                                             </div>
-                                            <p>Product Code: <span id="topcode">{{ $set->set_code }}</span></p>
-                                            <p>Available Quantity: <span id="topcode">{{ $set->quantity }}</span>
+                                            <p>Product Code: <span id="topcode">{{ $mathSet->set_code }}</span></p>
+                                            <p>Available Quantity: <span
+                                                    id="topcode">{{ $mathSet->quantity }}</span>
                                             </p>
                                         </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"
@@ -688,33 +690,33 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src="{{ asset('storage/product_images/' . $set->productImage) }}"
+                                                    <img src="{{ asset('storage/product_images/' . $mathSet->productImage) }}"
                                                         alt="Variant Image">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="mb-3">
                                                         <div class="mb-2">
                                                             <input type="hidden" name="setID"
-                                                                value="{{ $set->id }}">
+                                                                value="{{ $mathSet->id }}">
                                                             <input type="hidden" name="currentQuan"
-                                                                value="{{ $set->quantity }}">
+                                                                value="{{ $mathSet->quantity }}">
                                                             <label for="colorInput" class="form-label">Color</label>
                                                             <input type="text" class="form-control"
-                                                                value="{{ $set->color->name }}" name="color"
+                                                                value="{{ $mathSet->color->name }}" name="color"
                                                                 readonly>
                                                         </div>
                                                         <div class="mb-2">
 
                                                             <label for="sizeInput" class="form-label">Category</label>
                                                             <input type="text" class="form-control" id="sizeInput"
-                                                                value="{{ $set->category->name }}" name="category"
-                                                                readonly>
+                                                                value="{{ $mathSet->category->name }}"
+                                                                name="category" readonly>
                                                         </div>
 
                                                         <div class="mb-2">
                                                             <label for="pricing" class="form-label">Quantity</label>
                                                             <input type="number" min="1"
-                                                                max="{{ $set->quantity }}" class="form-control"
+                                                                max="{{ $mathSet->remaining }}" class="form-control"
                                                                 id="pricing" name="quantity" required>
                                                         </div>
                                                         <div class="mb-2">
@@ -770,18 +772,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <script>
-        function ThosoundSeparator(event) {
-            const inputElement = event.target;
-            let inputValue = inputElement.value;
-            inputValue = inputValue.replace(/[^0-9]/g, '');
-            inputValue = Number(inputValue).toLocaleString('en-US');
-            inputElement.value = inputValue;
-        }
-        document.getElementById('priceItem').addEventListener('input', ThosoundSeparator);
-    </script> --}}
-
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
 
@@ -789,7 +779,6 @@
     <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
-    {{-- <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script> --}}
     <script>
         $(document).ready(function() {
             $("#phone").inputmask({
@@ -799,10 +788,12 @@
     </script>
 
     <script src="https://unpkg.com/html5-qrcode"></script>
+    {{-- <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script> --}}
     <script>
         function onScanSuccess(decodedText, decodedResult) {
             try {
                 decodedText = decodedText.replace(/(:|\/|\.)+/g, '');
+                // const last10Letters = decodedText.slice(-10);
                 const url = `/qrCheck/${decodedText}`;
                 window.location.href = url;
             } catch (error) {

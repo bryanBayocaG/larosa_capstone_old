@@ -173,18 +173,19 @@ class RentoutController extends Controller
 
         if ($matchItem) {
             session()->flash('matchItem', $matchItem);
-            // session()->flash('success', 'Product matched with ' . $code);
-            return redirect()->back()->with('matchProVar', $matchItem);
-        } else {
-            $mathSet = product_set::where('cleanlink', $code)->first();
+            return redirect()->back();
+            // session()->flash('error', $code . ' ITEM mAtch');
+            return redirect()->back();
+        };
 
-            if ($mathSet) {
-                session()->flash('mathSet', $mathSet);
-                return redirect()->back()->with('matchProVar', $mathSet);
-            } else {
-                session()->flash('error', $code);
-                return redirect()->back();
-            }
-        }
+        $mathSet = product_set::where('cleanlink', $code)->first();
+        if ($mathSet) {
+            session()->flash('mathSet', $mathSet);
+            return redirect()->back();
+            // session()->flash('error', $code . ' SET mAtch');
+            // return redirect()->back();
+        };
+        session()->flash('error', $code);
+        return redirect()->back();
     }
 }

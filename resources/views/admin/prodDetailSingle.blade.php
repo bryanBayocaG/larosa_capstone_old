@@ -72,7 +72,6 @@
                             </div>
                             <div class="col-sm-2">
                                 <div style="margin-top: 1rem">
-
                                     <a href="#" id="downloadLink" type="image/png">
                                         <img src="data:image/png;base64, {!! base64_encode(
                                             QrCode::size(160)->format('png')->generate($item->link),
@@ -387,20 +386,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -436,7 +421,8 @@
         downloadLink.href = URL.createObjectURL(blob);
 
         // Set the filename (optional)
-        downloadLink.download = "qrcode.png";
+        downloadLink.download = "qrcode" + @json($item->name) + "_" + @json($item->item_code) +
+            ".png";
 
         // Append the link to the document
         document.body.appendChild(downloadLink);
