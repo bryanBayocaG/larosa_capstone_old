@@ -154,16 +154,16 @@ class RentoutController extends Controller
         $returnDateObject = Carbon::parse($returnDate);
         $formattedReturnDate = $returnDateObject->format('m d y');
 
-        $client = new Client();
-        $client->post('https://semaphore.co/api/v4/messages', [
-            'form_params' => [
-                'apikey' => $apiKey,
-                'number' => $cleanedNumber,
-                'message' => $message,
-                'sendername' => 'LAROSA',
-            ],
-            'verify' => false,
-        ]);
+        // $client = new Client();
+        // $client->post('https://semaphore.co/api/v4/messages', [
+        //     'form_params' => [
+        //         'apikey' => $apiKey,
+        //         'number' => $cleanedNumber,
+        //         'message' => $message,
+        //         'sendername' => 'LAROSA',
+        //     ],
+        //     'verify' => false,
+        // ]);
         Cart::instance('shopping')->destroy();
         return redirect()->back()->with('success', 'Apparel checked out succesfully!');
     }

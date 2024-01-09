@@ -403,29 +403,42 @@
                                 <div class="modal-body">
                                     <h5>Maximum number of Item that can be drop: <span
                                             style="color:#bd9a62">{{ $item->remaining }}</span> </h5>
-                                    <input type="number" name="quantity" class="form-control" min="1"
-                                        max="{{ $item->remaining }}" value="1">
-                                    <input name="itemId" type="hidden" value="{{ $id }}">
+
+                                    @if (intval($item->remaining) === 0)
+                                        <center>
+                                            <h5 style="color:#bd9a62"> Nothing can be Drop here</h5>
+                                        </center>
+
                                 </div>
-                                <div class="modal-footer">
-                                    <button name="add" type="submit" class="btn btn-submit"
-                                        style="color:white;">
-                                        Proceed
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
+                            @else
+                                <input type="number" name="quantity" class="form-control" min="1"
+                                    max="{{ $item->remaining }}" value="1">
+                                <input name="itemId" type="hidden" value="{{ $id }}">
                         </div>
+                        <div class="modal-footer">
+                            <button name="add" type="submit" class="btn btn-submit" style="color:white;">
+                                Proceed
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                            @endif
+
+
+
+
+
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
+
+
+
     </div>
+</div>
 </div>
 </div>
 <script>

@@ -29,12 +29,7 @@ class CartController extends Controller
             ['size' => $size, 'category' => '', 'image' => $image, 'code' => $code, 'color' => $color, 'setba' => 'yes']
         );
 
-        // $seetUpdate = product_set::find($request->input('setID'));
-        // $seetUpdate->quantity = $request->input('currentQuan') - $quan;
-        // $seetUpdate->save();
-
-
-        return redirect()->back()->with('success', 'Product Added to Cart');
+        return redirect()->back()->with('success', 'Set Added to Cart');
     }
     public function store2(Request $request)
     {
@@ -56,12 +51,7 @@ class CartController extends Controller
             ['size' => '', 'category' => $category, 'image' => $image, 'code' => $code, 'color' => $color, 'setba' => 'no']
         );
 
-        // $seetUpdate = product_set::find($request->input('setID'));
-        // $seetUpdate->quantity = $request->input('currentQuan') - $quan;
-        // $seetUpdate->save();
-
-
-        return redirect()->back()->with('success', 'Product Added to Cart');
+        return redirect()->back()->with('success', 'Item Added to Cart');
     }
     public function destroy($id)
     {

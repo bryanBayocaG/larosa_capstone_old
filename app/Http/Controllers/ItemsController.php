@@ -95,7 +95,7 @@ class ItemsController extends Controller
         $ItemCategs = ItemCategory::all();
         $totActiveRentors = Item_details::where('item_id', $id)->where('status', '!=', 'in-possesion')->count();
 
-        $minToDec = Item_details::where('item_id', $id)->where('set_id', 0)->where('set_id2', 0)->count();
+        $minToDec = Item_details::where('item_id', $id)->where('set_id', 0)->where('set_id2', 0)->where('status', 'in-possesion')->count();
 
         return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors', 'ItemCategs', 'minToDec', 'id', 'totActiveRentors'));
     }

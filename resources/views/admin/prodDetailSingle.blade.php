@@ -364,9 +364,9 @@
                                         </div>
                                     @else
                                         <h5>Maximum number of Item that can be drop: <span
-                                                style="color:#bd9a62">{{ $minToDec }}</span> </h5>
+                                                style="color:#bd9a62">{{ $item->quantity->remaining }}</span> </h5>
                                         <input type="number" name="quantity" class="form-control" min="1"
-                                            max="{{ $minToDec }}" value="1">
+                                            max="{{ $item->quantity->remaining }}" value="1">
                                         <input name="itemId" type="hidden" value="{{ $id }}">
                                 </div>
                                 <div class="modal-footer">

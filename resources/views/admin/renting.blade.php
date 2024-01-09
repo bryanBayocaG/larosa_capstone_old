@@ -200,7 +200,7 @@
                                                             <p>Product Code: <span
                                                                     id="topcode">{{ $set->set_code }}</span></p>
                                                             <p>Available Quantity: <span
-                                                                    id="topcode">{{ $set->quantity }}</span></p>
+                                                                    id="topcode">{{ $set->remaining }}</span></p>
                                                         </div>
                                                         <button type="button" class="close" data-bs-dismiss="modal"
                                                             aria-label="Close"><span
@@ -220,7 +220,7 @@
                                                                             <input type="hidden" name="setID"
                                                                                 value="{{ $set->id }}">
                                                                             <input type="hidden" name="currentQuan"
-                                                                                value="{{ $set->quantity }}">
+                                                                                value="{{ $set->remaining }}">
                                                                             <label for="colorInput"
                                                                                 class="form-label">Color</label>
                                                                             <input type="text" class="form-control"
@@ -241,7 +241,7 @@
                                                                             <label for="pricing"
                                                                                 class="form-label">Quantity</label>
                                                                             <input type="number" min="1"
-                                                                                max="{{ $set->quantity }}"
+                                                                                max="{{ $set->remaining }}"
                                                                                 class="form-control" id="pricing"
                                                                                 name="quantity" required>
                                                                         </div>
@@ -679,7 +679,7 @@
                                             </div>
                                             <p>Product Code: <span id="topcode">{{ $mathSet->set_code }}</span></p>
                                             <p>Available Quantity: <span
-                                                    id="topcode">{{ $mathSet->quantity }}</span>
+                                                    id="topcode">{{ $mathSet->remaining }}</span>
                                             </p>
                                         </div>
                                         <button type="button" class="close" data-bs-dismiss="modal"
@@ -699,7 +699,7 @@
                                                             <input type="hidden" name="setID"
                                                                 value="{{ $mathSet->id }}">
                                                             <input type="hidden" name="currentQuan"
-                                                                value="{{ $mathSet->quantity }}">
+                                                                value="{{ $mathSet->remaining }}">
                                                             <label for="colorInput" class="form-label">Color</label>
                                                             <input type="text" class="form-control"
                                                                 value="{{ $mathSet->color->name }}" name="color"
