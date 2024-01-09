@@ -80,10 +80,41 @@
                             <div class="col-sm-12" style="margin-top: 10px">
                                 <div class="row">
                                     <div class="col-sm-10" style="margin-top: 5px">
-                                        <a href="#editModal" data-bs-toggle="modal">
-                                            <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img" />
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#editModal" class="btn btn-warning btn-sm"
+                                                    data-bs-toggle="modal">
+                                                    <img src="{{ asset('assets/img/icons/edit-set.svg') }}"
+                                                        alt="img" />
 
-                                        </a>
+                                                </a>
+                                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#plusmodal"
+                                                    class="btn btn-primary">Increase</a> --}}
+                                                <a href="#plusmodal" class="btn btn-success" data-bs-toggle="modal">
+                                                    Increase
+
+                                                </a>
+                                                <a href="#minusmodal" class="btn btn-primary" data-bs-toggle="modal">
+                                                    Decrease
+                                                </a>
+
+                                                <br>
+                                                <br>
+
+                                                <form action="{{ route('dropItem') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $id }}">
+
+                                                    <button type="submit" class="btn btn-danger">
+                                                        Drop Entirely
+                                                    </button>
+                                                </form>
+
+
+                                            </div>
+                                            <div class="col-sm-6"></div>
+
+                                        </div>
 
                                     </div>
                                     <div class="col-sm-2" style="margin-top: 5px">
@@ -192,12 +223,31 @@
                                         aria-label="Close"><span aria-hidden="true">×</span></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ url('editItem/' . $item->id) }}" method="POST">
-
+                                    <form action="{{ url('editItem/' . $item->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @method('PUT')
                                         @csrf
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-sm-6">yow</div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div style="" class="container" class="image-upload">
+                                                            <input name="image" type="file" class="form-control"
+                                                                onchange="loadFile(event)" placeholder="Change Photo">
+                                                            <div style="margin-top:5px;padding:5px;"
+                                                                class="image-uploads">
+                                                                <center>
+                                                                    <img style="height:fit-content;border-radius:5px;"
+                                                                        id="output"
+                                                                        src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                                                        alt="img">
+                                                                </center>
+                                                            </div>
+                                                            <input type="hidden" name="old_image"
+                                                                value="{{ $item->productImage }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <div class="mb-2">
                                                         <label class="col-form-label">New Name:</label>
@@ -209,7 +259,7 @@
                                                     <div class="mb-2">
                                                         <label class="col-form-label">New Color:</label>
                                                         <select name="newColor" class="form-control">
-                                                            <option value="{{ $item->color }}" hidden>
+                                                            <option value="{{ $item->color_id }}" hidden>
                                                                 {{ $item->color->name }}
                                                             </option>
                                                             @foreach ($colors as $color)
@@ -220,18 +270,18 @@
                                                     </div>
                                                     <div class="mb-2">
                                                         <label class="col-form-label">New Category:</label>
-                                                        <input name="newCateg" type="text" class="form-control"
-                                                            value="{{ $item->itemCategory->name }}" required>
+                                                        {{-- <input name="newCategory" type="text" class="form-control"
+                                                            value="{{ $item->itemCategory->name }}" required> --}}
+                                                        <select name="newCategory" class="form-control">
+                                                            <option value="{{ $item->item_category_id }}" hidden>
+                                                                {{ $item->itemCategory->name }}
+                                                            </option>
+                                                            @foreach ($ItemCategs as $Categ)
+                                                                <option value="{{ $Categ->id }}">
+                                                                    {{ $Categ->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-
-                                                    <center>or</center>
-
-                                                    <div class="mb-2">
-                                                        <label class="col-form-label">Change Quantity:</label>
-                                                        <input name="newQuan" type="text" class="form-control"
-                                                            value="{{ $item->quantity->total }}" required>
-                                                    </div>
-
                                                 </div>
                                             </div>
 
@@ -250,10 +300,102 @@
                             </div>
                         </div>
                     </div>
+
+
+
+                    <div class="modal fade" id="plusmodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Increase Quantity</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('increaseItem') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <input type="number" name="quantity" class="form-control"
+                                                min="1" value="1">
+                                            <input name="itemId" type="hidden" value="{{ $id }}">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button name="add" type="submit" class="btn btn-submit"
+                                                style="color:white;">
+                                                Proceed
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="minusmodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Decrease Quantity</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('decreaseItem') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+
+                                            @if ($minToDec === 0)
+                                                <h5 style="color:#bd9a62"> Nothing can be Drop here</h5>
+                                        </div>
+                                    @else
+                                        <h5>Maximum number of Item that can be drop: <span
+                                                style="color:#bd9a62">{{ $minToDec }}</span> </h5>
+                                        <input type="number" name="quantity" class="form-control" min="1"
+                                            max="{{ $minToDec }}" value="1">
+                                        <input name="itemId" type="hidden" value="{{ $id }}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button name="add" type="submit" class="btn btn-submit"
+                                        style="color:white;">
+                                        Proceed
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                </div>
+                                @endif
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 <script>
@@ -297,9 +439,21 @@
         document.body.removeChild(downloadLink);
     });
 </script>
+<script type="text/javascript">
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+</script>
 
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
 <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 

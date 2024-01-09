@@ -82,9 +82,12 @@ Route::post('/addProduct', [ProductController::class, 'store'])->name('addProduc
 
 Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.page');
 Route::post('/addItem', [ItemsController::class, 'store'])->name('addItem');
+Route::post('/decreaseItem', [ItemsController::class, 'decreaseItem'])->name('decreaseItem');
+Route::post('/increaseItem', [ItemsController::class, 'increaseItem'])->name('increaseItem');
+Route::post('dropItem', [ItemsController::class, 'dropItem'])->name('dropItem');
 
 Route::get('/inventory/items/detail/{id}', [ItemsController::class, 'detailP']);
-Route::get('/editItem/{id}', [ItemsController::class, 'editItem']);
+Route::resource('/editItem', ItemsController::class)->only(['update']);
 
 
 Route::get('/inventory/set/detail/{id}', [ItemsController::class, 'detailP2']);

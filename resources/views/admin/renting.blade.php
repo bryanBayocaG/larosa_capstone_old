@@ -290,14 +290,14 @@
                                                 <div class="productsetimg">
                                                     <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
                                                         alt="img">
-                                                    <h6>In-stock: {{ $item->quantity->remaining }}</h6>
+                                                    <h6>Available In-stock: {{ $item->quantity->remaining }}</h6>
                                                 </div>
                                                 <div class="productsetcontent">
                                                     <h5>{{ $item->name }}</h5>
                                                     @if ($cart->where('id', $item->id)->first())
                                                         <h6>In-Cart</h6>
                                                     @elseif ($item->quantity->remaining === 0)
-                                                        <h6>Out of stock</h6>
+                                                        <h6>Out of Available stock</h6>
                                                     @else
                                                         <a href="javascript:void(0);" class="btn btn-adds"
                                                             data-product-id="{{ $item->id }}"

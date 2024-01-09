@@ -7,12 +7,14 @@ use App\Models\Color;
 use App\Models\included_item;
 use App\Models\item;
 use App\Models\Item_details;
+use App\Models\Item_quantity;
 use App\Models\ItemCategory;
 use App\Models\product_set;
 use Illuminate\Http\Request;
 
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ItemsController extends Controller
@@ -86,16 +88,99 @@ class ItemsController extends Controller
         $item = item::find($id);
         $thoseItems = Item_details::where('item_id', $id)->get();
         $colors = Color::all();
+        $ItemCategs = ItemCategory::all();
 
-        return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors'));
+        $minToDec = Item_details::where('item_id', $id)->where('set_id', 0)->where('set_id2', 0)->count();
+
+        return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors', 'ItemCategs', 'minToDec', 'id'));
     }
-    public function editItem(Request $request, $id)
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         $item = item::find($id);
 
-        $item->name = $request->input('newName');
+        $item->name = $request->newName;
+        $item->color_id = $request->newColor;
+        $item->item_category_id = $request->newCategory;
+        if ($request->hasFile('image')) {
+
+            /* Storage::disk('public')->delete('product_images/' . $request->input('old_image')); */
+            Storage::disk('public')->delete('item_images/' . $request->input('old_image'));
+
+            $newImage = $request->file('image');
+            $imageName = Str::random(10) . '.' . $newImage->getClientOriginalExtension();
+            $newImage->storeAs('item_images', $imageName, 'public');
+            $item->productImage = $imageName;
+        }
         $item->save();
+        return redirect()->back()->with('success', 'Item edited successfully.');
     }
+
+    public function decreaseItem(Request $request)
+    {
+        $quantity = $request->input('quantity');
+        $idTodel = $request->input('itemId');
+
+        $itemQuan = Item_quantity::where('item_id', $idTodel)->first();
+        $itemQuan->total = intval($itemQuan->total) - intval($quantity);
+        $itemQuan->remaining = intval($itemQuan->remaining) - intval($quantity);
+        $itemQuan->save();
+        for ($i = 0; $i < $quantity; $i++) {
+            $itemToDelete = Item_details::where('item_id', $idTodel)->where('set_id', 0)->where('set_id2', 0)->first();
+            $itemToDelete->delete();
+        }
+        return redirect()->back()->with('success', 'Dropped ' . $quantity . ' Item(s) Succesfully');
+    }
+
+    public function increaseItem(Request $request)
+    {
+        $quantity = $request->input('quantity');
+        $idToAdd = $request->input('itemId');
+
+        $itemQuan = Item_quantity::where('item_id', $idToAdd)->first();
+        $itemQuan->total = intval($itemQuan->total) + intval($quantity);
+        $itemQuan->remaining = intval($itemQuan->remaining) + intval($quantity);
+        $itemQuan->save();
+        for ($i = 0; $i < $quantity; $i++) {
+            $randomCodes = Str::random(10);
+            DB::table('item_details')->insert([
+                'item_code' => $randomCodes,
+                'item_id' => $idToAdd,
+                'set_id' => 0,
+                'set_id2' => 0,
+                'status' => "in-possesion",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+        return redirect()->back()->with('success', 'Added new ' . $quantity . ' Item(s) Succesfully');
+    }
+    public function dropItem(Request $request)
+    {
+        $reqId = $request->input('id');
+        $thisItemUsedinSet = Item_details::where('item_id', $reqId)->where('set_id2', '>', 0)->count();
+        $thisItemRented = Item_details::where('item_id', $reqId)->where('set_id', '>', 0)->count();
+
+        if ($thisItemUsedinSet > 0 || $thisItemRented > 0) {
+            return redirect()->back()->with('error', 'This item is being used somewhere!');
+        } else {
+
+            $itemDetailToDelete = Item_details::where('item_id', $reqId);
+            $itemDetailToDelete->delete();
+
+            $itemQuanToDelete = Item_quantity::find($reqId);
+            $itemQuanToDelete->delete();
+
+            $itemToDelete = item::find($reqId);
+            $itemToDelete->delete();
+
+            return redirect('/inventory/items')->with('success', 'Succesfully dropped the Item!');
+        }
+    }
+
+
     public function detailP2($id)
     {
         $item = product_set::find($id);

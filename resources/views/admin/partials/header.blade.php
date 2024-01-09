@@ -46,6 +46,11 @@
 
 
     {{-- for crazy --}}
+    <style>
+        .btn.btn-primary:hover {
+            opacity: 0.6;
+        }
+    </style>
 
     @livewireStyles
 </head>
