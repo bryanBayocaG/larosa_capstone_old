@@ -23,7 +23,7 @@ class ItemsController extends Controller
     public function index()
     {
         $categ = Category::all();
-        $items = item::all();
+        $items = item::where('stash', null)->get();
         $icateg = ItemCategory::all();
         $colorses = Color::all();
         $tabCategories =  ItemCategory::with('items')->get();
@@ -176,7 +176,8 @@ class ItemsController extends Controller
             $itemQuanToDelete->delete();
 
             $itemToDelete = item::find($reqId);
-            $itemToDelete->delete();
+            $itemToDelete->stash = now();
+            $itemToDelete->save();
 
             return redirect('/inventory/items')->with('success', 'Succesfully dropped the Item!');
         }

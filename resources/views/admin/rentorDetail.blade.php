@@ -49,9 +49,6 @@
                             </p>
                         </div>
                     </div>
-                    @if (session()->has('message'))
-                        <h1>{{ session('message') }}</h1>
-                    @endif
                     <div style="margin-top: 5px" class="card">
                         <div class="card-body">
                             {{-- <div class="page-header "> --}}
@@ -534,6 +531,9 @@
         document.getElementById('priceInput').setAttribute('max', {{ $rentor->balance }});
     </script>
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 

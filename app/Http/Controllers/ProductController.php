@@ -21,7 +21,7 @@ class ProductController extends Controller
         $categ = Category::all();
         $color = Color::all();
         $size = Size::all();
-        $Products = product_set::all();
+        $Products = product_set::where('stash', null)->get();
         // $combi =  Category::with('products')->get();
         return view('admin.products', compact('categ', 'color', 'size', 'Products'));
     }

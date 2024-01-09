@@ -37,6 +37,6 @@ class RentorController extends Controller
         $rentInfoUpdate->balance = $request->input('currentBal') - $request->input('payment');
         $rentInfoUpdate->save();
 
-        return redirect()->back()->with('message', 'Payment added successfully.');
+        return redirect()->back()->with('success', 'Payment added successfully.');
     }
 }

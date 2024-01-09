@@ -62,23 +62,24 @@
 
                 @foreach ($tabCategories as $category)
                     <div class="tab_content" data-tab="{{ $category->name }}">
-                        {{-- <h1>{{ $category->items }}</h1> --}}
                         <div class="row">
                             @if ($category->items)
                                 @forelse ($category->items as $item)
-                                    <div class="col-lg-2 col-sm-4 d-flex ">
-                                        {{-- <a href="{{ url('inventory/products/varietyfor/' . $items->id) }}"> --}}
-                                        <div class="productset flex-fill">
-                                            <div class="productsetimg">
-                                                <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
-                                                    alt="img">
+                                    @if ($item->stash === null)
+                                        <div class="col-lg-2 col-sm-4 d-flex">
+                                            {{-- <a href="{{ url('inventory/products/varietyfor/' . $item->id) }}"> --}}
+                                            <div class="productset flex-fill">
+                                                <div class="productsetimg">
+                                                    <img src="{{ asset('storage/item_images/' . $item->productImage) }}"
+                                                        alt="img">
+                                                </div>
+                                                <div class="productsetcontent">
+                                                    <h6>{{ $item->name }}</h6>
+                                                </div>
                                             </div>
-                                            <div class="productsetcontent">
-                                                <h6>{{ $item->name }}</h6>
-                                            </div>
+                                            {{-- </a> --}}
                                         </div>
-                                        {{-- </a> --}}
-                                    </div>
+                                    @endif
                                 @empty
                                     <center>
                                         @include('admin.partials.noProduct')

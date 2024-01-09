@@ -28,7 +28,7 @@ class HomeController extends Controller
                 $totalColors = Color::count();
                 $totalSizes = Size::count();
                 $rentors = RentInfo::all();
-                $setNum = product_set::sum('quantity');
+                $setNum = product_set::where('stash', null)->sum('quantity');
                 $setRemain = product_set::sum('remaining');
                 $overDuerent = RentInfo::where('status', 'Overdue')->count();
                 $withBalance = RentInfo::where('balance', '>', 0.00)->count();

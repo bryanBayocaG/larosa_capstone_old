@@ -50,10 +50,10 @@ class ReturnController extends Controller
                 $Sitem->status = "Returned";
                 $Sitem->save();
             }
-            session()->flash('message', 'Fully Returned');
+            session()->flash('success', 'Fully Returned');
             return redirect()->back();
         }
-        session()->flash('message', 'Partially Returned');
+        session()->flash('success', 'Partially Returned');
 
         return redirect()->back();
     }
@@ -97,10 +97,10 @@ class ReturnController extends Controller
                 $Sitem->status = "Returned";
                 $Sitem->save();
             }
-            session()->flash('message', 'Fully Returned');
+            session()->flash('success', 'Fully Returned');
             return redirect()->back();
         }
-        session()->flash('message', 'Partially Returned');
+        session()->flash('success', 'Partially Returned');
 
         return redirect()->back();
     }

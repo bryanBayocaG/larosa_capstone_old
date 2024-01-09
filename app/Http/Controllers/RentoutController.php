@@ -25,8 +25,8 @@ class RentoutController extends Controller
     {
         $categ = Category::all();
         $cart = Cart::instance('shopping')->content();
-        $sets = product_set::all();
-        $items = item::all();
+        $sets = product_set::where('stash', null)->get();
+        $items = item::where('stash', null)->get();
 
 
         return view('admin.renting', compact('categ', 'cart', 'sets', 'items'));

@@ -145,12 +145,12 @@ class ProductSetController extends Controller
                         'remaining' => DB::raw('remaining + ' . $SetQuan),
                         'updated_at' => now(),
                     ]);
-            }
-            // $itemQuanToDelete = Item_quantity::find($reqId);
-            // $itemQuanToDelete->delete();
+            };
 
-            // $itemToDelete = item::find($reqId);
-            // $itemToDelete->delete();
+            $setToDelete = product_set::find($SetId);
+            $setToDelete->stash = now();
+            $setToDelete->save();
+
             $itemIncludedToDelete->delete();
 
             return redirect('/inventory/productset')->with('success', 'Succesfully dropped the Set!');
