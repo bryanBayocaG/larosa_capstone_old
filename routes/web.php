@@ -91,10 +91,13 @@ Route::resource('/editItem', ItemsController::class)->only(['update']);
 
 
 Route::get('/inventory/set/detail/{id}', [ItemsController::class, 'detailP2']);
-Route::get('/editSet/{id}', [ItemsController::class, 'editSet']);
+Route::resource('/editSet', ProductController::class)->only(['update']);
+Route::post('/increaseSet', [ProductSetController::class, 'increaseSet'])->name('increaseSet');
+Route::post('/decreaseSet', [ProductSetController::class, 'decreaseSet'])->name('decreaseSet');
+Route::post('dropSet', [ProductSetController::class, 'dropSet'])->name('dropSet');
 
 Route::get('inventory/productset/addProductSet', [ProductSetController::class, 'index']);
-Route::post('/updateProductSet/{id}', [ProductController::class, 'update']);
+// Route::post('/updateProductSet/{id}', [ProductController::class, 'update']);
 
 Route::post('/inludeItem', [AddSelectController::class, 'store'])->name('include.selected');
 Route::get('/inludeItemRemove/{id}', [AddSelectController::class, 'destroy']);

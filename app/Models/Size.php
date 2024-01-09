@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Size extends Model
 {
     use HasFactory;
+
+    public function productSets()
+    {
+        return $this->hasMany(product_set::class);
+    }
 }

@@ -10,6 +10,7 @@ use App\Models\Item_details;
 use App\Models\Item_quantity;
 use App\Models\ItemCategory;
 use App\Models\product_set;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 
@@ -98,6 +99,7 @@ class ItemsController extends Controller
     {
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'newName' => 'required|string|max:20',
         ]);
         $item = item::find($id);
 
@@ -185,7 +187,22 @@ class ItemsController extends Controller
     {
         $item = product_set::find($id);
         $thoseItems = included_item::where('product_set_id', $id)->get();
+        $colors = Color::all();
+        $ItemCategs = Category::all();
+        $sizes = Size::all();
 
-        return view('admin.prodDetailSet', compact('item', 'thoseItems', 'id'));
+
+        $minimumQuan = PHP_INT_MAX;
+
+        foreach ($thoseItems as $thoseItem) {
+            $mainQuan = Item_details::where('item_id', $thoseItem->item_id)->where('set_id2', 0)->where('set_id', 0)->count();
+            if ($mainQuan < $minimumQuan) {
+                $minimumQuan = $mainQuan;
+            }
+        }
+
+
+
+        return view('admin.prodDetailSet', compact('item', 'thoseItems', 'id', 'colors', 'ItemCategs', 'sizes', 'minimumQuan'));
     }
 }

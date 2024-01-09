@@ -63,30 +63,6 @@
                                 @endforelse
                             </div>
                         </div>
-
-                        {{-- @foreach ($combi as $category)
-                            <div class="tab_content" data-tab="{{ $category->name }}">
-                                <div class="row">
-                                    @if ($category->products)
-                                        @foreach ($category->products as $item)
-                                            <div class="col-lg-2 col-sm-4 d-flex ">
-                                                <a href="{{ url('inventory/products/varietyfor/' . $product->id) }}">
-                                                    <div class="productset flex-fill">
-                                                        <div class="productsetimg">
-                                                            <img src="{{ asset('storage/product_images/' . $item->productImage) }}"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="productsetcontent">
-                                                            <h6>{{ $item->name }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach --}}
                         @foreach ($categ as $category)
                             <div class="tab_content" data-tab="{{ $category->name }}">
                                 <div class="row">
@@ -266,6 +242,9 @@
         </script>
 
         <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+        <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
 
         <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 

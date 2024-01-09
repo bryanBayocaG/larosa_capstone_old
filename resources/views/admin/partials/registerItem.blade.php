@@ -36,7 +36,7 @@
                                 <label class="col-form-label">Item Name</label>
                                 <input name="name" type="text" placeholder="Item name" class="form-control"
                                     required>
-                                <p style="color:red;">*Name must be greater than 20 characters</p>
+                                <p style="color:red;">*Name must not be greater than 20 characters</p>
 
                             </div>
                             <div class="mb-2">

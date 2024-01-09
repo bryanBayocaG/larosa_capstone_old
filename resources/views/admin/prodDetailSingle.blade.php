@@ -243,6 +243,10 @@
                                                                         alt="img">
                                                                 </center>
                                                             </div>
+                                                            <p style="color:red;">Upload only
+                                                                jpeg,png,jpg,gif files with
+                                                                Maximum
+                                                                of 2(MB)</p>
                                                             <input type="hidden" name="old_image"
                                                                 value="{{ $item->productImage }}">
                                                         </div>
@@ -255,6 +259,8 @@
                                                             value="{{ $item->id }}">
                                                         <input name="newName" type="text" class="form-control"
                                                             value="{{ $item->name }}" required>
+                                                        <p style="color:red;">*Name must not be greater than 20
+                                                            characters</p>
                                                     </div>
                                                     <div class="mb-2">
                                                         <label class="col-form-label">New Color:</label>

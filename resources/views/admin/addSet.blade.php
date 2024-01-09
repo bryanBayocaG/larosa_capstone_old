@@ -51,7 +51,7 @@
                                     <div class="mb-1">
                                         <label class="col-form-label">Product Set Name</label>
                                         <input name="name" type="text" class="form-control" required>
-                                        <p style="color:red;">*Name must be greater than 20 characters</p>
+                                        <p style="color:red;">*Name must not be greater than 20 characters</p>
                                     </div>
                                     <div class="mb-2">
                                         <div class="row">

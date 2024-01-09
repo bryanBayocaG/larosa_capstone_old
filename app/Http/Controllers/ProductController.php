@@ -92,4 +92,28 @@ class ProductController extends Controller
         Cart::instance('itemselected')->destroy();
         return redirect()->back()->with('success', 'Product set added successfully.');
     }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'newName' => 'required|string|max:20',
+        ]);
+        $item = product_set::find($id);
+
+        $item->name = $request->newName;
+        $item->color_id = $request->newColor;
+        $item->category_id = $request->newCategory;
+        $item->size_id = $request->newSize;
+        if ($request->hasFile('image')) {
+
+            Storage::disk('public')->delete('product_images/' . $request->input('old_image'));
+
+            $newImage = $request->file('image');
+            $imageName = Str::random(10) . '.' . $newImage->getClientOriginalExtension();
+            $newImage->storeAs('product_images', $imageName, 'public');
+            $item->productImage = $imageName;
+        }
+        $item->save();
+        return redirect()->back()->with('success', 'Item edited successfully.');
+    }
 }
