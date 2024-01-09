@@ -58,6 +58,15 @@
                                 </select>
                             </div>
                             <div class="mb-2">
+                                <label class="col-form-label">Item Size</label>
+                                <select class="form-control" name="size" class="select" required>
+                                    <option value="" hidden>Choose Color</option>
+                                    @foreach ($sizes as $size)
+                                        <option value="{{ $size->id }}"> {{ $size->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-2">
                                 <label class="col-form-label">Item Quantity</label>
                                 <input id="quantity" name="quantity" min="1" class="form-control" required>
                             </div>

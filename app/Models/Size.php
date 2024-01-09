@@ -13,4 +13,8 @@ class Size extends Model
     {
         return $this->hasMany(product_set::class);
     }
+    public function items()
+    {
+        return $this->hasMany(item::class);
+    }
 }

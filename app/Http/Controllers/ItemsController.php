@@ -27,9 +27,10 @@ class ItemsController extends Controller
         $icateg = ItemCategory::all();
         $colorses = Color::all();
         $tabCategories =  ItemCategory::with('items')->get();
+        $sizes = Size::all();
 
         // $combi =  Category::with('products')->get();
-        return view('admin.items', compact('categ', 'items', 'icateg', 'colorses', 'tabCategories'));
+        return view('admin.items', compact('categ', 'items', 'icateg', 'colorses', 'tabCategories', 'sizes'));
     }
     public function store(Request $request)
     {
@@ -47,6 +48,7 @@ class ItemsController extends Controller
         $quantity = $request->input('quantity');
         $Itemcateg = $request->input('category');
         $Itemcolor = $request->input('Color');
+        $itemSize = $request->input('size');
 
         $randomCode = Str::random(10);
         $imageName = $randomCode . '.' . $image->getClientOriginalExtension();
@@ -57,6 +59,7 @@ class ItemsController extends Controller
             'link' => 'https://larosarental.online/larosa/showSingleProd/' . $randomCode,
             'item_category_id' => $Itemcateg,
             'color_id' => $Itemcolor,
+            'size_id' => $itemSize,
             'name' => $name,
             'productImage' => $imageName,
             'created_at' => now(),
@@ -90,10 +93,11 @@ class ItemsController extends Controller
         $thoseItems = Item_details::where('item_id', $id)->get();
         $colors = Color::all();
         $ItemCategs = ItemCategory::all();
+        $totActiveRentors = Item_details::where('item_id', $id)->where('status', '!=', 'in-possesion')->count();
 
         $minToDec = Item_details::where('item_id', $id)->where('set_id', 0)->where('set_id2', 0)->count();
 
-        return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors', 'ItemCategs', 'minToDec', 'id'));
+        return view('admin.prodDetailSingle', compact('item', 'thoseItems', 'colors', 'ItemCategs', 'minToDec', 'id', 'totActiveRentors'));
     }
     public function update(Request $request, $id)
     {

@@ -126,11 +126,11 @@ class ProductSetController extends Controller
             return redirect()->back()->with('error', 'This Set is being rented by customer!');
         } else {
 
-            $itemIncludedToDelete = included_item::where('product_set_id', $SetId);
+            $itemIncludedToDelete = included_item::where('product_set_id', $SetId)->get();
 
-            foreach ($itemIncludedToDelete as $items) {
+            foreach ($itemIncludedToDelete as $itemZ) {
                 DB::table('item_details')
-                    ->where('item_id', $items->item_id)
+                    ->where('item_id', $itemZ->item_id)
                     ->where('status', 'in-possesion')
                     ->where('set_id2', $SetId)
                     ->limit(intval($SetQuan))
@@ -140,7 +140,7 @@ class ProductSetController extends Controller
                     ]);
 
                 DB::table('item_quantities')
-                    ->where('item_id', $items->item_id)
+                    ->where('item_id', $itemZ->item_id)
                     ->update([
                         'remaining' => DB::raw('remaining + ' . $SetQuan),
                         'updated_at' => now(),
@@ -151,7 +151,8 @@ class ProductSetController extends Controller
             $setToDelete->stash = now();
             $setToDelete->save();
 
-            $itemIncludedToDelete->delete();
+            $itemIncludedToDelete2 = included_item::where('product_set_id', $SetId);
+            $itemIncludedToDelete2->delete();
 
             return redirect('/inventory/productset')->with('success', 'Succesfully dropped the Set!');
         }

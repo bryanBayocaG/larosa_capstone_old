@@ -49,18 +49,21 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <p>Color: <span id="code">{{ $item->color->name }}</span></p>
+                                                    <p>Size: <span id="code">{{ $item->size->name }}</span></p>
                                                     <p>Total Pieces: <span id="code">{{ $item->quantity->total }}
                                                             pc(s)</span></p>
-                                                    </p>
+
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <p>Category: <span
                                                             id="code">{{ $item->itemCategory->name }}</span></p>
                                                     </p>
+                                                    <p>Active Rented Pices: <span
+                                                            id="code">{{ $totActiveRentors }}</span></p>
                                                     <p>Available Pieces: <span
                                                             id="code">{{ $item->quantity->remaining }} pc(s)</span>
                                                     </p>
-                                                    </p>
+
                                                 </div>
                                             </div>
                                         </div>
