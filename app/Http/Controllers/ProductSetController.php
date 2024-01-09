@@ -129,6 +129,22 @@ class ProductSetController extends Controller
             $itemIncludedToDelete = included_item::where('product_set_id', $SetId);
 
             foreach ($itemIncludedToDelete as $items) {
+                DB::table('item_details')
+                    ->where('item_id', $items->item_id)
+                    ->where('status', 'in-possesion')
+                    ->where('set_id2', $SetId)
+                    ->limit(intval($SetQuan))
+                    ->update([
+                        'set_id2' => 0,
+                        'updated_at' => now(),
+                    ]);
+
+                DB::table('item_quantities')
+                    ->where('item_id', $items->item_id)
+                    ->update([
+                        'remaining' => DB::raw('remaining + ' . $SetQuan),
+                        'updated_at' => now(),
+                    ]);
             }
             // $itemQuanToDelete = Item_quantity::find($reqId);
             // $itemQuanToDelete->delete();
