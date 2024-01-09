@@ -787,6 +787,9 @@
 
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script> --}}
     <script>
         $(document).ready(function() {
             $("#phone").inputmask({
@@ -873,10 +876,6 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
-
-    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
-    {{-- <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script> --}}
-
 
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('asset/js/html5-qrcode.min.js') }}"></script>

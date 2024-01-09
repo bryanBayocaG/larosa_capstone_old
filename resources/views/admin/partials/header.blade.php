@@ -26,6 +26,10 @@
 
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toatr.css') }}" />
 
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
+" rel="stylesheet">
+
     {{-- <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     {{-- for crazy --}}
