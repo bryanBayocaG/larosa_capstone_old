@@ -11,10 +11,16 @@ class ProductReportController extends Controller
     public function reportSingleItem()
     {
         $items = Item_details::all();
-        return view("admin.reportSingleItem", compact("items"));
+        $totalItems = Item_details::count();
+        $totalRented = Item_details::where('status', 'Rented')->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
+        return view("admin.reportSingleItem", compact("items", 'totalItems', 'totalRented', 'totalAvailable'));
     }
     public function filterSingleItem(Request $request)
     {
+        $totalItems = Item_details::count();
+        $totalRented = Item_details::where('status', 'Rented')->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
         $setVal = intval($request->setVal);
         $state = $request->state;
 
@@ -24,6 +30,7 @@ class ProductReportController extends Controller
         //     ->whereDate('return_date', '<=', $end_date)
         //     ->get();
         $usersQuery = Item_details::query();
+
 
         if ($setVal != 0) {
             if ($setVal === 1) {
@@ -48,6 +55,6 @@ class ProductReportController extends Controller
 
 
 
-        return view('admin.reportSingleItem', compact('items'));
+        return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable'));
     }
 }

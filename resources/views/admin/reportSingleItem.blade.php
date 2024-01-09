@@ -8,6 +8,48 @@
                 <h6>Customize your Reports using Filters and Export/Print</h6>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das2" style="background-color: rgb(37, 37, 197)">
+                    <div class="dash-counts">
+                        <h4>{{ $totalItems }}</h4>
+                        <h5>Total No. of Items</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i data-feather="tag"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das2" style="background-color: rgb(214, 156, 49)">
+                    <div class="dash-counts">
+                        <h4>{{ $totalRented }}</h4>
+                        <h5>Total No. of Rented Items</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i data-feather="minus-circle"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das2" style="background-color: green">
+                    <div class="dash-counts">
+                        <h4>{{ $totalAvailable }}</h4>
+                        <h5>Total No. of Available Available</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i data-feather="check-circle"></i>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
         <div class="card">
             <div class="card-body">
                 <form method="GET" action="{{ route('filterSingleItem') }}">
