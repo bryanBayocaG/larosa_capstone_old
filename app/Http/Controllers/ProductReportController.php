@@ -12,10 +12,10 @@ class ProductReportController extends Controller
 {
     public function reportSingleItem()
     {
-        $items = Item_details::where('stash', null)->get();
-        $totalItems = Item_details::where('stash', null)->count();
+        $items = Item_details::all();
+        $totalItems = Item_details::count();
         $totalRented = Item_details::where('status', 'Rented')->count();
-        $totalAvailable = Item_details::where('status', 'in-possesion')->where('stash', null)->where('set_id', 0)->where('set_id2', 0)->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('state', 'Good')->where('set_id', 0)->where('set_id2', 0)->count();
         return view("admin.reportSingleItem", compact("items", 'totalItems', 'totalRented', 'totalAvailable'));
     }
     public function filterSingleItem(Request $request)
