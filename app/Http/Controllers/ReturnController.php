@@ -58,6 +58,16 @@ class ReturnController extends Controller
         return redirect()->back();
     }
 
+    public function returnSingleRentCondition(Request $request)
+    {
+        $itemID = $request->input('item');
+        $condition = $request->input('condition');
+
+        $item = Item_details::find($itemID);
+        $item->state = $condition;
+        $item->save();
+    }
+
     public function returnSet(Request $request)
     {
         $rentInfoID = $request->input('rentInfoID');

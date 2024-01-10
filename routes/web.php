@@ -128,10 +128,13 @@ Route::get('/download_pdf2/{id}', [PrintController::class, 'setItemDL']);
 
 
 Route::post('/returnSingleRent', [ReturnController::class, 'returnSingle']);
+Route::post('/returnSingleRentCondition', [ReturnController::class, 'returnSingleRentCondition']);
 Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);
 
 Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleItem'])->name('reportSingleItem');
 Route::get('/reportSingleItem/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
+
+Route::get('/reportSetItem', [ProductReportController::class, 'reportSetItem'])->name('reportSetItem');
 
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
 Route::get('/larosa/showSetProd/{code}', [PublicShowController::class, 'setItem']);

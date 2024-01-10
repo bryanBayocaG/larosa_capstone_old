@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item_details;
+use App\Models\ProdSetDetails;
+use App\Models\product_set;
 use App\Models\RentInfo;
 use Illuminate\Http\Request;
 
@@ -10,10 +12,10 @@ class ProductReportController extends Controller
 {
     public function reportSingleItem()
     {
-        $items = Item_details::all();
-        $totalItems = Item_details::count();
+        $items = Item_details::where('stash', null)->get();
+        $totalItems = Item_details::where('stash', null)->count();
         $totalRented = Item_details::where('status', 'Rented')->count();
-        $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('stash', null)->where('set_id', 0)->where('set_id2', 0)->count();
         return view("admin.reportSingleItem", compact("items", 'totalItems', 'totalRented', 'totalAvailable'));
     }
     public function filterSingleItem(Request $request)
@@ -56,5 +58,19 @@ class ProductReportController extends Controller
 
 
         return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable'));
+    }
+    public function reportSetItem()
+    {
+        $items = product_set::where('stash', null)->get();
+        $totalItems = product_set::where('stash', null)->count();
+
+
+        $itemQuantity = $items->sum('quantity');
+        $itemRemaining = $items->sum('remaining');
+        $difference = $itemQuantity - $itemRemaining;
+
+        // $totalRented = product_set::where('status', 'Rented')->count();
+        $totalAvailable = product_set::where('stash', null)->sum('remaining');;
+        return view("admin.reportSetItem", compact("items", 'totalItems', 'totalAvailable', 'difference'));
     }
 }

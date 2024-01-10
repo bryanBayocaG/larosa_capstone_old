@@ -95,8 +95,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
+
                     <img src="{{ asset('assets/picture/Larosa.jpg') }}" alt=""
                         style="width: 50%; pointer-events: none;" />
+
                 </div>
             </div>
 
@@ -122,6 +124,11 @@
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Email Password
                                     Reset Link</button>
+                            </div>
+                            <div class="form-group">
+                                <a href="{{ url('/login') }}" style="width:40%; color: white"
+                                    class="form-control btn btn-primary submit px-3">Go
+                                    Back</a>
                             </div>
                         </form>
                     </div>

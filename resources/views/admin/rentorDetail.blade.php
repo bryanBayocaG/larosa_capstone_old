@@ -324,52 +324,81 @@
                                                                     aria-hidden="true">×</span></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ url('/returnSingleRent') }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-                                                                        <center>
-                                                                            <h3 style="color:red">Are you sure to set
-                                                                                this
-                                                                                as Returned?</h3>
-                                                                        </center>
-                                                                    </div>
-                                                                    <div class="col-sm-12">
-                                                                        <h5>This item consist(s) of
-                                                                            {{ $rentedItem->quantity }}pc(s) of item(s)
-                                                                            including the following:</h5>
-                                                                    </div>
-                                                                    <div class="col-sm-12">
-                                                                        <div class="row">
-                                                                            @php
-                                                                                $singleItems = \App\Models\Item_details::where('set_id', $id)
-                                                                                    ->where('set_id2', 0)
-                                                                                    ->where('status', 'Rented')
-                                                                                    ->get();
-                                                                            @endphp
-                                                                            @foreach ($singleItems as $singleI)
-                                                                                <div class="col-lg-3 col-sm-6 d-flex">
-                                                                                    <div
-                                                                                        class="productset flex-fill active">
-                                                                                        <div class="productsetimg">
-                                                                                            <img src="{{ asset('storage/item_images/' . $singleI->item->productImage) }}"
-                                                                                                alt="img">
-                                                                                            <h6>{{ $singleI->item_code }}
-                                                                                            </h6>
-                                                                                        </div>
-                                                                                        <div class="productsetcontent">
-                                                                                            <h6>{{ $singleI->item->name }}|{{ $singleI->item->color->name }}
-                                                                                            </h6>
-                                                                                        </div>
 
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <center>
+                                                                        <h3 style="color:red">Are you sure to set
+                                                                            this
+                                                                            as Returned?</h3>
+                                                                    </center>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <h5>This item consist(s) of
+                                                                        {{ $rentedItem->quantity }}pc(s) of item(s)
+                                                                        including the following:</h5>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <div class="row">
+                                                                        @php
+                                                                            $singleItems = \App\Models\Item_details::where('set_id', $id)
+                                                                                ->where('set_id2', 0)
+                                                                                ->where('status', 'Rented')
+                                                                                ->get();
+                                                                        @endphp
+                                                                        @foreach ($singleItems as $singleI)
+                                                                            <div class="col-lg-3 col-sm-6 d-flex">
+                                                                                <div
+                                                                                    class="productset flex-fill active">
+                                                                                    <div class="productsetimg">
+                                                                                        <img src="{{ asset('storage/item_images/' . $singleI->item->productImage) }}"
+                                                                                            alt="img">
+                                                                                        <h6>{{ $singleI->item_code }}
+                                                                                        </h6>
                                                                                     </div>
+                                                                                    <div class="productsetcontent">
+                                                                                        <h6>{{ $singleI->item->name }}|{{ $singleI->item->color->name }}
+                                                                                        </h6>
+                                                                                        @livewire('make-single-condition', [
+                                                                                            'id' => $singleI->id,
+                                                                                        ])
+                                                                                        {{-- <div class="form1-container">
+                                                                                            <form
+                                                                                                action="{{ url('/returnSingleRentCondition') }}"
+                                                                                                method="POST"
+                                                                                                class="form1">
+                                                                                                @csrf
+                                                                                                <label
+                                                                                                    for="">Condition:</label>
+                                                                                                <input type="text"
+                                                                                                    name="item"
+                                                                                                    value="{{ $singleI->id }}">
+                                                                                                <select
+                                                                                                    name="condition">
+                                                                                                    <option
+                                                                                                        value="Good">
+                                                                                                        Good</option>
+                                                                                                    <option
+                                                                                                        value="Damage">
+                                                                                                        Damaged</option>
+                                                                                                    <option
+                                                                                                        value="Damage">
+                                                                                                        Missing</option>
+                                                                                                </select>
+                                                                                            </form>
+                                                                                        </div> --}}
+                                                                                    </div>
+
                                                                                 </div>
-                                                                            @endforeach
-                                                                        </div>
+                                                                            </div>
+                                                                        @endforeach
                                                                     </div>
                                                                 </div>
-
+                                                            </div>
+                                                            <form id="form2"
+                                                                action="{{ url('/returnSingleRent') }}"
+                                                                method="POST">
+                                                                @csrf
                                                                 <input type="hidden" name="rentInfoID"
                                                                     value="{{ $id }}">
                                                                 <input type="hidden" name="rentQuantity"
@@ -378,6 +407,7 @@
                                                                     value="{{ $productItem->id }}">
 
                                                                 <div class="modal-footer">
+
                                                                     <button name="add" type="submit"
                                                                         class="btn btn-primary"
                                                                         style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
@@ -388,124 +418,121 @@
                                                                         data-bs-dismiss="modal">
                                                                         Cancel
                                                                     </button>
-                                                                </div>
                                                             </form>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
                                     </div>
-                                @endforeach
+                                @endif
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab_content active" data-tab="payments">
+                        <div class="page-header">
+                            <div class="page-title">
+                                {{-- <h4>Product Category list</h4>
+                                        <h6>View/Search product Category</h6> --}}
+                            </div>
+                            <div class="page-btn">
+                                @if ($rentor->balance === '0.00')
+                                    <button href="" class="btn btn-remove" disabled>
+                                        Fully Paid
+                                    </button>
+                                @else
+                                    <a href="addcategory.php" class="btn btn-added" data-bs-toggle="modal"
+                                        data-bs-target="#addCategory">
+                                        <img src="{{ asset('assets/img/icons/plus.svg') }}" class="me-1"
+                                            alt="img" />
+                                        Add Payment
+                                    </a>
+                                @endif
                             </div>
                         </div>
-                        <div class="tab_content active" data-tab="payments">
-                            <div class="page-header">
-                                <div class="page-title">
-                                    {{-- <h4>Product Category list</h4>
-                                        <h6>View/Search product Category</h6> --}}
-                                </div>
-                                <div class="page-btn">
-                                    @if ($rentor->balance === '0.00')
-                                        <button href="" class="btn btn-remove" disabled>
-                                            Fully Paid
-                                        </button>
-                                    @else
-                                        <a href="addcategory.php" class="btn btn-added" data-bs-toggle="modal"
-                                            data-bs-target="#addCategory">
-                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" class="me-1"
-                                                alt="img" />
-                                            Add Payment
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-top">
-                                        <div class="search-set">
-                                            <div class="search-path">
-                                            </div>
-                                            <div class="search-input">
-                                                <a class="btn btn-searchset"><img
-                                                        src="{{ asset('assets/img/icons/search-white.svg') }}"
-                                                        alt="img" /></a>
-                                            </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-top">
+                                    <div class="search-set">
+                                        <div class="search-path">
+                                        </div>
+                                        <div class="search-input">
+                                            <a class="btn btn-searchset"><img
+                                                    src="{{ asset('assets/img/icons/search-white.svg') }}"
+                                                    alt="img" /></a>
                                         </div>
                                     </div>
-                                    <div class="card" id="filter_inputs">
-                                        <div class="card-body pb-0"></div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table id="datatable" class="table datanew">
-                                            <thead>
-                                                <tr>
-                                                    <th>Paid At</th>
-                                                    <th>Amount</th>
-                                                    <th>Remarks</th>
+                                </div>
+                                <div class="card" id="filter_inputs">
+                                    <div class="card-body pb-0"></div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table datanew">
+                                        <thead>
+                                            <tr>
+                                                <th>Paid At</th>
+                                                <th>Amount</th>
+                                                <th>Remarks</th>
 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($payments as $payment)
+                                                <tr>
+                                                    <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('M j, Y h:i:s A') }}
+                                                    </td>
+                                                    <td>{{ number_format($payment->payments, 2, '.', ',') }}</td>
+                                                    <td>{{ $payment->remarks }}</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($payments as $payment)
-                                                    <tr>
-                                                        <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('M j, Y h:i:s A') }}
-                                                        </td>
-                                                        <td>{{ number_format($payment->payments, 2, '.', ',') }}</td>
-                                                        <td>{{ $payment->remarks }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="modal fade" id="addCategory" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                Add Payment
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                &times;
+                        </div>
+                        <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" wire:ignore.self>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            Add Payment
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <form action="{{ url('/addPayment') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="col-form-label">Enter Amount:</label>
+                                                <input name="payment" type="number" id="priceInput"
+                                                    class="form-control" autocomplete="off" required />
+                                                <input name="currentBal" type="hidden"
+                                                    value="{{ $rentor->balance }}">
+                                                <input name="target" type="hidden" value="{{ $rentor->id }}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label">Remarks:</label>
+                                                <textarea name="remarks" class="form-control" cols="30" rows="6"></textarea>
+                                                <input name="rentid" type="hidden" value="{{ $id }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button name="add" type="submit" class="btn btn-primary"
+                                                style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
+                                                onmouseout="this.style.opacity='1'">
+                                                Continue
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
                                             </button>
                                         </div>
-                                        <form action="{{ url('/addPayment') }}" method="POST">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label class="col-form-label">Enter Amount:</label>
-                                                    <input name="payment" type="number" id="priceInput"
-                                                        class="form-control" autocomplete="off" required />
-                                                    <input name="currentBal" type="hidden"
-                                                        value="{{ $rentor->balance }}">
-                                                    <input name="target" type="hidden"
-                                                        value="{{ $rentor->id }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="col-form-label">Remarks:</label>
-                                                    <textarea name="remarks" class="form-control" cols="30" rows="6"></textarea>
-                                                    <input name="rentid" type="hidden"
-                                                        value="{{ $id }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button name="add" type="submit" class="btn btn-primary"
-                                                    style="transition: opacity 0.3s ease; opacity: 1; "onmouseover="this.style.opacity='0.6'"
-                                                    onmouseout="this.style.opacity='1'">
-                                                    Continue
-                                                </button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -515,6 +542,9 @@
         </div>
     </div>
     </div>
+    </div>
+
+
     <script>
         document.getElementById('priceInput').addEventListener('input', function() {
             const maxPrice = parseInt({{ $rentor->balance }});
@@ -529,8 +559,15 @@
             }
         });
         document.getElementById('priceInput').setAttribute('max', {{ $rentor->balance }});
+
+        window.addEventListener('warning', event => {
+            toastr.warning(event.detail.text, 'You modified The Item Condition', {
+                timeOut: 10000
+            })
+        });
     </script>
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>

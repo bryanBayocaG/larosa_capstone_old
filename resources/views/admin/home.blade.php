@@ -91,9 +91,9 @@
                                 <h5>
                                     <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
                                 </h5>
-                                <h6>Product Set <a class="btn btn-primary" href="{{ route('setCategPage') }}">
+                                <h6>Product Set {{-- <a class="btn btn-primary" href="{{ route('reportSetItem') }}">
                                         Create Report
-                                    </a>
+                                    </a> --}}
                                 </h6>
                             </div>
                         </div>
