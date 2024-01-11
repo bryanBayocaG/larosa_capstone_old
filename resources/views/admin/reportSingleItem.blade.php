@@ -90,9 +90,12 @@
                                 <div class="col-sm-6">
                                     <select name="state" id="" class="form-control">
                                         <option value="none" hidden>Choose Item State</option>
-                                        <option value="Rented">Renting</option>
+                                        <option value="Rented">Rented</option>
                                         <option value="Available">Available</option>
                                         <option value="Overdue">Overdue</option>
+                                        <option value="Damaged">Damaged</option>
+                                        <option value="Missing">Missing</option>
+
                                     </select>
                                 </div>
                             </div>

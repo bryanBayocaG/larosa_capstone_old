@@ -54,6 +54,12 @@ class ProductReportController extends Controller
             if ($state === 'Overdue') {
                 $usersQuery->where('status', '===', 'Overdue');
             }
+            if ($state === 'Missing') {
+                $usersQuery->where('state', 'Missing');
+            }
+            if ($state === 'Damaged') {
+                $usersQuery->where('state', 'Damage');
+            }
         }
 
         $items = $usersQuery->get();
