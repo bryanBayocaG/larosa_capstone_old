@@ -47,7 +47,6 @@
                                                         alt="img">
                                                 </div>
                                                 <div class="productsetcontent">
-
                                                     <h6>{{ $product->name }}</h6>
                                                     <p>Category: {{ $product->category->name }} <br>
                                                         Quantity: {{ $product->remaining }}/{{ $product->quantity }}
@@ -63,27 +62,36 @@
                                 @endforelse
                             </div>
                         </div>
-                        @foreach ($categ as $category)
+                        @foreach ($tabCategories as $category)
                             <div class="tab_content" data-tab="{{ $category->name }}">
                                 <div class="row">
-                                    <h1>to be follow</h1>
-                                    {{-- @if ($category->products)
-                                    @foreach ($category->products as $item)
-                                        <div class="col-lg-2 col-sm-4 d-flex ">
-                                            <a href="{{ url('inventory/products/varietyfor/' . $product->id) }}">
-                                                <div class="productset flex-fill">
-                                                    <div class="productsetimg">
-                                                        <img src="{{ asset('storage/product_images/' . $item->productImage) }}"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="productsetcontent">
-                                                        <h6>{{ $item->name }}</h6>
-                                                    </div>
+                                    @if ($category->productSet)
+                                        @forelse ($category->productSet as $item)
+                                            @if ($item->stash === null)
+                                                <div class="col-lg-2 col-sm-4 d-flex ">
+                                                    <a href="{{ url('inventory/set/detail/' . $product->id) }}">
+                                                        <div class="productset flex-fill">
+                                                            <div class="productsetimg">
+                                                                <img src="{{ asset('storage/product_images/' . $product->productImage) }}"
+                                                                    alt="img">
+                                                            </div>
+                                                            <div class="productsetcontent">
+                                                                <h6>{{ $product->name }}</h6>
+                                                                <p>Category: {{ $product->category->name }} <br>
+                                                                    Quantity:
+                                                                    {{ $product->remaining }}/{{ $product->quantity }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                @endif --}}
+                                            @endif
+                                        @empty
+                                            <center>
+                                                @include('admin.partials.noProduct')
+                                            </center>
+                                        @endforelse
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

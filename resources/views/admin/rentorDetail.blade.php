@@ -514,6 +514,8 @@
                                                 <input name="currentBal" type="hidden"
                                                     value="{{ $rentor->balance }}">
                                                 <input name="target" type="hidden" value="{{ $rentor->id }}">
+                                                <input type="hidden" value="{{ $rentor->contact_num }}"
+                                                    name="tagerNum">
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label">Remarks:</label>

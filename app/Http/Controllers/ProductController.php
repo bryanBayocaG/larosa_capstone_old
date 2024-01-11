@@ -22,8 +22,8 @@ class ProductController extends Controller
         $color = Color::all();
         $size = Size::all();
         $Products = product_set::where('stash', null)->get();
-        // $combi =  Category::with('products')->get();
-        return view('admin.products', compact('categ', 'color', 'size', 'Products'));
+        $tabCategories =  Category::with('productSet')->get();
+        return view('admin.products', compact('categ', 'color', 'size', 'Products', 'tabCategories'));
     }
     public function store(Request $request)
     {

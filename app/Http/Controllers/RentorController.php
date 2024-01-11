@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\payment;
 use App\Models\rentedItem;
 use App\Models\RentInfo;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class RentorController extends Controller
@@ -27,6 +28,10 @@ class RentorController extends Controller
     }
     public function pay(Request $request)
     {
+        $binayad = $request->input('payment');
+        $currentBal = $request->input('currentBal');
+        $balance = $currentBal - $binayad;
+
         $payment = new payment();
         $payment->rent_info_id = $request->input('rentid');
         $payment->payments = $request->input('payment');
@@ -36,6 +41,24 @@ class RentorController extends Controller
         $rentInfoUpdate = RentInfo::find($request->input('target'));
         $rentInfoUpdate->balance = $request->input('currentBal') - $request->input('payment');
         $rentInfoUpdate->save();
+
+
+
+        $apiKey = 'da96e8b9124390d6e9a85bfc253e6cea';
+        $number = $request->input('tagerNum');
+        $cleanedNumber = str_replace('-', '', $number);
+        $message = 'As of ' . now() . ' you paid your balance with a total of ₱ ' . $binayad . ' .00. with remaing balance of ₱ ' . $balance . '.00.';
+        $client = new Client();
+        $client->post('https://semaphore.co/api/v4/messages', [
+            'form_params' => [
+                'apikey' => $apiKey,
+                'number' => $cleanedNumber,
+                'message' => $message,
+                'sendername' => 'LAROSA',
+            ],
+            'verify' => false,
+        ]);
+
 
         return redirect()->back()->with('success', 'Payment added successfully.');
     }

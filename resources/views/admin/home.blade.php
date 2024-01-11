@@ -66,9 +66,9 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash2">
+                        <div class="dash-widget dash">
                             <div class="dash-widgetimg ">
-                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img" /></span>
+                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img" /></span>
                             </div>
                             <div class="dash-widgetcontent">
                                 <h5>
@@ -82,22 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="dash-widget dash">
-                            <div class="dash-widgetimg">
-                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img" /></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>
-                                    <span class="counters" data-count="{{ $setNum }}">{{ $setNum }}</span>
-                                </h5>
-                                <h6>Product Set {{-- <a class="btn btn-primary" href="{{ route('reportSetItem') }}">
-                                        Create Report
-                                    </a> --}}
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count das1" style="background-color: #ff7857">

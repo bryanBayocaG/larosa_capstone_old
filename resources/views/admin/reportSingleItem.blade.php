@@ -43,8 +43,28 @@
                     </div>
                 </div>
             </div>
-
-
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das1" style="background-color: #ff7857">
+                    <div class="dash-counts">
+                        <h4>{{ $damagedItem }}</h4>
+                        <h5>Damaged</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i data-feather="minus-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das1" style="background-color: rgb(196, 19, 19)">
+                    <div class="dash-counts">
+                        <h4>{{ $totalMissing }}</h4>
+                        <h5>Missing</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i data-feather="alert-circle"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -99,6 +119,7 @@
                                 <th>Rentor Name</th>
                                 <th>Rent Due Date</th>
                                 <th>Overdue</th>
+                                <th>Damaged</th>
                                 <th>Included Set</th>
                                 <th>Availability</th>
                             </tr>
@@ -149,6 +170,13 @@
                                             <p style="color: gray">NONE</p>
                                         @endif
                                     </td>
+                                    <td>
+                                        @if ($item->state === 'Damage')
+                                            <span class="badges bg-lightred">Yes</span>
+                                        @else
+                                            <span class="badges bg-lightgreen">No</span>
+                                        @endif
+                                    </td>
                                     <td style="color: gray">
                                         @if ($item->set_id2 !== 0)
                                             @php
@@ -178,6 +206,7 @@
                                 <th>Rentor Name</th>
                                 <th>Rent Due Date</th>
                                 <th>Overdue</th>
+                                <th>Damaged</th>
                                 <th>Included Set</th>
                                 <th>Availability</th>
                             </tr>

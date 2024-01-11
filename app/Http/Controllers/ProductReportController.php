@@ -16,7 +16,9 @@ class ProductReportController extends Controller
         $totalItems = Item_details::count();
         $totalRented = Item_details::where('status', 'Rented')->count();
         $totalAvailable = Item_details::where('status', 'in-possesion')->where('state', 'Good')->where('set_id', 0)->where('set_id2', 0)->count();
-        return view("admin.reportSingleItem", compact("items", 'totalItems', 'totalRented', 'totalAvailable'));
+        $totalMissing = Item_details::where('state', 'Missing')->count();
+        $damagedItem = Item_details::where('state', 'Damage')->count();
+        return view("admin.reportSingleItem", compact("items", 'totalItems', 'totalRented', 'totalAvailable', 'totalMissing', 'damagedItem'));
     }
     public function filterSingleItem(Request $request)
     {
@@ -25,7 +27,8 @@ class ProductReportController extends Controller
         $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
         $setVal = intval($request->setVal);
         $state = $request->state;
-
+        $totalMissing = Item_details::where('state', 'Missing')->count();
+        $damagedItem = Item_details::where('state', 'Damaged')->count();
 
 
         // $rentors = RentInfo::whereDate('return_date', '>=', $start_date)
@@ -57,7 +60,7 @@ class ProductReportController extends Controller
 
 
 
-        return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable'));
+        return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable', 'totalMissing', 'damagedItem'));
     }
     public function reportSetItem()
     {
