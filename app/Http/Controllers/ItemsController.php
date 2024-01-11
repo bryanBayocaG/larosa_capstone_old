@@ -80,6 +80,7 @@ class ItemsController extends Controller
                 'set_id' => 0,
                 'set_id2' => 0,
                 'status' => "in-possesion",
+                'state' => "Good",
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -157,6 +158,7 @@ class ItemsController extends Controller
                 'set_id' => 0,
                 'set_id2' => 0,
                 'status' => "in-possesion",
+                'state' => "Good",
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
