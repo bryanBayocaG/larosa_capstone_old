@@ -74,8 +74,8 @@
                                 <h5>
                                     <span class="counters" data-count="{{ $totalItem }}">{{ $totalItem }}</span>
                                 </h5>
-                                <h6>Single Items <a class="btn btn-primary" href="{{ route('reportSingleItem') }}">
-                                        Create Report
+                                <h6>Inventory Items <a class="btn btn-primary" href="{{ route('reportSingleItem') }}">
+                                        View Report
                                     </a>
                                 </h6>
 
@@ -136,7 +136,7 @@
                             <div class="row">
 
                                 <div class="col-sm-4">
-                                    <h6>For Due Date</h6>
+                                    <h6 style="font-weight: bold;">For Due Date</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="">Start Date:</label>
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <h6>For Event Date</h6>
+                                    <h6 style="font-weight: bold;">For Event Date</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="">Start Date:</label>
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <h6>For Transaction Date</h6>
+                                    <h6 style="font-weight: bold;">For Transaction Date</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="">Start Date:</label>
@@ -176,15 +176,15 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12" style="margin-top:5px">
-                                    <button class="btn btn-primary btn-sm" type="submit">Filter
+                                    <button class="btn btn-primary btn-xs" type="submit">Filter
                                     </button>
-                                    <a href="{{ url('home') }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ url('home') }}" class="btn btn-primary btn-xs">
                                         Reset Filter
                                     </a>
                                 </div>
                             </div>
                         </form>
-
+                        <br><br>
                         <div style="margin-top: 5px" class="table-responsive">
                             <table id="example">
                                 <thead>

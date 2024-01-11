@@ -78,7 +78,7 @@
                         <div class="col-sm-4"></div>
                         <div class="col-sm-4"></div>
                         <div class="col-sm-4">
-                            <h6>Filter by: </h6>
+                            <h6 style="font-weight: bold;">Filter by: </h6>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <select name="setVal" id="" class="form-control">
@@ -112,7 +112,7 @@
 
                     </div>
                 </form>
-
+                <br><br>
                 <div class="table-responsive">
                     <table id="example">
                         <thead>
