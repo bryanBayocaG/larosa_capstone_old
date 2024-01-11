@@ -428,7 +428,7 @@
                             <div class="card-body pt-0">
                                 <div class="totalitem">
                                     @livewire('cart-counter')
-                                    {{-- <a href="{{ url('cartRemoveAll') }}">Clear all</a> --}}
+                                    <a href="{{ url('cartRemoveAll') }}">Clear all</a>
                                 </div>
                                 @livewire('show-cart-items')
                             </div>

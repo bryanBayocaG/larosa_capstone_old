@@ -65,4 +65,9 @@ class CartController extends Controller
         Cart::instance('shopping')->remove($rowId);
         return redirect()->back()->with('success', 'Product Remove from Cart');
     }
+    public function destroyAll()
+    {
+        Cart::instance('shopping')->destroy();;
+        return redirect()->back()->with('message', 'Contents Remove from Cart');
+    }
 }

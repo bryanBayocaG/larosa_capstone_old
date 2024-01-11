@@ -109,9 +109,11 @@ Route::post('/checkout', [RentoutController::class, 'checkout']);
 Route::get('/qrCheck/{code}', [RentoutController::class, 'qrCodeCheck']);
 
 
+
 Route::post('/cartstore', [CartController::class, 'store'])->name('cart.store');
 Route::post('/cartstoreI', [CartController::class, 'store2'])->name('cart.storeI');
 Route::get('/cartRemove/{id}', [CartController::class, 'destroy']);
+Route::get('/cartRemoveAll', [CartController::class, 'destroyAll']);
 
 
 Route::get('/rentor', [RentorController::class, 'index'])->name('rentor.page');
