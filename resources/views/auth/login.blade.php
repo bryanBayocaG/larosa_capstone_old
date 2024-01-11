@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group">
                                 <input name="password" id="password-field" type="password" class="form-control"
-                                    placeholder="Password" required>
+                                    placeholder="papa" required>
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
