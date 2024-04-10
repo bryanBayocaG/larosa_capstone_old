@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label> Product Set Image</label>
+                                        <label> Product Set Images</label>
                                         <div style="" class="container" class="image-upload">
                                             <input name="image" type="file" class="form-control"
                                                 onchange="loadFile(event)" required>
