@@ -31,9 +31,9 @@
 </head>
 
 <body>
-    <center>
+    {{-- <center>
         <h4>{{ $singItem->name }} - SINGLE</h4>
-    </center>
+    </center> --}}
 
     <div class="btn-group">
         <div class="button" style="margin-top: 1rem">

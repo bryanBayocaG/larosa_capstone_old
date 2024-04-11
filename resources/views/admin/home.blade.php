@@ -126,10 +126,21 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="card-body">
-                    <div id="s-line" class="chart-set"></div>
-                </div> --}}
-                <div class="card">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="s-line" class="chart-set"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+                {{-- <div class="card">
                     <div class="card-body">
                         <form method="GET" action="{{ route('filterDueDate') }}">
                             @csrf
@@ -262,7 +273,7 @@
                             }
                         </style>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -346,7 +357,75 @@
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
         <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-        <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
+        {{-- <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script> --}}
+        <script>
+            "use strict";
+$(document).ready(function () {
+    function generateData(baseval, count, yrange) {
+        var i = 0;
+        var series = [];
+        while (i < count) {
+            var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
+            var y =
+                Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
+                yrange.min;
+            var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
+            series.push([x, y, z]);
+            baseval += 86400000;
+            i++;
+        }
+        desk;
+        return series;
+    }
+
+
+    if ($("#s-line").length > 0) {
+        var sline = {
+            chart: {
+                height: 350,
+                type: "line",
+                zoom: { enabled: false },
+                toolbar: { show: false },
+            },
+            dataLabels: { enabled: false },
+            stroke: { curve: "straight" },
+            series: [
+                {
+                    name: "Revenue",
+                    data: [
+                        {{$janSum}}, {{$febSum}}, {{$marSum}}, {{$aprSum}}, {{$maySum}}, {{$junSum}}, {{$julSum}}, {{$augSum}},
+                        {{$sepSum}}, {{$octSum}}, {{$novSum}}, {{$decSum}},
+                    ],
+                },
+            ],
+            title: { text: "Total Revenue by months", align: "left" },
+            grid: { row: { colors: ["#f1f2f3", "transparent"], opacity: 0.5 } },
+            xaxis: {
+                categories: [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                    
+                ],
+            },
+        };
+        var chart = new ApexCharts(document.querySelector("#s-line"), sline);
+        chart.render();
+    }
+});
+        </script>
+
+        {{-- <script src="{{ asset('assets/plugins/chartjs/chart.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/chartjs/chart-data.js')}}"></script> --}}
 
         <script src="{{ asset('assets/js/script.js') }}"></script>
         </body>

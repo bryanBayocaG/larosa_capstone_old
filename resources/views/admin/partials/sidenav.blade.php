@@ -33,11 +33,11 @@
                     </a>
                 </li>
 
-                {{-- <li>
+                <li>
                     <a class="{{ request()->segment(1) == 'rentor' ? 'active' : '' }}"
                         href="{{ route('rentor.page') }}"><i data-feather="users"></i><span> Rentors</span>
                     </a>
-                </li> --}}
+                </li>
 
 
                 {{-- @if (Auth::user()->usertype == 'Admin')

@@ -54,5 +54,17 @@ class CheckOverdue extends Command
                 'verify' => false,
             ]);
         }
+
+            // $message = 'Dear hoyhoyhoy';
+            // $client = new Client();
+            // $client->post('https://semaphore.co/api/v4/messages', [
+            //     'form_params' => [
+            //         'apikey' => $apiKey,
+            //         'number' => '09667984996',
+            //         'message' => $message,
+            //         'sendername' => 'LAROSA',
+            //     ],
+            //     'verify' => false,
+            // ]);
     }
 }

@@ -14,7 +14,7 @@ use App\Models\ItemCategory;
 use App\Models\product_set;
 use App\Models\RentInfo;
 use App\Models\Size;
-
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     public function index()
@@ -33,7 +33,24 @@ class HomeController extends Controller
                 $overDuerent = RentInfo::where('status', 'Overdue')->count();
                 $withBalance = RentInfo::where('balance', '>', 0.00)->count();
 
-                return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors', 'overDuerent', 'withBalance'));
+                $currentYear = Carbon::now()->year;
+
+                $janSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 1)->sum('totalPrice');
+                $febSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 2)->sum('totalPrice');
+                $marSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 3)->sum('totalPrice');
+                $aprSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 4)->sum('totalPrice');
+                $maySum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 5)->sum('totalPrice');
+                $junSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 6)->sum('totalPrice');
+                $julSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 7)->sum('totalPrice');
+                $augSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 8)->sum('totalPrice');
+                $sepSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 9)->sum('totalPrice');
+                $octSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 10)->sum('totalPrice');
+                $novSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 11)->sum('totalPrice');
+                $decSum = RentInfo::whereYear('created_at', $currentYear)->whereMonth('created_at', 12)->sum('totalPrice');
+
+
+                return view('admin.home', compact('totalCategory', 'totalColors', 'totalSizes', 'totalItem', 'totalAvailableItem', 'setNum', 'setRemain', 'rentors', 'overDuerent', 'withBalance',
+                "janSum", "febSum", "marSum", "aprSum", "maySum", "junSum", "julSum", "augSum", "sepSum", "octSum", "novSum", "decSum"));
             } else {
                 return redirect()->back();
             }

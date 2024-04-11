@@ -17,7 +17,8 @@ class PrintController extends Controller
     public function singleItemPrint($id)
     {
         $singItem = item::find($id);
-        $pdf = Pdf::loadView('admin.pdf', compact('singItem'))->setPaper('letter', 'portrait');
+        $customPaper = array(0,0,360,200);
+        $pdf = Pdf::loadView('admin.pdf', compact('singItem'))->setPaper($customPaper);
         return $pdf->stream('qrCode.pdf', array('Attachment' => false));
     }
     public function singleItemDL($id)

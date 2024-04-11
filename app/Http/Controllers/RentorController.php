@@ -12,11 +12,11 @@ class RentorController extends Controller
 {
     public function index()
     {
+        
         $rentors = RentInfo::all();
-        $renting = RentInfo::where('status', 'Renting')->get();
-        $overdue = RentInfo::where('status', 'Overdue')->get();
-        $returned = RentInfo::where('status', 'Returned')->get();
-        return view('admin.rentorList', compact('rentors', 'renting', 'overdue', 'returned'));
+        $overDuerent = RentInfo::where('status', 'Overdue')->count();
+        $withBalance = RentInfo::where('balance', '>', 0.00)->count();
+        return view('admin.rentorList', compact('rentors', 'overDuerent', 'withBalance'));
     }
 
     public function detailP($id)
