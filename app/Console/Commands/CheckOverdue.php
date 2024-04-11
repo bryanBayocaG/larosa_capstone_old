@@ -55,7 +55,7 @@ class CheckOverdue extends Command
         //     ]);
         // }
 
-            $message = 'Dear hoyhoyhoy testing sang cron';
+            $message = 'Dear hoyhoyhoy testing sang cron sa hostinger';
             $client = new Client();
             $client->post('https://semaphore.co/api/v4/messages', [
                 'form_params' => [
