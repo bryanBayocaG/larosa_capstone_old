@@ -28,7 +28,7 @@
                                 @csrf
                                 <select name="time" id="" class="form-control">
                                     <option value="{{$setTimeValue}}" hidden>Choose Time to Set</option>
-                                    <Option value="01:39">8:00 AM</Option>
+                                    <Option value="01:43">8:00 AM</Option>
                                     <Option value="09:00">9:00 AM</Option>
                                     <Option value="10:00">10:00 AM</Option>
                                     <Option value="11:00">11:00 AM</Option>
