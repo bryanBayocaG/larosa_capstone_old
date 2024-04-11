@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\payment;
 use App\Models\rentedItem;
 use App\Models\RentInfo;
+use App\Models\SetTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RentorController extends Controller
 {
@@ -16,7 +18,16 @@ class RentorController extends Controller
         $rentors = RentInfo::all();
         $overDuerent = RentInfo::where('status', 'Overdue')->count();
         $withBalance = RentInfo::where('balance', '>', 0.00)->count();
-        return view('admin.rentorList', compact('rentors', 'overDuerent', 'withBalance'));
+        $firstSetTime = SetTime::first();
+
+        if ($firstSetTime) {
+       
+            $setTimeValue = $firstSetTime->set_time;
+        } else {
+         
+            $setTimeValue = null; 
+        }
+        return view('admin.rentorList', compact('rentors', 'overDuerent', 'withBalance','setTimeValue'));
     }
 
     public function detailP($id)
@@ -61,5 +72,22 @@ class RentorController extends Controller
 
 
         return redirect()->back()->with('success', 'Payment added successfully.');
+    }
+
+    public function setTime(Request $request)
+    {
+      
+        $existingTime = SetTime::first(); 
+
+        if ($existingTime) {
+            $existingTime->set_time = $request->input('time');
+            $existingTime->save();
+        } else {
+            $newTime = new SetTime();
+            $newTime->set_time = $request->input('time');
+            $newTime->save();
+        }
+    
+        return redirect()->back()->with('success', 'Time Updated.');
     }
 }

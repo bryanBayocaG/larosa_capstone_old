@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('items', function (Blueprint $table) {
-            $table->unsignedBigInteger('size_id')->after('color_id');
-
-
-            $table->foreign('size_id')->references('id')->on('sizes');
+        Schema::create('set_times2', function (Blueprint $table) {
+            $table->id();
+            $table->string('set_time');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('items', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('set_times2');
     }
 };

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Console;
+use App\Models\SetTime;
 
 use App\Models\RentInfo;
 use Carbon\Carbon;
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:check-overdue')->dailyAt('22:21');
+        $firstSetTime = SetTime::first();
+        $schedule->command('app:check-overdue')->dailyAt($firstSetTime->set_time);
 
         // $schedule->call(function () {
         //     $today = Carbon::now()->format('Y-m-d');

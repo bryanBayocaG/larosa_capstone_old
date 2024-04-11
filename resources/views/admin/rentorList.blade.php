@@ -7,6 +7,45 @@
 </style>
 <div class="page-wrapper">
     <div class="content">
+        <div>
+            <div class="row">
+                <div class="col-sm-8">
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            @php
+    use Carbon\Carbon;
+@endphp
+
+{{-- Assuming $time is the 24-hour format time --}}
+@php
+    $formattedTime = Carbon::createFromFormat('H:i', $setTimeValue)->format('g:i A');
+@endphp
+                            <h6 style="font-weight: bold;">Setted Time for Reminders: <span style="color: #BD9A62">{{$formattedTime}}</span></h6>
+                            <form action="{{ route('setTime') }}" method="POST">
+                                @csrf
+                                <select name="time" id="" class="form-control">
+                                    <option value="{{$setTimeValue}}" hidden>Choose Time to Set</option>
+                                    <Option value="01:39">8:00 AM</Option>
+                                    <Option value="09:00">9:00 AM</Option>
+                                    <Option value="10:00">10:00 AM</Option>
+                                    <Option value="11:00">11:00 AM</Option>
+                                    <Option value="12:00">12:00 PM</Option>
+                                    <Option value="13:00">1:00 PM</Option>
+                                    <Option value="14:00">2:00 PM</Option>
+                                    <Option value="15:00">3:00 PM</Option>
+                                    <Option value="16:00">4:00 PM</Option>
+                                </select>
+                                <br>
+                                <button style="width: 100%" class="btn btn-primary btn-xs" type="submit">Apply</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
                 <form method="GET" action="{{ route('filterDueDate') }}">

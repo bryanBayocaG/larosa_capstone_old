@@ -138,6 +138,8 @@ Route::get('/reportSingleItem/filterSingleItem', [ProductReportController::class
 
 Route::get('/reportSetItem', [ProductReportController::class, 'reportSetItem'])->name('reportSetItem');
 
+Route::post('/setTime', [ RentorController::class, 'setTime'])->name('setTime');
+
 Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'singleItem']);
 Route::get('/larosa/showSetProd/{code}', [PublicShowController::class, 'setItem']);
 // Route::get('/larosa/showSingleProd/{code}', [PublicShowController::class, 'setItem']);
