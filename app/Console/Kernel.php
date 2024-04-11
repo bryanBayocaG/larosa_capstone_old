@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:check-overdue')->dailyAt('22:15');
+        $schedule->command('app:check-overdue')->dailyAt('22:21');
 
         // $schedule->call(function () {
         //     $today = Carbon::now()->format('Y-m-d');
