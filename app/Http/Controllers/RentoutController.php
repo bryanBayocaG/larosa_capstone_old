@@ -11,6 +11,7 @@ use App\Models\payment;
 use App\Models\product_set;
 use App\Models\rentedItem;
 use App\Models\RentInfo;
+use App\Models\ItemMovements;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -83,6 +84,8 @@ class RentoutController extends Controller
             $orderItem->quantity = intval($item->qty);
             $orderItem->save();
 
+
+
             $product = product_set::find($item->id);
             if ($item->options->setba === 'yes') {
                 if ($product) {
@@ -116,7 +119,14 @@ class RentoutController extends Controller
                             $itemBelongs->set_id = $RentinfoId;
                             $itemBelongs->status = 'Rented';
                             $itemBelongs->save();
+
+                            $itemMove = new ItemMovements();
+                            $itemMove->item_id = $itemBelongs->id;
+                            $itemMove->status = "Rented";
+                            $itemMove->save();
                         }
+
+                        
                     }
                 };
             }

@@ -7,6 +7,7 @@ use App\Models\ProdSetDetails;
 use App\Models\product_set;
 use App\Models\RentInfo;
 use Illuminate\Http\Request;
+use App\Models\ItemMovements;
 
 class ProductReportController extends Controller
 {
@@ -63,11 +64,76 @@ class ProductReportController extends Controller
         }
 
         $items = $usersQuery->get();
+        
 
 
 
         return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable', 'totalMissing', 'damagedItem'));
     }
+    public function filterRetDate(Request $request)
+    {
+        $totalItems = Item_details::count();
+        $totalRented = Item_details::where('status', 'Rented')->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
+        $setVal = intval($request->setVal);
+        $state = $request->state;
+        $totalMissing = Item_details::where('state', 'Missing')->count();
+        $damagedItem = Item_details::where('state', 'Damaged')->count();
+
+        $Restart_date = $request->ReTstart_date;
+        $Reend_date = $request->ReTend_date;
+
+        $usersQuery = ItemMovements::query();
+
+        if (!empty($Restart_date)) {
+            $usersQuery->whereDate('created_at', '>=', $Restart_date)->where('status', "Returned");
+        }
+        if (!empty($Reend_date)) {
+            $usersQuery->whereDate('created_at', '<=', $Restart_date)->where('status', "Returned");
+        }
+
+        $item = $usersQuery->get();
+
+        $itemIds = $item->pluck('item_id');
+
+        $items = Item_details::whereIn('id', $itemIds)->get();
+        return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable', 'totalMissing', 'damagedItem'));
+
+    }
+
+    public function filterRenDate(Request $request)
+    {
+        $totalItems = Item_details::count();
+        $totalRented = Item_details::where('status', 'Rented')->count();
+        $totalAvailable = Item_details::where('status', 'in-possesion')->where('set_id', 0)->where('set_id2', 0)->count();
+        $setVal = intval($request->setVal);
+        $state = $request->state;
+        $totalMissing = Item_details::where('state', 'Missing')->count();
+        $damagedItem = Item_details::where('state', 'Damaged')->count();
+
+        $Restart_date = $request->ReTstart_date;
+        $Reend_date = $request->ReTend_date;
+
+        $usersQuery = ItemMovements::query();
+
+        if (!empty($Restart_date)) {
+            $usersQuery->whereDate('created_at', '>=', $Restart_date)->where('status', "Rented");
+        }
+        if (!empty($Reend_date)) {
+            $usersQuery->whereDate('created_at', '<=', $Restart_date)->where('status', "Rented");
+        }
+
+        $item = $usersQuery->get();
+
+        $itemIds = $item->pluck('item_id');
+
+        $items = Item_details::whereIn('id', $itemIds)->get();
+        return view('admin.reportSingleItem', compact('items', 'totalItems', 'totalRented', 'totalAvailable', 'totalMissing', 'damagedItem'));
+
+    }
+
+
+
     public function reportSetItem()
     {
         $items = product_set::where('stash', null)->get();

@@ -75,8 +75,46 @@
                 <form method="GET" action="{{ route('filterSingleItem') }}">
                     @csrf
                     <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <h6 style="font-weight: bold;">Returned Items</h6>
+                            <form method="GET" action="{{ route('filterRetDate') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="">Start Date:</label>
+                                        <input type="date" name="ReTstart_date" class="form-control">
+                                
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="">End Date:</label>
+                                        <input type="date" name="ReTend_date" class="form-control">
+                                        
+                                        <button class="btn btn-primary btn-sm form-control" style="margin-top: 5px" type="submit">Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-4">
+                            <h6 style="font-weight: bold;">Rented Items</h6>
+                            <form method="GET" action="{{ route('filterRenDate') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="">Start Date:</label>
+                                        <input type="date" name="ReTstart_date" class="form-control">
+                                
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="">End Date:</label>
+                                        <input type="date" name="ReTend_date" class="form-control">
+                                        
+                                        <button class="btn btn-primary btn-sm form-control" style="margin-top: 5px" type="submit">Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="col-sm-4">
                             <h6 style="font-weight: bold;">Filter by: </h6>
                             <div class="row">

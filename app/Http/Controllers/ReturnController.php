@@ -7,6 +7,7 @@ use App\Models\Item_quantity;
 use App\Models\product_set;
 use App\Models\rentedItem;
 use App\Models\RentInfo;
+use App\Models\ItemMovements;
 use Illuminate\Http\Request;
 
 class ReturnController extends Controller
@@ -26,6 +27,7 @@ class ReturnController extends Controller
             $item->save();
         };
 
+
         $quantityBack = Item_quantity::find($itemID);
         if ($quantityBack) {
             $quantityBack->remaining = $quantityBack->remaining + $rentQuan;
@@ -40,6 +42,13 @@ class ReturnController extends Controller
             $itemDetail->set_id = 0;
             $itemDetail->status = 'in-possesion';
             $itemDetail->save();
+
+            $itemMove = new ItemMovements();
+            if ($itemMove) {
+                $itemMove->item_id = $itemDetail->id;
+                $itemMove->status = "Returned";
+                $itemMove->save();
+            }
         }
 
 

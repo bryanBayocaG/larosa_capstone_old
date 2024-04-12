@@ -135,6 +135,8 @@ Route::post('/returnSetRent', [ReturnController::class, 'returnSet']);
 
 Route::get('/reportSingleItem', [ProductReportController::class, 'reportSingleItem'])->name('reportSingleItem');
 Route::get('/reportSingleItem/filterSingleItem', [ProductReportController::class, 'filterSingleItem'])->name('filterSingleItem');
+Route::get('/reportSingleItem/filterRetDate', [ProductReportController::class, 'filterRetDate'])->name('filterRetDate');
+Route::get('/reportSingleItem/filterRenDate', [ProductReportController::class, 'filterRenDate'])->name('filterRenDate');
 
 Route::get('/reportSetItem', [ProductReportController::class, 'reportSetItem'])->name('reportSetItem');
 
