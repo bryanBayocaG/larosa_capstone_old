@@ -72,8 +72,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form method="GET" action="{{ route('filterSingleItem') }}">
-                    @csrf
+
                     <div class="row">
                         <div class="col-sm-4">
                             <h6 style="font-weight: bold;">Returned Items</h6>
@@ -116,6 +115,8 @@
                             </form>
                         </div>
                         <div class="col-sm-4">
+                            <form method="GET" action="{{ route('filterSingleItem') }}">
+                                @csrf
                             <h6 style="font-weight: bold;">Filter by: </h6>
                             <div class="row">
                                 <div class="col-sm-6">
