@@ -29,7 +29,7 @@ LaRosa Rental Shop Management is my capstone project, built using Laravel, Boots
 
 ## 🟢 Status
 
-Current status of the project: Not maintained.
+Current status of the project: **Not maintained**.
 
 ## 🛠 Tech Stack
 
