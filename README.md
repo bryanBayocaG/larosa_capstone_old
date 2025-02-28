@@ -2,7 +2,7 @@
 
 ### ⚠️ Note!!!
 
-This project is no longer maintained and serves only as a showcase of my previous coding work. A new, actively maintained version is currently in development, featuring **React** as the frontend and **Laravel** as the backend.
+This project is **no longer** maintained and serves only as a showcase of my previous coding work. A new, actively maintained version is currently in development, featuring **React** as the frontend and **Laravel** as the backend.
 
 ## 📄 Description
 
