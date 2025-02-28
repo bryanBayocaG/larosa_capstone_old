@@ -1,26 +1,37 @@
-# Task Folder
+# Rental Shop Management System with QR Code asset tagging for LaRosa
 
-🌐 [Visit Demo](https://task-folder.vercel.app/)
+tagging
+
+### ⚠️ Note!!!
+
+This project is no longer maintained and serves only as a showcase of my previous coding work. A new, actively maintained version is currently in development, featuring **React** as the frontend and **Laravel** as the backend.
 
 ## 📄 Description
 
-It’s one of my passion projects, built using the MERN stack with Zustand for state management. Users can create boards, add draggable columns, and manage tasks seamlessly. Every column and task is fully draggable, and their positions aren’t just updated in the UI—they’re also persistently stored in a NoSQL database. I have created two versions of backend, one is built vanilla Javascript and other in Typescript.
+LaRosa Rental Shop Management is my capstone project, built using Laravel, Bootstrap, and MySQL. It streamlines rental operations by tracking rental movements and generating unique QR tags for each gown to ensure easy identification. The system enhances transaction speed and provides SMS notifications to customers with transaction details and return deadlines. Additionally, LaRosa employees can configure the exact time for automated reminder messages, ensuring timely communication and efficient rental management.
 
 ## 🚀 Features
 
--   Boards & Columns
-    -   Create multiple boards
-    -   Add, rename, and delete columns
--   Drag-and-drop functionality
-    -   Move tasks between columns
-    -   Reorder columns within a board
--   Data persistence
-    -   Uses NoSQL database
-    -   Syncs across sessions
+### 🏷️ Rental Management
+
+-   Track and manage rental movements seamlessly
+-   Generate unique QR tags for each gown for easy identification
+
+### 💳 Transaction & Notifications
+
+-   Speed up transactions with an efficient processing system
+-   Send SMS notifications with transaction details and return deadlines
+-   Employees can schedule reminder messages for customers
+
+### 📊 Data Management & Security
+
+-   Uses MySQL for structured data storage
+-   Syncs data across sessions for consistency
+-   **Rollback function** to restore data in case of unexpected issues
 
 ## 🟢 Status
 
-Current status of the project: In Development.
+Current status of the project: Not maintained.
 
 ## 🛠 Tech Stack
 
